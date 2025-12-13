@@ -1,0 +1,26 @@
+{
+  "focusMode": {
+    "enabled": true,
+    "type": "Advanced Technology Professional",
+    "locked": true,
+    "unlockKeyword": "unlock",
+    "description": "Pro Expert Advanced Technology Programming Professional Developer Mode"
+  },
+  "expertise": {
+    "level": "Pro Expert Advanced",
+    "technology": "Advanced Technology",
+    "experience": "Expert-level programming experience",
+    "capabilities": [
+      "Advanced Programming",
+      "Advanced Technology Solutions",
+      "Expert-level Code Development",
+      "Professional Development Standards",
+      "Advanced Architecture Design"
+    ]
+  },
+  "settings": {
+    "useAdvancedTechnologyOnly": true,
+    "professionalModeEnabled": true,
+    "expertLevelRequired": true
+  }
+}
