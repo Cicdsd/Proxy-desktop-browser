@@ -8,18 +8,17 @@ use axum::{
 use browser_core::TabIPManager;
 use serde::{Deserialize, Serialize};
 use std::sync::Arc;
-use tokio::sync::Mutex;
 use tracing::{info, error};
 use virtual_ip::{Country, IPGenerator, IPValidator, VirtualIP};
 
 #[derive(Clone)]
 pub struct ApiServer {
-    tab_manager: Arc<Mutex<TabIPManager>>,
+    tab_manager: Arc<TabIPManager>,
     ip_generator: Arc<IPGenerator>,
 }
 
 impl ApiServer {
-    pub fn new(tab_manager: Arc<Mutex<TabIPManager>>, ip_generator: Arc<IPGenerator>) -> Self {
+    pub fn new(tab_manager: Arc<TabIPManager>, ip_generator: Arc<IPGenerator>) -> Self {
         Self {
             tab_manager,
             ip_generator,
@@ -46,9 +45,8 @@ impl ApiServer {
         let app = Arc::new(self).router().await;
         let addr = format!("127.0.0.1:{port}");
         info!("API server listening on http://{addr}");
-        axum::Server::bind(&addr.parse()?)
-            .serve(app.into_make_service())
-            .await?;
+        let listener = tokio::net::TcpListener::bind(&addr).await?;
+        axum::serve(listener, app).await?;
         Ok(())
     }
 }
@@ -64,8 +62,7 @@ async fn create_tab_handler(
     State(state): State<Arc<ApiServer>>,
     Json(payload): Json<CreateTabRequest>,
 ) -> Result<Json<TabResponse>, StatusCode> {
-    let manager = state.tab_manager.lock().await;
-    let tab = manager
+    let tab = state.tab_manager
         .create_tab(&payload.country_code)
         .await
         .map_err(|e| {
@@ -78,8 +75,7 @@ async fn create_tab_handler(
 async fn list_tabs_handler(
     State(state): State<Arc<ApiServer>>,
 ) -> Result<Json<Vec<TabResponse>>, StatusCode> {
-    let manager = state.tab_manager.lock().await;
-    let tabs = manager.list_tabs().await;
+    let tabs = state.tab_manager.list_tabs().await;
     Ok(Json(tabs.into_iter().map(TabResponse::from).collect()))
 }
 
@@ -87,8 +83,7 @@ async fn get_tab_handler(
     State(state): State<Arc<ApiServer>>,
     Path(id): Path<String>,
 ) -> Result<Json<TabResponse>, StatusCode> {
-    let manager = state.tab_manager.lock().await;
-    let tab = manager
+    let tab = state.tab_manager
         .get_tab(&id)
         .await
         .ok_or(StatusCode::NOT_FOUND)?;
@@ -99,8 +94,7 @@ async fn close_tab_handler(
     State(state): State<Arc<ApiServer>>,
     Path(id): Path<String>,
 ) -> Result<StatusCode, StatusCode> {
-    let manager = state.tab_manager.lock().await;
-    manager
+    state.tab_manager
         .close_tab(&id)
         .await
         .map_err(|e| {
@@ -120,8 +114,7 @@ async fn rotate_ip_handler(
     Path(id): Path<String>,
     Json(payload): Json<RotateIPRequest>,
 ) -> Result<Json<VirtualIPResponse>, StatusCode> {
-    let manager = state.tab_manager.lock().await;
-    let ip = manager
+    let ip = state.tab_manager
         .rotate_ip(&id, payload.new_country.as_deref())
         .await
         .map_err(|e| {
@@ -135,8 +128,7 @@ async fn validate_ip_handler(
     State(state): State<Arc<ApiServer>>,
     Path(id): Path<String>,
 ) -> Result<Json<ValidationResponse>, StatusCode> {
-    let manager = state.tab_manager.lock().await;
-    let tab = manager.get_tab(&id).await.ok_or(StatusCode::NOT_FOUND)?;
+    let tab = state.tab_manager.get_tab(&id).await.ok_or(StatusCode::NOT_FOUND)?;
 
     let validator = IPValidator::new();
     let report = validator

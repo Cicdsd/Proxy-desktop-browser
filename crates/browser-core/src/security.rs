@@ -32,8 +32,8 @@ impl<'a> SecurityManager<'a> {
             .url_relative(UrlRelative::Deny)
             .link_rel(Some("noopener noreferrer"));
 
-        // URL validation regex
-        let url_regex = Regex::new(r"^(https?|mailto):[^\s/$.?#].[^\s]*$").unwrap();
+        // URL validation regex - more permissive to handle common URL formats
+        let url_regex = Regex::new(r"^(https?|mailto):(//.+|.+)$").unwrap();
 
         Self {
             html_sanitizer: sanitizer,

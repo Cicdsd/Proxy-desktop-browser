@@ -1,6 +1,5 @@
 use std::env;
 use std::sync::Arc;
-use tokio::sync::Mutex;
 
 use api_server::ApiServer;
 use browser_core::TabIPManager;
@@ -12,6 +11,7 @@ use virtual_ip::{
     CountryDatabase,
     IPGenerator,
 };
+use sqlx::SqlitePool;
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
@@ -36,7 +36,26 @@ async fn main() -> anyhow::Result<()> {
         IPGenerator::new(countries, ranges)
     };
 
-    let tab_manager = Arc::new(Mutex::new(TabIPManager::new(ip_generator.clone())));
+    // Create database pool
+    let db_url = env::var("DATABASE_URL")
+        .unwrap_or_else(|_| "sqlite:./data/browser.db?mode=rwc".to_string());
+    
+    let db_pool = SqlitePool::connect(&db_url).await?;
+    
+    // Run migrations
+    sqlx::query(
+        "CREATE TABLE IF NOT EXISTS tabs (
+            tab_id TEXT PRIMARY KEY,
+            country_code TEXT NOT NULL,
+            ip TEXT NOT NULL,
+            created_at INTEGER NOT NULL,
+            last_active INTEGER NOT NULL
+        )"
+    )
+    .execute(&db_pool)
+    .await?;
+    
+    let tab_manager = Arc::new(TabIPManager::new(ip_generator.clone(), db_pool).await?);
     let server = ApiServer::new(tab_manager, Arc::new(ip_generator));
 
     let port: u16 = env::var("PORT")

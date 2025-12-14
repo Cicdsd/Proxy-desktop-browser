@@ -110,20 +110,22 @@ mod tests {
         
         let db = Database::new(db_path_str).await?;
         
-        // Test transaction
-        let result = db.transaction(|tx| {
-            Box::pin(async move {
-                sqlx::query("INSERT INTO settings (key, value, updated_at) VALUES (?, ?, ?)")
-                    .bind("test_key")
-                    .bind("test_value")
-                    .bind(chrono::Utc::now().to_rfc3339())
-                    .execute(&mut *tx)
-                    .await?;
-                Ok(42)
-            })
-        }).await?;
+        // Test transaction using begin_transaction
+        let mut tx = db.begin_transaction().await?;
+        sqlx::query("INSERT INTO settings (key, value, updated_at) VALUES (?, ?, ?)")
+            .bind("test_key")
+            .bind("test_value")
+            .bind(chrono::Utc::now().to_rfc3339())
+            .execute(&mut *tx)
+            .await?;
+        tx.commit().await?;
         
-        assert_eq!(result, 42);
+        // Verify the value was inserted
+        let count: i64 = sqlx::query_scalar("SELECT COUNT(*) FROM settings WHERE key = ?")
+            .bind("test_key")
+            .fetch_one(db.pool())
+            .await?;
+        assert_eq!(count, 1);
         
         db.close().await?;
         Ok(())

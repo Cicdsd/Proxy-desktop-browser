@@ -212,13 +212,16 @@ impl FreeIpProviderManager {
         }
 
         // Generate random sample indices before any async operations
-        let mut rng = rand::thread_rng();
-        let mut sample_indices: Vec<usize> = (0..proxies.len()).collect();
-        sample_indices.shuffle(&mut rng);
-        sample_indices.truncate(sample_size);
+        // Use a block scope to ensure rng is dropped before await
+        let sample_indices: Vec<usize> = {
+            let mut rng = rand::thread_rng();
+            let mut indices: Vec<usize> = (0..proxies.len()).collect();
+            indices.shuffle(&mut rng);
+            indices.truncate(sample_size);
+            indices
+        };
         
-        // Now we can safely use async operations
-        let mut working_proxies = Vec::new();
+        // Now we can safely use async operations since rng is dropped
         let mut tested_proxies = Vec::new();
         
         for &idx in &sample_indices {
@@ -228,10 +231,6 @@ impl FreeIpProviderManager {
             let mut proxy = proxy.clone();
             proxy.is_working = test_result.is_working;
             tested_proxies.push(proxy);
-            
-            if test_result.is_working {
-                working_proxies.push(tested_proxies.last().unwrap().clone());
-            }
         }
         
         // Include untested proxies as non-working

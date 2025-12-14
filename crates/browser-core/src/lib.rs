@@ -27,8 +27,27 @@ pub use proxy::{ProxyManager, ProxySettings, ProxyType, FreeProxy, ProxyTestResu
 pub use http_client::{HttpClient, PublicIpDetector, PublicIpInfo};
 pub use scraper_util::ProxyScraper;
 pub use security::{SecurityManager, BookmarkInput, ProxyInput};
-pub use webview_manager::{WebviewManager, WebviewTab};
-pub use browser_tab_manager::{BrowserTabManager, BrowserTab, CreateTabConfig, TabStats};
+pub use webview_manager::{
+    WebviewManager, WebviewTab,
+    // Tauri command handlers from webview_manager
+    create_webview_tab, navigate_webview_tab, close_webview_tab,
+    focus_webview_tab, get_webview_tabs, navigation_changed,
+    title_changed, go_back_tab, go_forward_tab, reload_tab,
+    stop_tab, set_tab_zoom, get_active_tab, execute_script_in_tab,
+    rotate_proxy_for_tab, update_rotation_strategy, get_proxy_session_stats,
+    fetch_proxies_from_provider,
+};
+pub use browser_tab_manager::{
+    BrowserTabManager, BrowserTab, CreateTabConfig, TabStats,
+    // Tauri command handlers from browser_tab_manager
+    create_browser_tab, close_browser_tab, switch_browser_tab,
+    navigate_browser_tab, browser_tab_go_back, browser_tab_go_forward,
+    reload_browser_tab, stop_browser_tab, set_browser_tab_zoom,
+    rotate_browser_tab_ip, get_browser_tabs, get_browser_tab,
+    get_active_browser_tab, execute_script_in_browser_tab,
+    clear_browser_tab_data, get_browser_tab_stats,
+    update_webview_tab_state,
+};
 pub use free_ip_providers::{FreeIpProvider, FreeIpProviderManager};
 pub use storage::{StorageEngine, Cookie, HistoryEntry, Bookmark};
 pub use backup::{BackupManager, BackupData, BackupOptions, BackupInfo, AutoBackupSettings};
