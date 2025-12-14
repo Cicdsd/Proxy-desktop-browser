@@ -55,6 +55,19 @@ export type ProxySettings = {
   password: string | null;
   dns_servers: string[];
   bypass_list: string[];
+  enabled?: boolean;
+  type?: 'http' | 'https' | 'socks4' | 'socks5' | 'direct';
+};
+
+export type ProxyStatus = {
+  isConnected: boolean;
+  currentIp: string;
+  currentCountry: string;
+  latency: number;
+  bytesDownloaded: number;
+  bytesUploaded: number;
+  proxyServer: string;
+  lastChecked: string;
 };
 
 export type FreeProxy = {
