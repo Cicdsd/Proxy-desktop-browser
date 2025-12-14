@@ -1,13 +1,16 @@
 {
   "extends": "@tsconfig/svelte/tsconfig.json",
   "compilerOptions": {
-    "types": ["svelte"],
+    "types": ["svelte", "bun-types"],
     "baseUrl": ".",
     "paths": {
       "$lib/*": ["src/lib/*"]
     },
-    "lib": ["ES2019", "DOM"]
+    "lib": ["ES2022", "DOM"],
+    "module": "ESNext",
+    "target": "ESNext",
+    "moduleResolution": "bundler"
   },
-  "include": ["src/**/*", "src/node_modules/**/*", "vite.config.ts"],
-  "exclude": ["node_modules/*", "ui-tauri/src-tauri"]
+  "include": ["src/**/*", "vite.config.ts"],
+  "exclude": ["node_modules", "ui-tauri/src-tauri", "dist"]
 }

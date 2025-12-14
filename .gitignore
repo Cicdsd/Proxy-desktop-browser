@@ -4,6 +4,10 @@ Cargo.lock
 **/*.rs.bk
 *.pdb
 
+# Bun
+.bun/
+bun.lockb
+
 # Node.js / npm
 node_modules/
 dist/
