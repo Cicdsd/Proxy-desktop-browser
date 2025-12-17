@@ -1,4 +1,5 @@
 use browser_core::TabStatus;
+use serde_json;
 
 #[test]
 fn test_tab_status_creating() {

@@ -5,6 +5,7 @@ use browser_core::{
     LogManager, LogLevel, LogConfig,
 };
 use std::time::Duration;
+use anyhow;
 
 /// Test memory manager allocation tracking
 #[tokio::test]

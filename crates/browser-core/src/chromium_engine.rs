@@ -32,7 +32,7 @@ use crate::proxy::ProxySettings;
 pub const ENGINE_VERSION: u32 = 1000;
 pub const ENGINE_VERSION_STRING: &str = "1.0.0.0";
 pub const ENGINE_NAME: &str = "Custom Chromium Fork - Enhanced Edition";
-pub const ENGINE_BUILD_DATE: &str = env!("CARGO_PKG_VERSION");
+pub const ENGINE_CARGO_VERSION: &str = env!("CARGO_PKG_VERSION");
 
 /// Browser engine type selection
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, Default)]
@@ -321,7 +321,7 @@ impl ChromiumEngine {
             version: ENGINE_VERSION,
             version_string: ENGINE_VERSION_STRING.to_string(),
             name: ENGINE_NAME.to_string(),
-            build_date: ENGINE_BUILD_DATE.to_string(),
+            build_date: ENGINE_CARGO_VERSION.to_string(),
             capabilities: self.get_capabilities(),
             uptime: self.start_time.elapsed(),
         }
@@ -539,7 +539,11 @@ impl ChromiumEngine {
             let mut metrics = self.metrics.write().await;
             metrics.page_loads += 1;
             metrics.total_load_time_ms += elapsed;
-            metrics.avg_load_time_ms = metrics.total_load_time_ms / metrics.page_loads as u128;
+            metrics.avg_load_time_ms = if metrics.page_loads > 0 {
+                metrics.total_load_time_ms / metrics.page_loads as u128
+            } else {
+                0
+            };
         }
 
         Ok(tab)
@@ -668,7 +672,25 @@ impl ChromiumEngine {
                 }};
                 success(position);
             }};
+            navigator.geolocation.watchPosition = function(success) {{
+                const position = {{
+                    coords: {{
+                        latitude: {},
+                        longitude: {},
+                        accuracy: {},
+                        altitude: null,
+                        altitudeAccuracy: null,
+                        heading: null,
+                        speed: null
+                    }},
+                    timestamp: Date.now()
+                }};
+                success(position);
+                return 1; // Return a fake watch ID
+            }};
+            navigator.geolocation.clearWatch = function() {{}};
             "#,
+            geo.latitude, geo.longitude, geo.accuracy,
             geo.latitude, geo.longitude, geo.accuracy
         );
         
@@ -760,7 +782,7 @@ impl ChromiumEngine {
                             try {
                                 const imageData = context.getImageData(0, 0, this.width, this.height);
                                 for (let i = 0; i < imageData.data.length; i += 4) {
-                                    imageData.data[i] += shift;
+                                    imageData.data[i] = Math.min(255, Math.max(0, imageData.data[i] + shift));
                                 }
                                 context.putImageData(imageData, 0, 0);
                             } catch(e) {}
@@ -850,8 +872,11 @@ impl ChromiumEngine {
             scripts.push(format!(
                 r#"
                 try {{
+                    const original = Intl.DateTimeFormat.prototype.resolvedOptions;
                     Intl.DateTimeFormat.prototype.resolvedOptions = function() {{
-                        return {{ timeZone: '{}' }};
+                        const opts = original.call(this);
+                        opts.timeZone = '{}';
+                        return opts;
                     }};
                 }} catch(e) {{}}
                 "#,
