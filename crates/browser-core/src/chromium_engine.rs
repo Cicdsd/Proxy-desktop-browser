@@ -32,7 +32,7 @@ use crate::proxy::ProxySettings;
 pub const ENGINE_VERSION: u32 = 1000;
 pub const ENGINE_VERSION_STRING: &str = "1.0.0.0";
 pub const ENGINE_NAME: &str = "Custom Chromium Fork - Enhanced Edition";
-pub const ENGINE_BUILD_DATE: &str = env!("CARGO_PKG_VERSION");
+pub const ENGINE_CARGO_VERSION: &str = env!("CARGO_PKG_VERSION");
 
 /// Browser engine type selection
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, Default)]
@@ -321,7 +321,7 @@ impl ChromiumEngine {
             version: ENGINE_VERSION,
             version_string: ENGINE_VERSION_STRING.to_string(),
             name: ENGINE_NAME.to_string(),
-            build_date: ENGINE_BUILD_DATE.to_string(),
+            build_date: ENGINE_CARGO_VERSION.to_string(),
             capabilities: self.get_capabilities(),
             uptime: self.start_time.elapsed(),
         }
@@ -539,7 +539,11 @@ impl ChromiumEngine {
             let mut metrics = self.metrics.write().await;
             metrics.page_loads += 1;
             metrics.total_load_time_ms += elapsed;
-            metrics.avg_load_time_ms = metrics.total_load_time_ms / metrics.page_loads as u128;
+            metrics.avg_load_time_ms = if metrics.page_loads > 0 {
+                metrics.total_load_time_ms / metrics.page_loads as u128
+            } else {
+                0
+            };
         }
 
         Ok(tab)
@@ -635,15 +639,36 @@ impl ChromiumEngine {
     }
 
     /// Apply network throttling to the page
+    /// 
+    /// # Current Limitation
+    /// Network throttling is not currently implemented. The configuration is validated
+    /// and logged, but throttling is not actively applied to network requests.
+    /// 
+    /// # Future Implementation
+    /// This will require direct CDP (Chrome DevTools Protocol) access via chromiumoxide
+    /// to use the Network.emulateNetworkConditions command.
+    /// 
+    /// # Workaround
+    /// For now, this method validates the configuration without error, allowing
+    /// the API to remain stable. Tests pass because they only verify the configuration,
+    /// not actual network behavior.
     async fn apply_network_throttling(&self, _page: &Page) -> Result<()> {
         let (download, upload, latency) = self.config.network_condition.get_params();
         
-        // Note: Network throttling via CDP would require direct protocol access
-        // For now, we log the configuration. Full implementation would use chromiumoxide's CDP methods
-        info!("Network throttling configured: download={}, upload={}, latency={}", download, upload, latency);
+        warn!(
+            "Network throttling is configured but not yet implemented. \
+            Configuration: download={}kbps, upload={}kbps, latency={}ms",
+            download, upload, latency
+        );
         
-        // TODO: Implement using chromiumoxide CDP commands when available:
-        // page.execute(cdp::network::EmulateNetworkConditions { ... }).await?;
+        // TODO: Implement using chromiumoxide CDP commands:
+        // page.execute(cdp::network::EmulateNetworkConditions {
+        //     offline: false,
+        //     download_throughput: download as f64 * 1024.0 / 8.0,
+        //     upload_throughput: upload as f64 * 1024.0 / 8.0,
+        //     latency: latency as f64,
+        //     connection_type: None,
+        // }).await?;
         
         Ok(())
     }
@@ -668,7 +693,25 @@ impl ChromiumEngine {
                 }};
                 success(position);
             }};
+            navigator.geolocation.watchPosition = function(success) {{
+                const position = {{
+                    coords: {{
+                        latitude: {},
+                        longitude: {},
+                        accuracy: {},
+                        altitude: null,
+                        altitudeAccuracy: null,
+                        heading: null,
+                        speed: null
+                    }},
+                    timestamp: Date.now()
+                }};
+                success(position);
+                return 1; // Return a fake watch ID
+            }};
+            navigator.geolocation.clearWatch = function() {{}};
             "#,
+            geo.latitude, geo.longitude, geo.accuracy,
             geo.latitude, geo.longitude, geo.accuracy
         );
         
@@ -760,7 +803,7 @@ impl ChromiumEngine {
                             try {
                                 const imageData = context.getImageData(0, 0, this.width, this.height);
                                 for (let i = 0; i < imageData.data.length; i += 4) {
-                                    imageData.data[i] += shift;
+                                    imageData.data[i] = Math.min(255, Math.max(0, imageData.data[i] + shift));
                                 }
                                 context.putImageData(imageData, 0, 0);
                             } catch(e) {}
@@ -850,8 +893,11 @@ impl ChromiumEngine {
             scripts.push(format!(
                 r#"
                 try {{
+                    const original = Intl.DateTimeFormat.prototype.resolvedOptions;
                     Intl.DateTimeFormat.prototype.resolvedOptions = function() {{
-                        return {{ timeZone: '{}' }};
+                        const opts = original.call(this);
+                        opts.timeZone = '{}';
+                        return opts;
                     }};
                 }} catch(e) {{}}
                 "#,
@@ -983,102 +1029,96 @@ impl ChromiumEngine {
     
     // ===== Enhanced CDP Commands =====
     
-    /// Execute custom JavaScript in a tab
-    pub async fn execute_script(&self, tab_id: &str, script: &str) -> Result<String> {
+    /// Helper method to get a page for a specific tab
+    /// Note: Due to chromiumoxide's architecture, we use the active tab for CDP operations.
+    /// This is a known limitation where tab_id is validated but operations target the active page.
+    async fn get_page_for_tab(&self, tab_id: &str) -> Result<Page> {
+        // Verify the tab exists
+        let tabs = self.tabs.read().await;
+        if !tabs.contains_key(tab_id) {
+            return Err(anyhow!("Tab not found: {}", tab_id));
+        }
+        drop(tabs);
+        
         let browser = self.browser.as_ref()
             .ok_or_else(|| anyhow!("Browser not launched"))?;
         
         let pages = browser.pages().await.map_err(|e| anyhow!("Failed to get pages: {}", e))?;
         
-        if let Some(page) = pages.first() {
-            let result = page.evaluate(script)
-                .await
-                .map_err(|e| anyhow!("Failed to execute script: {}", e))?;
-            
-            // Update metrics
-            {
-                let mut metrics = self.metrics.write().await;
-                metrics.cdp_commands_sent += 1;
-            }
-            
-            Ok(format!("{:?}", result))
-        } else {
-            Err(anyhow!("No pages available for tab {}", tab_id))
+        // Use the first available page (active page)
+        // TODO: Implement proper page-to-tab mapping when chromiumoxide supports target IDs
+        pages.into_iter().next()
+            .ok_or_else(|| anyhow!("No pages available"))
+    }
+    
+    /// Execute custom JavaScript in a tab
+    pub async fn execute_script(&self, tab_id: &str, script: &str) -> Result<String> {
+        let page = self.get_page_for_tab(tab_id).await?;
+        
+        let result = page.evaluate(script)
+            .await
+            .map_err(|e| anyhow!("Failed to execute script: {}", e))?;
+        
+        // Update metrics
+        {
+            let mut metrics = self.metrics.write().await;
+            metrics.cdp_commands_sent += 1;
         }
+        
+        Ok(format!("{:?}", result))
     }
     
     /// Capture screenshot of a tab
     pub async fn capture_screenshot(&self, tab_id: &str) -> Result<Vec<u8>> {
-        let browser = self.browser.as_ref()
-            .ok_or_else(|| anyhow!("Browser not launched"))?;
+        let page = self.get_page_for_tab(tab_id).await?;
         
-        let pages = browser.pages().await.map_err(|e| anyhow!("Failed to get pages: {}", e))?;
+        let screenshot = page.screenshot(chromiumoxide::page::ScreenshotParams::default())
+            .await
+            .map_err(|e| anyhow!("Failed to capture screenshot: {}", e))?;
         
-        if let Some(page) = pages.first() {
-            let screenshot = page.screenshot(chromiumoxide::page::ScreenshotParams::default())
-                .await
-                .map_err(|e| anyhow!("Failed to capture screenshot: {}", e))?;
-            
-            // Update metrics
-            {
-                let mut metrics = self.metrics.write().await;
-                metrics.cdp_commands_sent += 1;
-            }
-            
-            info!("Captured screenshot for tab {}", tab_id);
-            Ok(screenshot)
-        } else {
-            Err(anyhow!("No pages available for tab {}", tab_id))
+        // Update metrics
+        {
+            let mut metrics = self.metrics.write().await;
+            metrics.cdp_commands_sent += 1;
         }
+        
+        info!("Captured screenshot for tab {}", tab_id);
+            Ok(screenshot)
     }
     
     /// Get page HTML content
     pub async fn get_page_content(&self, tab_id: &str) -> Result<String> {
-        let browser = self.browser.as_ref()
-            .ok_or_else(|| anyhow!("Browser not launched"))?;
+        let page = self.get_page_for_tab(tab_id).await?;
         
-        let pages = browser.pages().await.map_err(|e| anyhow!("Failed to get pages: {}", e))?;
+        let content = page.content()
+            .await
+            .map_err(|e| anyhow!("Failed to get page content: {}", e))?;
         
-        if let Some(page) = pages.first() {
-            let content = page.content()
-                .await
-                .map_err(|e| anyhow!("Failed to get page content: {}", e))?;
-            
-            // Update metrics
-            {
-                let mut metrics = self.metrics.write().await;
-                metrics.cdp_commands_sent += 1;
-            }
-            
-            Ok(content)
-        } else {
-            Err(anyhow!("No pages available for tab {}", tab_id))
+        // Update metrics
+        {
+            let mut metrics = self.metrics.write().await;
+            metrics.cdp_commands_sent += 1;
         }
+        
+        Ok(content)
     }
     
     /// Reload a tab
     pub async fn reload_tab(&self, tab_id: &str) -> Result<()> {
-        let browser = self.browser.as_ref()
-            .ok_or_else(|| anyhow!("Browser not launched"))?;
+        let page = self.get_page_for_tab(tab_id).await?;
         
-        let pages = browser.pages().await.map_err(|e| anyhow!("Failed to get pages: {}", e))?;
+        page.reload()
+            .await
+            .map_err(|e| anyhow!("Failed to reload page: {}", e))?;
         
-        if let Some(page) = pages.first() {
-            page.reload()
-                .await
-                .map_err(|e| anyhow!("Failed to reload page: {}", e))?;
-            
-            // Update metrics
-            {
-                let mut metrics = self.metrics.write().await;
-                metrics.cdp_commands_sent += 1;
-            }
-            
-            info!("Reloaded tab {}", tab_id);
-            Ok(())
-        } else {
-            Err(anyhow!("No pages available for tab {}", tab_id))
+        // Update metrics
+        {
+            let mut metrics = self.metrics.write().await;
+            metrics.cdp_commands_sent += 1;
         }
+        
+        info!("Reloaded tab {}", tab_id);
+        Ok(())
     }
     
     /// Go back in tab history using JavaScript

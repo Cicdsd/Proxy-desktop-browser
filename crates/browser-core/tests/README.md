@@ -18,14 +18,19 @@ tests/
 
 ## Test Categories
 
-### 1. Unit Tests (86 tests)
+### 1. Unit Tests (140 tests)
 Fast tests that don't require a real browser. Run automatically in CI/CD.
 
 **Files:**
-- `chromium_config_tests.rs` - 18 tests
-- `chromium_tab_tests.rs` - 17 tests
-- `chromium_engine_tests.rs` - 34 tests
-- `engine_manager_tests.rs` - 17 tests
+- `chromium_config_tests.rs` - 18 tests (Configuration validation)
+- `chromium_tab_tests.rs` - 17 tests (Tab operations)
+- `chromium_engine_tests.rs` - 34 tests (Engine lifecycle)
+- `engine_manager_tests.rs` - 17 tests (Engine management)
+- `chromium_features_tests.rs` - 9 tests (Feature validation)
+- `network_privacy_tests.rs` - 20 tests (Network and privacy)
+- `security_tests.rs` - 18 tests (Security features)
+- `stability_tests.rs` - 13 tests (Stability and recovery)
+- `tab_lifecycle.rs` - 4 tests (Tab lifecycle states)
 
 **Run unit tests:**
 ```bash
@@ -34,9 +39,14 @@ cargo test --test chromium_config_tests
 cargo test --test chromium_tab_tests
 cargo test --test chromium_engine_tests
 cargo test --test engine_manager_tests
+cargo test --test chromium_features_tests
+cargo test --test network_privacy_tests
+cargo test --test security_tests
+cargo test --test stability_tests
+cargo test --test tab_lifecycle
 ```
 
-### 2. Integration Tests (19 tests)
+### 2. Integration Tests (16 tests)
 Tests that launch a real Chromium browser. Marked with `#[ignore]` to avoid CI failures.
 
 **File:** `chromium_integration_tests.rs`
