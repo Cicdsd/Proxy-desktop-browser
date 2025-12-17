@@ -17,7 +17,7 @@ use tracing::{debug, info, warn};
 
 /// EXP-1001: Multi-Engine Architecture
 /// Allows dynamic switching between rendering engines
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum EngineType {
     Chromium,
     WebKit,

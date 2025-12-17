@@ -535,10 +535,13 @@
   <div class="tab-bar">
     <div class="tabs-container">
       {#each tabs as tab (tab.tab_id)}
-        <button 
+        <div 
           class="tab"
           class:active={tab.tab_id === activeTabId}
           onclick={() => selectTab(tab.tab_id)}
+          onkeydown={(e) => e.key === 'Enter' && selectTab(tab.tab_id)}
+          role="button"
+          tabindex="0"
           title={tab.title || tab.url}
         >
           <span class="tab-icon">
@@ -550,7 +553,7 @@
           </span>
           <span class="tab-title">{tab.title || 'New Tab'}</span>
           <button class="tab-close" onclick={(e) => closeTab(tab.tab_id, e)}>✕</button>
-        </button>
+        </div>
       {/each}
       
       <button class="new-tab-btn" onclick={() => createNewTab()} title="New Tab (Ctrl+T)">
@@ -790,12 +793,15 @@
         </div>
         <div class="proxy-items">
           {#each proxies.slice(0, 20) as proxy}
-            <button 
+            <div 
               class="proxy-item"
               class:active={currentProxy?.ip === proxy.ip}
               class:working={proxy.is_working}
               class:failed={!proxy.is_working}
               onclick={() => setProxy(proxy)}
+              onkeydown={(e) => e.key === 'Enter' && setProxy(proxy)}
+              role="button"
+              tabindex="0"
             >
               <span class="proxy-flag">{getCountryFlag(proxy.country_code)}</span>
               <span class="proxy-info">
@@ -814,7 +820,7 @@
                   {validatingProxy === proxy.ip ? '⏳' : '✓'}
                 </button>
               </div>
-            </button>
+            </div>
           {/each}
           {#if proxies.length === 0}
             <div class="no-proxies">No proxies available. Click "Fetch Free Proxies" to load.</div>
@@ -836,14 +842,14 @@
           <div class="empty-panel">No bookmarks yet. Press Ctrl+D to add one.</div>
         {:else}
           {#each bookmarks as bookmark}
-            <button class="panel-item" onclick={() => openBookmark(bookmark.url)}>
+            <div class="panel-item" onclick={() => openBookmark(bookmark.url)} onkeydown={(e) => e.key === 'Enter' && openBookmark(bookmark.url)} role="button" tabindex="0">
               <span class="item-icon">🔖</span>
               <span class="item-info">
                 <span class="item-title">{bookmark.title}</span>
                 <span class="item-url">{bookmark.url}</span>
               </span>
               <button class="item-delete" onclick={(e) => { e.stopPropagation(); deleteBookmark(bookmark.id); }}>✕</button>
-            </button>
+            </div>
           {/each}
         {/if}
       </div>

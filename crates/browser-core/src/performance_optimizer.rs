@@ -85,7 +85,7 @@ pub struct CacheEntry {
 }
 
 /// Cache priority levels
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum CachePriority {
     Critical,   // Core resources (HTML, critical CSS)
     High,       // Important resources (JS, fonts)

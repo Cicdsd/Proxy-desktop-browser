@@ -376,7 +376,8 @@ impl ErrorRecoveryManager {
         
         // Trim history if too large
         if history.len() > self.config.max_error_history {
-            history.drain(0..history.len() - self.config.max_error_history);
+            let drain_count = history.len() - self.config.max_error_history;
+            history.drain(0..drain_count);
         }
     }
 

@@ -163,7 +163,8 @@ impl MemoryProfiler {
         
         // Keep only last 1000 snapshots
         if snapshots.len() > 1000 {
-            snapshots.drain(0..snapshots.len() - 1000);
+            let drain_count = snapshots.len() - 1000;
+            snapshots.drain(0..drain_count);
         }
 
         debug!("Memory snapshot: {}MB used, {} tabs", heap_used, tab_count);
@@ -236,7 +237,8 @@ impl MemoryProfiler {
 
         // Keep only last 100 alerts
         if alerts.len() > 100 {
-            alerts.drain(0..alerts.len() - 100);
+            let drain_count = alerts.len() - 100;
+            alerts.drain(0..drain_count);
         }
     }
 

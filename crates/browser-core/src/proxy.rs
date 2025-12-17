@@ -19,7 +19,7 @@ impl Default for ProxyType {
     }
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct ProxySettings {
     pub proxy_type: ProxyType,
     pub host: Option<String>,
