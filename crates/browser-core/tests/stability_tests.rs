@@ -5,7 +5,7 @@ use browser_core::{
     LogManager, LogLevel, LogConfig,
 };
 use std::time::Duration;
-use anyhow;
+use anyhow::anyhow;
 
 /// Test memory manager allocation tracking
 #[tokio::test]
@@ -118,7 +118,7 @@ async fn test_error_recovery_retry_success() {
             async move {
                 let attempt = c.fetch_add(1, std::sync::atomic::Ordering::SeqCst);
                 if attempt < 2 {
-                    Err(anyhow::anyhow!("Simulated failure attempt {}", attempt))
+                    Err(anyhow!("Simulated failure attempt {}", attempt))
                 } else {
                     Ok("Success!")
                 }
@@ -140,7 +140,7 @@ async fn test_error_recovery_max_retries() {
         "always_fails",
         ErrorCategory::Network,
         || async {
-            Err(anyhow::anyhow!("Always fails"))
+            Err(anyhow!("Always fails"))
         },
     ).await;
     
