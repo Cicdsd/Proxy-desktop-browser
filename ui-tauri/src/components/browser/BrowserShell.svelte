@@ -842,7 +842,13 @@
           <div class="empty-panel">No bookmarks yet. Press Ctrl+D to add one.</div>
         {:else}
           {#each bookmarks as bookmark}
-            <div class="panel-item" onclick={() => openBookmark(bookmark.url)} onkeydown={(e) => e.key === 'Enter' && openBookmark(bookmark.url)} role="button" tabindex="0">
+            <div 
+              class="panel-item" 
+              onclick={() => openBookmark(bookmark.url)} 
+              onkeydown={(e) => e.key === 'Enter' && openBookmark(bookmark.url)} 
+              role="button" 
+              tabindex="0"
+            >
               <span class="item-icon">🔖</span>
               <span class="item-info">
                 <span class="item-title">{bookmark.title}</span>
