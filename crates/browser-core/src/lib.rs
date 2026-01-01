@@ -49,6 +49,8 @@ pub use webview_manager::{WebviewManager, WebviewTab};
 pub use browser_tab_manager::{BrowserTabManager, BrowserTab, CreateTabConfig, TabStats};
 pub use free_ip_providers::{FreeIpProvider, FreeIpProviderManager};
 pub use storage::{
+    SessionManager, BrowserSession, SessionTab, SessionSettings, SessionProxyConfig,
+    WindowState, ScrollPosition, TabHistoryEntry, SessionStatistics,
     StorageEngine,
     Cookie,
     HistoryEntry,
@@ -62,7 +64,10 @@ pub use backup::{BackupManager, BackupData, BackupOptions, BackupInfo, AutoBacku
 pub use browser_controls::{BrowserController, BrowserState, BrowserSettings, WebRtcPolicy};
 pub use local_proxy::{LocalProxyServer, LocalProxyManager, ProxyConnection};
 pub use pac_server::{PacServer, PacManager};
-pub use proxy_rotation::{ProxyRotationManager, ProxyRotationStrategy, ProxyMetrics, ProxySessionStats};
+pub use proxy_rotation::{
+    ProxyRotationManager, ProxyRotationStrategy, ProxyMetrics, ProxySessionStats,
+    SmartProxySelector, ProxyHealthMonitor, ProxyHealthStatus, BandwidthStats, GeoDiversityManager
+};
 pub use proxy_validator::{ProxyValidator, ProxyValidatorConfig, ValidationResult, ProxyHealthChecker};
 pub use chromium_engine::{
     ChromiumEngine,
@@ -165,6 +170,8 @@ pub use automation::{
 
 // V1000 Content Enhancement exports
 pub use content_enhancement::{
+    AdvancedLanguageDetector, LanguageProfile, LanguageDetectionResult, ScriptType,
+    TextAnalyzer, TextStatistics,
     ContentEnhancementManager,
     ReaderMode, ReaderModeConfig, ReaderTheme, ExtractedArticle,
     MediaPlayer, MediaPlayerConfig, MediaInfo, MediaType, VideoQuality,

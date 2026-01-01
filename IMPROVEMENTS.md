@@ -186,3 +186,16 @@ This document summarizes the code quality improvements made to the Proxy-Desktop
 ## Build System
 
 A comprehensive Makefile has been added with the following targets:
+## Recent Enhancements (v1.1.0)
+
+### Smart Proxy Selection System
+
+The proxy rotation module has been enhanced with intelligent proxy selection capabilities:
+
+#### SmartProxySelector
+A weighted scoring algorithm that evaluates proxies based on multiple factors:
+- **Success Rate** (35% weight): Historical request success rate
+- **Response Time** (25% weight): Average latency with configurable maximum
+- **Geography** (15% weight): Preferred country matching
+- **Uptime** (15% weight): Proxy availability percentage
+- **Anonymity** (10% weight): Elite/Anonymous/Transparent classification

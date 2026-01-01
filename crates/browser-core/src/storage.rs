@@ -865,3 +865,582 @@ mod tests {
         assert_eq!(bookmarks.len(), 2);
     }
 }
+
+// =============================================================================
+// Session Management System
+// =============================================================================
+
+/// Browser session data for persistence
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct BrowserSession {
+    /// Unique session ID
+    pub session_id: String,
+    /// Session name (user-defined)
+    pub name: String,
+    /// Creation timestamp
+    pub created_at: i64,
+    /// Last accessed timestamp
+    pub last_accessed: i64,
+    /// Open tabs in this session
+    pub tabs: Vec<SessionTab>,
+    /// Window state
+    pub window_state: WindowState,
+    /// Session-specific settings
+    pub settings: SessionSettings,
+    /// Session tags for organization
+    pub tags: Vec<String>,
+    /// Whether this is the default session
+    pub is_default: bool,
+}
+
+/// Tab information for session persistence
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct SessionTab {
+    /// Tab ID
+    pub tab_id: String,
+    /// Current URL
+    pub url: String,
+    /// Page title
+    pub title: String,
+    /// Favicon URL
+    pub favicon_url: Option<String>,
+    /// Tab position/index
+    pub position: usize,
+    /// Whether tab is pinned
+    pub is_pinned: bool,
+    /// Whether tab is muted
+    pub is_muted: bool,
+    /// Scroll position
+    pub scroll_position: ScrollPosition,
+    /// Navigation history for this tab
+    pub history: Vec<TabHistoryEntry>,
+    /// Current history index
+    pub history_index: usize,
+}
+
+/// Scroll position for tab restoration
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
+pub struct ScrollPosition {
+    pub x: i32,
+    pub y: i32,
+}
+
+/// Tab navigation history entry
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct TabHistoryEntry {
+    pub url: String,
+    pub title: String,
+    pub timestamp: i64,
+}
+
+/// Window state for session restoration
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct WindowState {
+    pub x: i32,
+    pub y: i32,
+    pub width: u32,
+    pub height: u32,
+    pub is_maximized: bool,
+    pub is_fullscreen: bool,
+}
+
+impl Default for WindowState {
+    fn default() -> Self {
+        Self {
+            x: 100,
+            y: 100,
+            width: 1280,
+            height: 720,
+            is_maximized: false,
+            is_fullscreen: false,
+        }
+    }
+}
+
+/// Session-specific settings
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct SessionSettings {
+    /// Proxy configuration for this session
+    pub proxy_config: Option<SessionProxyConfig>,
+    /// User agent override
+    pub user_agent: Option<String>,
+    /// Whether to block ads in this session
+    pub block_ads: bool,
+    /// Whether to enable tracking protection
+    pub tracking_protection: bool,
+    /// Zoom level (1.0 = 100%)
+    pub zoom_level: f64,
+}
+
+impl Default for SessionSettings {
+    fn default() -> Self {
+        Self {
+            proxy_config: None,
+            user_agent: None,
+            block_ads: true,
+            tracking_protection: true,
+            zoom_level: 1.0,
+        }
+    }
+}
+
+/// Proxy configuration for a session
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct SessionProxyConfig {
+    pub enabled: bool,
+    pub proxy_type: String,
+    pub host: String,
+    pub port: u16,
+    pub username: Option<String>,
+    pub password: Option<String>,
+}
+
+/// Session manager for handling browser sessions
+pub struct SessionManager {
+    sessions: Arc<RwLock<HashMap<String, BrowserSession>>>,
+    active_session_id: Arc<RwLock<Option<String>>>,
+    storage_path: PathBuf,
+    auto_save_enabled: bool,
+}
+
+impl SessionManager {
+    /// Create a new session manager
+    pub fn new(storage_path: PathBuf) -> Self {
+        Self {
+            sessions: Arc::new(RwLock::new(HashMap::new())),
+            active_session_id: Arc::new(RwLock::new(None)),
+            storage_path,
+            auto_save_enabled: true,
+        }
+    }
+
+    /// Create a new session
+    pub async fn create_session(&self, name: &str, is_default: bool) -> Result<BrowserSession> {
+        let session_id = uuid::Uuid::new_v4().to_string();
+        let now = chrono::Utc::now().timestamp();
+
+        let session = BrowserSession {
+            session_id: session_id.clone(),
+            name: name.to_string(),
+            created_at: now,
+            last_accessed: now,
+            tabs: Vec::new(),
+            window_state: WindowState::default(),
+            settings: SessionSettings::default(),
+            tags: Vec::new(),
+            is_default,
+        };
+
+        let mut sessions = self.sessions.write().await;
+        
+        // If this is default, unmark other default sessions
+        if is_default {
+            for s in sessions.values_mut() {
+                s.is_default = false;
+            }
+        }
+
+        sessions.insert(session_id.clone(), session.clone());
+        info!("Created new session: {} ({})", name, session_id);
+
+        if self.auto_save_enabled {
+            self.save_sessions_internal(&sessions).await?;
+        }
+
+        Ok(session)
+    }
+
+    /// Get a session by ID
+    pub async fn get_session(&self, session_id: &str) -> Option<BrowserSession> {
+        let sessions = self.sessions.read().await;
+        sessions.get(session_id).cloned()
+    }
+
+    /// Get the active session
+    pub async fn get_active_session(&self) -> Option<BrowserSession> {
+        let active_id = self.active_session_id.read().await;
+        if let Some(id) = active_id.as_ref() {
+            self.get_session(id).await
+        } else {
+            None
+        }
+    }
+
+    /// Set the active session
+    pub async fn set_active_session(&self, session_id: &str) -> Result<()> {
+        let sessions = self.sessions.read().await;
+        if !sessions.contains_key(session_id) {
+            return Err(anyhow::anyhow!("Session not found"));
+        }
+        drop(sessions);
+
+        let mut active_id = self.active_session_id.write().await;
+        *active_id = Some(session_id.to_string());
+
+        // Update last accessed
+        let mut sessions = self.sessions.write().await;
+        if let Some(session) = sessions.get_mut(session_id) {
+            session.last_accessed = chrono::Utc::now().timestamp();
+        }
+
+        Ok(())
+    }
+
+    /// List all sessions
+    pub async fn list_sessions(&self) -> Vec<BrowserSession> {
+        let sessions = self.sessions.read().await;
+        let mut list: Vec<BrowserSession> = sessions.values().cloned().collect();
+        list.sort_by(|a, b| b.last_accessed.cmp(&a.last_accessed));
+        list
+    }
+
+    /// Update a session
+    pub async fn update_session(&self, session: BrowserSession) -> Result<()> {
+        let mut sessions = self.sessions.write().await;
+        
+        if !sessions.contains_key(&session.session_id) {
+            return Err(anyhow::anyhow!("Session not found"));
+        }
+
+        sessions.insert(session.session_id.clone(), session);
+
+        if self.auto_save_enabled {
+            self.save_sessions_internal(&sessions).await?;
+        }
+
+        Ok(())
+    }
+
+    /// Delete a session
+    pub async fn delete_session(&self, session_id: &str) -> Result<bool> {
+        let mut sessions = self.sessions.write().await;
+        let removed = sessions.remove(session_id).is_some();
+
+        if removed {
+            // Clear active session if it was deleted
+            let mut active_id = self.active_session_id.write().await;
+            if active_id.as_ref() == Some(&session_id.to_string()) {
+                *active_id = None;
+            }
+
+            info!("Deleted session: {}", session_id);
+
+            if self.auto_save_enabled {
+                self.save_sessions_internal(&sessions).await?;
+            }
+        }
+
+        Ok(removed)
+    }
+
+    /// Add a tab to a session
+    pub async fn add_tab_to_session(&self, session_id: &str, tab: SessionTab) -> Result<()> {
+        let mut sessions = self.sessions.write().await;
+        
+        let session = sessions.get_mut(session_id)
+            .ok_or_else(|| anyhow::anyhow!("Session not found"))?;
+
+        session.tabs.push(tab);
+        session.last_accessed = chrono::Utc::now().timestamp();
+
+        if self.auto_save_enabled {
+            self.save_sessions_internal(&sessions).await?;
+        }
+
+        Ok(())
+    }
+
+    /// Remove a tab from a session
+    pub async fn remove_tab_from_session(&self, session_id: &str, tab_id: &str) -> Result<bool> {
+        let mut sessions = self.sessions.write().await;
+        
+        let session = sessions.get_mut(session_id)
+            .ok_or_else(|| anyhow::anyhow!("Session not found"))?;
+
+        let initial_len = session.tabs.len();
+        session.tabs.retain(|t| t.tab_id != tab_id);
+        let removed = session.tabs.len() < initial_len;
+
+        if removed {
+            session.last_accessed = chrono::Utc::now().timestamp();
+
+            if self.auto_save_enabled {
+                self.save_sessions_internal(&sessions).await?;
+            }
+        }
+
+        Ok(removed)
+    }
+
+    /// Update a tab in a session
+    pub async fn update_tab_in_session(&self, session_id: &str, tab: SessionTab) -> Result<()> {
+        let mut sessions = self.sessions.write().await;
+        
+        let session = sessions.get_mut(session_id)
+            .ok_or_else(|| anyhow::anyhow!("Session not found"))?;
+
+        if let Some(existing_tab) = session.tabs.iter_mut().find(|t| t.tab_id == tab.tab_id) {
+            *existing_tab = tab;
+            session.last_accessed = chrono::Utc::now().timestamp();
+
+            if self.auto_save_enabled {
+                self.save_sessions_internal(&sessions).await?;
+            }
+        }
+
+        Ok(())
+    }
+
+    /// Save all sessions to disk
+    pub async fn save_sessions(&self) -> Result<()> {
+        let sessions = self.sessions.read().await;
+        self.save_sessions_internal(&sessions).await
+    }
+
+    /// Internal save method
+    async fn save_sessions_internal(&self, sessions: &HashMap<String, BrowserSession>) -> Result<()> {
+        let sessions_file = self.storage_path.join("sessions.json");
+        
+        // Ensure directory exists
+        if let Some(parent) = sessions_file.parent() {
+            tokio::fs::create_dir_all(parent).await?;
+        }
+
+        let json = serde_json::to_string_pretty(sessions)?;
+        tokio::fs::write(&sessions_file, json).await
+            .context("Failed to write sessions file")?;
+
+        Ok(())
+    }
+
+    /// Load sessions from disk
+    pub async fn load_sessions(&self) -> Result<usize> {
+        let sessions_file = self.storage_path.join("sessions.json");
+        
+        if !sessions_file.exists() {
+            return Ok(0);
+        }
+
+        let json = tokio::fs::read_to_string(&sessions_file).await
+            .context("Failed to read sessions file")?;
+
+        let loaded: HashMap<String, BrowserSession> = serde_json::from_str(&json)
+            .context("Failed to parse sessions file")?;
+
+        let count = loaded.len();
+        let mut sessions = self.sessions.write().await;
+        *sessions = loaded;
+
+        // Set active session to default or most recently accessed
+        let active_id = sessions.values()
+            .filter(|s| s.is_default)
+            .next()
+            .or_else(|| sessions.values().max_by_key(|s| s.last_accessed))
+            .map(|s| s.session_id.clone());
+
+        if let Some(id) = active_id {
+            let mut active = self.active_session_id.write().await;
+            *active = Some(id);
+        }
+
+        info!("Loaded {} sessions", count);
+        Ok(count)
+    }
+
+    /// Export a session to JSON
+    pub async fn export_session(&self, session_id: &str) -> Result<String> {
+        let session = self.get_session(session_id).await
+            .ok_or_else(|| anyhow::anyhow!("Session not found"))?;
+
+        serde_json::to_string_pretty(&session)
+            .context("Failed to serialize session")
+    }
+
+    /// Import a session from JSON
+    pub async fn import_session(&self, json: &str) -> Result<String> {
+        let mut session: BrowserSession = serde_json::from_str(json)
+            .context("Failed to parse session JSON")?;
+
+        // Generate new session ID to avoid conflicts
+        session.session_id = uuid::Uuid::new_v4().to_string();
+        session.last_accessed = chrono::Utc::now().timestamp();
+
+        let session_id = session.session_id.clone();
+        let mut sessions = self.sessions.write().await;
+        sessions.insert(session_id.clone(), session);
+
+        if self.auto_save_enabled {
+            self.save_sessions_internal(&sessions).await?;
+        }
+
+        Ok(session_id)
+    }
+
+    /// Get the default session or create one
+    pub async fn get_or_create_default_session(&self) -> Result<BrowserSession> {
+        let sessions = self.sessions.read().await;
+        
+        if let Some(default) = sessions.values().find(|s| s.is_default) {
+            return Ok(default.clone());
+        }
+
+        drop(sessions);
+        self.create_session("Default Session", true).await
+    }
+
+    /// Duplicate a session
+    pub async fn duplicate_session(&self, session_id: &str, new_name: &str) -> Result<BrowserSession> {
+        let original = self.get_session(session_id).await
+            .ok_or_else(|| anyhow::anyhow!("Session not found"))?;
+
+        let now = chrono::Utc::now().timestamp();
+        let new_session = BrowserSession {
+            session_id: uuid::Uuid::new_v4().to_string(),
+            name: new_name.to_string(),
+            created_at: now,
+            last_accessed: now,
+            tabs: original.tabs.clone(),
+            window_state: original.window_state.clone(),
+            settings: original.settings.clone(),
+            tags: original.tags.clone(),
+            is_default: false,
+        };
+
+        let mut sessions = self.sessions.write().await;
+        sessions.insert(new_session.session_id.clone(), new_session.clone());
+
+        if self.auto_save_enabled {
+            self.save_sessions_internal(&sessions).await?;
+        }
+
+        Ok(new_session)
+    }
+
+    /// Search sessions by name or tag
+    pub async fn search_sessions(&self, query: &str) -> Vec<BrowserSession> {
+        let sessions = self.sessions.read().await;
+        let query_lower = query.to_lowercase();
+
+        sessions.values()
+            .filter(|s| {
+                s.name.to_lowercase().contains(&query_lower) ||
+                s.tags.iter().any(|t| t.to_lowercase().contains(&query_lower))
+            })
+            .cloned()
+            .collect()
+    }
+
+    /// Get session statistics
+    pub async fn get_statistics(&self) -> SessionStatistics {
+        let sessions = self.sessions.read().await;
+        
+        let total_sessions = sessions.len();
+        let total_tabs: usize = sessions.values().map(|s| s.tabs.len()).sum();
+        let pinned_tabs: usize = sessions.values()
+            .flat_map(|s| s.tabs.iter())
+            .filter(|t| t.is_pinned)
+            .count();
+
+        SessionStatistics {
+            total_sessions,
+            total_tabs,
+            pinned_tabs,
+            active_session_id: self.active_session_id.read().await.clone(),
+        }
+    }
+}
+
+/// Session statistics
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct SessionStatistics {
+    pub total_sessions: usize,
+    pub total_tabs: usize,
+    pub pinned_tabs: usize,
+    pub active_session_id: Option<String>,
+}
+
+#[cfg(test)]
+mod session_tests {
+    use super::*;
+    use tempfile::TempDir;
+
+    async fn create_test_session_manager() -> (SessionManager, TempDir) {
+        let temp_dir = TempDir::new().unwrap();
+        let manager = SessionManager::new(temp_dir.path().to_path_buf());
+        (manager, temp_dir)
+    }
+
+    #[tokio::test]
+    async fn test_create_session() {
+        let (manager, _temp) = create_test_session_manager().await;
+        
+        let session = manager.create_session("Test Session", false).await.unwrap();
+        assert_eq!(session.name, "Test Session");
+        assert!(!session.is_default);
+    }
+
+    #[tokio::test]
+    async fn test_default_session() {
+        let (manager, _temp) = create_test_session_manager().await;
+        
+        let session = manager.get_or_create_default_session().await.unwrap();
+        assert!(session.is_default);
+    }
+
+    #[tokio::test]
+    async fn test_add_tab() {
+        let (manager, _temp) = create_test_session_manager().await;
+        
+        let session = manager.create_session("Test", false).await.unwrap();
+        
+        let tab = SessionTab {
+            tab_id: "tab1".to_string(),
+            url: "https://example.com".to_string(),
+            title: "Example".to_string(),
+            favicon_url: None,
+            position: 0,
+            is_pinned: false,
+            is_muted: false,
+            scroll_position: ScrollPosition::default(),
+            history: vec![],
+            history_index: 0,
+        };
+        
+        manager.add_tab_to_session(&session.session_id, tab).await.unwrap();
+        
+        let updated = manager.get_session(&session.session_id).await.unwrap();
+        assert_eq!(updated.tabs.len(), 1);
+    }
+
+    #[tokio::test]
+    async fn test_session_persistence() {
+        let temp_dir = TempDir::new().unwrap();
+        
+        // Create and save
+        {
+            let manager = SessionManager::new(temp_dir.path().to_path_buf());
+            manager.create_session("Persistent Session", true).await.unwrap();
+        }
+        
+        // Load in new manager
+        {
+            let manager = SessionManager::new(temp_dir.path().to_path_buf());
+            let count = manager.load_sessions().await.unwrap();
+            assert_eq!(count, 1);
+            
+            let sessions = manager.list_sessions().await;
+            assert_eq!(sessions[0].name, "Persistent Session");
+        }
+    }
+
+    #[tokio::test]
+    async fn test_duplicate_session() {
+        let (manager, _temp) = create_test_session_manager().await;
+        
+        let original = manager.create_session("Original", false).await.unwrap();
+        let duplicate = manager.duplicate_session(&original.session_id, "Copy").await.unwrap();
+        
+        assert_ne!(original.session_id, duplicate.session_id);
+        assert_eq!(duplicate.name, "Copy");
+    }
+}
