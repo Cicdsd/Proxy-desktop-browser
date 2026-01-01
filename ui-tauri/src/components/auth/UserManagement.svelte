@@ -1,7 +1,8 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { getContext } from 'svelte';
-  import { promoteUserToAdmin, createEnterpriseUser } from '../../lib/api';
+  import { promoteUserToAdmin, createEnterpriseUser, fetchUsers } from '../../lib/api';
+
   import LoadingSpinner from '../ui/LoadingSpinner.svelte';
   import type { AuthContext } from './AuthWrapper.svelte';
   import type { User } from '../../lib/types';
@@ -18,30 +19,18 @@
   let newEnterpriseId = '';
   let creatingUser = false;
   
-  // Mock user data - in production, fetch from API
+  // Fetch users on component mount
   onMount(async () => {
-    // TODO: Implement fetchUsers API endpoint
-    users = [
-      {
-        id: '1',
-        username: 'admin',
-        email: 'admin@company.com',
-        role: 'Admin',
-        created_at: new Date().toISOString(),
-        last_login: new Date().toISOString(),
-        enterprise_id: null
-      },
-      {
-        id: '2',
-        username: 'john_doe',
-        email: 'john@company.com',
-        role: 'User',
-        created_at: new Date().toISOString(),
-        last_login: new Date().toISOString(),
-        enterprise_id: 'enterprise-123'
-      }
-    ];
+    loading = true;
+    try {
+      users = await fetchUsers();
+    } catch (err) {
+      error = err instanceof Error ? err.message : 'Failed to fetch users';
+    } finally {
+      loading = false;
+    }
   });
+
   
   async function handlePromoteToAdmin(userId: string, username: string) {
     if (!confirm(`Are you sure you want to promote ${username} to admin?`)) {
@@ -60,9 +49,10 @@
         user.role = 'Admin';
         users = [...users];
       }
-    } catch (err: any) {
-      error = err || 'Failed to promote user';
+    } catch (err: unknown) {
+      error = err instanceof Error ? err.message : 'Failed to promote user';
     } finally {
+
       loading = false;
     }
   }
@@ -92,9 +82,10 @@
       newPassword = '';
       newEnterpriseId = '';
       showCreateUser = false;
-    } catch (err: any) {
-      error = err || 'Failed to create user';
+    } catch (err: unknown) {
+      error = err instanceof Error ? err.message : 'Failed to create user';
     } finally {
+
       creatingUser = false;
     }
   }

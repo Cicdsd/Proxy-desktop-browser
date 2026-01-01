@@ -1,5 +1,6 @@
-pub mod database;
+pub mod prelude;
 pub mod tab_manager;
+
 pub mod tab_isolation;
 pub mod fingerprint;
 pub mod proxy;
@@ -35,7 +36,8 @@ pub mod experimental;
 pub mod automation;
 pub mod content_enhancement;
 
-pub use database::{Database, DatabaseError};
+// Database removed - using in-memory storage
+
 pub use tab_manager::TabIPManager;
 pub use tab_isolation::{TabProfile, NetworkConfig, TabStatus};
 pub use fingerprint::BrowserFingerprint;
@@ -46,24 +48,89 @@ pub use security::{SecurityManager, BookmarkInput, ProxyInput};
 pub use webview_manager::{WebviewManager, WebviewTab};
 pub use browser_tab_manager::{BrowserTabManager, BrowserTab, CreateTabConfig, TabStats};
 pub use free_ip_providers::{FreeIpProvider, FreeIpProviderManager};
-pub use storage::{StorageEngine, Cookie, HistoryEntry, Bookmark};
+pub use storage::{
+    StorageEngine,
+    Cookie,
+    HistoryEntry,
+    Bookmark,
+    StorageExport,
+    ImportOptions,
+    ExportOptions,
+    ImportExportStats
+};
 pub use backup::{BackupManager, BackupData, BackupOptions, BackupInfo, AutoBackupSettings};
 pub use browser_controls::{BrowserController, BrowserState, BrowserSettings, WebRtcPolicy};
 pub use local_proxy::{LocalProxyServer, LocalProxyManager, ProxyConnection};
 pub use pac_server::{PacServer, PacManager};
 pub use proxy_rotation::{ProxyRotationManager, ProxyRotationStrategy, ProxyMetrics, ProxySessionStats};
 pub use proxy_validator::{ProxyValidator, ProxyValidatorConfig, ValidationResult, ProxyHealthChecker};
-pub use chromium_engine::{ChromiumEngine, ChromiumEngineConfig, BrowserEngineManager, BrowserEngineType, ChromiumTab, EngineCapabilities};
-pub use ad_verification::{AdVerificationManager, AdVerificationConfig, ImpressionVerification, ImpressionData, VastVerification, VpaidVerification, VerificationSession, SessionStats, ViewabilityStatus, FraudSignal, AdFormat, VerificationStandard};
+pub use chromium_engine::{
+    ChromiumEngine,
+    ChromiumEngineConfig,
+    BrowserEngineManager,
+    BrowserEngineType,
+    ChromiumTab,
+    EngineCapabilities
+};
+pub use ad_verification::{
+    AdVerificationManager,
+    AdVerificationConfig,
+    ImpressionVerification,
+    ImpressionData,
+    VastVerification,
+    VpaidVerification,
+    VerificationSession,
+    SessionStats,
+    ViewabilityStatus,
+    FraudSignal,
+    AdFormat,
+    VerificationStandard
+};
 
 // V1000 Phase 1 exports
-pub use memory_profiler::{MemoryProfiler, MemorySnapshot, MemoryStats, MemoryThresholds, MemoryAlert, LeakReport, GcRecommendation};
-pub use error_recovery::{ErrorRecoveryManager, ErrorRecoveryConfig, ErrorCategory, RecoveryStrategy, RecoveryResult, ErrorStats, CrashPrediction};
-pub use performance_optimizer::{PerformanceOptimizer, PerformanceConfig, PerformanceReport, CoreWebVitals, CacheStats, CachePriority};
+pub use memory_profiler::{
+    MemoryProfiler,
+    MemorySnapshot,
+    MemoryStats,
+    MemoryThresholds,
+    MemoryAlert,
+    LeakReport,
+    GcRecommendation
+};
+pub use error_recovery::{
+    ErrorRecoveryManager,
+    ErrorRecoveryConfig,
+    ErrorCategory,
+    RecoveryStrategy,
+    RecoveryResult,
+    ErrorStats,
+    CrashPrediction
+};
+pub use performance_optimizer::{
+    PerformanceOptimizer,
+    PerformanceConfig,
+    PerformanceReport,
+    CoreWebVitals,
+    CacheStats,
+    CachePriority
+};
 
 // V1000 Phase 2 exports
-pub use network_intelligence::{NetworkIntelligence, NetworkIntelligenceConfig, NetworkIntelligenceReport, TrafficReport, QosPriority};
-pub use privacy_fortress::{PrivacyFortress, PrivacyConfig, PrivacyReport, PrivacyGrade, TrackerStats, CookieIsolationLevel};
+pub use network_intelligence::{
+    NetworkIntelligence,
+    NetworkIntelligenceConfig,
+    NetworkIntelligenceReport,
+    TrafficReport,
+    QosPriority
+};
+pub use privacy_fortress::{
+    PrivacyFortress,
+    PrivacyConfig,
+    PrivacyReport,
+    PrivacyGrade,
+    TrackerStats,
+    CookieIsolationLevel
+};
 
 // V1000 Experimental Feature exports
 pub use experimental::{

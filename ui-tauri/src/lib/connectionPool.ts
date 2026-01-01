@@ -1,3 +1,4 @@
+import { logDebug, logWarn, logError } from './logger';
 // Connection Pool for Proxy Requests
 interface Connection {
   id: string;
@@ -22,9 +23,9 @@ export class ProxyConnectionPool {
   private connections: Map<string, Connection> = new Map();
   private requestQueue: Array<{
     proxy: string;
-    request: () => Promise<any>;
-    resolve: (value: any) => void;
-    reject: (error: any) => void;
+    request: () => Promise<unknown>;
+    resolve: (value: unknown) => void;
+    reject: (reason?: unknown) => void;
     timestamp: number;
   }> = [];
   
@@ -50,7 +51,7 @@ export class ProxyConnectionPool {
   // Add a new proxy connection to the pool
   addConnection(proxy: string): void {
     if (this.connections.size >= this.config.maxConnections) {
-      console.warn('Connection pool at maximum capacity');
+      logWarn('Connection pool at maximum capacity');
       return;
     }
     
@@ -164,7 +165,7 @@ export class ProxyConnectionPool {
             connection.isHealthy = true;
           } catch (error) {
             connection.isHealthy = false;
-            console.warn(`Health check failed for proxy ${proxy}:`, error);
+            logWarn(`Health check failed for proxy ${proxy}:`, error);
           }
         }
       }
@@ -221,7 +222,7 @@ export class ProxyConnectionPool {
     
     // Add more connections if utilization is high
     if (stats.utilization > 0.8 && this.connections.size < this.config.maxConnections) {
-      console.log('High utilization detected, consider adding more connections');
+      logDebug('High utilization detected, consider adding more connections');
     }
     
     // Remove underutilized connections

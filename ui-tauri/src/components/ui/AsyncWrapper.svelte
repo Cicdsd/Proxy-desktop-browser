@@ -1,12 +1,12 @@
-<script lang="ts">
+<script lang="ts" generics="T">
   import { onMount } from 'svelte';
   import LoadingSpinner from './LoadingSpinner.svelte';
   import SkeletonLoader from './SkeletonLoader.svelte';
   import ErrorBoundary from './ErrorBoundary.svelte';
   import { handleAsyncError } from '../../lib/utils';
   
-  export let promise: Promise<any>;
-  export let loadingComponent = 'skeleton';
+  export let promise: Promise<T>;
+  export let loadingComponent: 'skeleton' | 'spinner' = 'skeleton';
   export let errorComponent = true;
   export let skeletonCount = 1;
   export let skeletonHeight = '20px';
@@ -15,7 +15,7 @@
   
   let loading = true;
   let error: Error | null = null;
-  let data: any = null;
+  let data: T | null = null;
   
   onMount(async () => {
     const [result, err] = await handleAsyncError(promise);
@@ -28,13 +28,11 @@
     }
   });
   
-  function handleRetry() {
+  function handleRetry(): void {
     loading = true;
     error = null;
-    onMount(async () => {
-      const [result, err] = await handleAsyncError(promise);
+    handleAsyncError(promise).then(([result, err]) => {
       loading = false;
-      
       if (err) {
         error = err;
       } else {

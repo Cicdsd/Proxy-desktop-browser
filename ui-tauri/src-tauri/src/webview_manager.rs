@@ -40,7 +40,12 @@ impl WebviewManager {
         // Apply proxy settings if provided (environment variables for now)
         let title = if let Some(ref proxy) = proxy_url {
             // For now, use environment variables (affects all windows)
-            // TODO: Implement proper per-webview proxy with WebView2 environment
+            // NOTE: Per-webview proxy configuration requires WebView2 environment setup
+            // which must be done before the WebView is created. Current implementation
+            // uses environment variables as a fallback. For true per-tab isolation,
+            // consider using the IntegratedChromium engine from browser-core crate
+            // which provides full CDP-based proxy control per browser context.
+
             if cfg!(target_os = "windows") {
                 std::env::set_var("HTTP_PROXY", proxy);
                 std::env::set_var("HTTPS_PROXY", proxy);

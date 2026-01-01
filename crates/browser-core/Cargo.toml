@@ -25,8 +25,8 @@ reqwest-retry = { workspace = true }
 scraper = { workspace = true }
 select = { workspace = true }
 
-# Database - SWITCHED TO ASYNC
-sqlx = { workspace = true }
+# Database removed - using in-memory storage
+
 
 # Security - NEW
 keyring = { workspace = true }
@@ -50,8 +50,8 @@ virtual-ip = { path = "../virtual-ip" }
 # Tauri dependencies (for commands)
 tauri = { workspace = true }
 
-# SQLite for storage
-rusqlite = { version = "0.32", features = ["bundled"] }
+# SQLite storage removed - using in-memory storage
+
 
 # Local proxy server dependencies
 # No additional dependencies needed - all available from workspace

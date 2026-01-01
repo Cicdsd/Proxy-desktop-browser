@@ -41,16 +41,9 @@ reqwest = { version = "0.12", default-features = false, features = [
 reqwest-middleware = "0.3"
 reqwest-retry = "0.6"
 
-# Database - SWITCHED TO ASYNC
-sqlx = { version = "0.8", features = [
-    "runtime-tokio",
-    "sqlite",
-    "migrate",
-    "chrono",
-    "uuid"
-]}
 
 # Web Scraping - NEW
+
 scraper = "0.20"
 select = "0.6"
 

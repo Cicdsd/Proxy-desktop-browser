@@ -1,10 +1,13 @@
 <script lang="ts">
   import { onMount, onDestroy, getContext } from 'svelte';
+  import { logDebug, logError } from '../lib/logger';
   import TwoPanelLayout from './layout/TwoPanelLayout.svelte';
   import LeftPanel from './layout/LeftPanel.svelte';
   import RightPanel from './layout/RightPanel.svelte';
   import WebviewBrowser from './browser/WebviewBrowser.svelte';
   import UserManagement from './auth/UserManagement.svelte';
+  import ApiSettingsPanel from './config/ApiSettingsPanel.svelte';
+
   import type { Tab, Country, ValidationResponse, WebviewTab } from '../lib/types';
   import {
     fetchTabs,
@@ -30,7 +33,8 @@
   
   // Webview browser state
   let selectedWebviewTab: WebviewTab | null = null;
-  let activeView: 'browser' | 'enterprise' = 'browser';
+  let activeView: 'browser' | 'enterprise' | 'api-settings' = 'browser';
+
   
   // Subscribe to auth state
   $: if ($auth.user) {
@@ -115,7 +119,7 @@
     try {
       countries = await fetchCountries();
     } catch (e) {
-      console.error(e);
+      logError(e);
     }
   }
 
@@ -131,7 +135,7 @@
       }
     } catch (e) {
       error = 'Failed to load tabs';
-      console.error(e);
+      logError(e);
     } finally {
       loading = false;
     }
@@ -146,7 +150,7 @@
       selectedTab = newTab;
     } catch (e) {
       error = 'Failed to create tab';
-      console.error(e);
+      logError(e);
     } finally {
       loading = false;
     }
@@ -161,7 +165,7 @@
       selectedTab = newTab;
     } catch (e) {
       error = 'Failed to create random tab';
-      console.error(e);
+      logError(e);
     } finally {
       loading = false;
     }
@@ -184,7 +188,7 @@
       await loadTabs();
     } catch (e) {
       error = 'Failed to rotate IP';
-      console.error(e);
+      logError(e);
     } finally {
       validating = false;
     }
@@ -198,7 +202,7 @@
       validation = response;
     } catch (e) {
       error = 'Failed to validate IP';
-      console.error(e);
+      logError(e);
     } finally {
       validating = false;
     }
@@ -223,11 +227,11 @@
   
   function handleWebviewTabCreated(e: CustomEvent) {
     // Optionally associate with IP tab
-    console.log('Webview tab created:', e.detail.tab);
+    logDebug('Webview tab created:', e.detail.tab);
   }
   
   function handleWebviewNavigated(e: CustomEvent) {
-    console.log('Webview navigated:', e.detail);
+    logDebug('Webview navigated:', e.detail);
   }
   
   async function handleLogout() {
@@ -266,10 +270,18 @@
       >
         Browser
       </button>
+      <button 
+        class="view-toggle"
+        class:active={activeView === 'api-settings'}
+        on:click={() => activeView = 'api-settings'}
+      >
+        🔑 API Settings
+      </button>
       <button class="logout-btn" on:click={handleLogout}>
         Logout
       </button>
     </div>
+
   </header>
   
   <!-- Main content -->
@@ -308,7 +320,12 @@
       </div>
     {:else if activeView === 'enterprise'}
       <UserManagement />
+    {:else if activeView === 'api-settings'}
+      <div class="settings-container">
+        <ApiSettingsPanel />
+      </div>
     {/if}
+
   </main>
   
   {#if error}
@@ -451,4 +468,12 @@
     from { opacity: 0; transform: translate(-50%, 10px); }
     to { opacity: 1; transform: translate(-50%, 0); }
   }
+  
+  .settings-container {
+    flex: 1;
+    overflow-y: auto;
+    background: #0c1120;
+    padding: 20px;
+  }
 </style>
+

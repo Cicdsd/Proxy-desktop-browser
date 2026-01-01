@@ -932,7 +932,7 @@ fn main() {
             let storage_engine = match StorageEngine::new(&storage_dir) {
                 Ok(engine) => Arc::new(engine),
                 Err(e) => {
-                    eprintln!("Warning: Failed to initialize storage engine: {}. Using temp directory.", e);
+                    warn!(" Failed to initialize storage engine: {}. Using temp directory.", e);
                     let temp_dir = std::env::temp_dir().join("virtual-ip-browser/data");
                     Arc::new(StorageEngine::new(&temp_dir).expect("Failed to create storage engine"))
                 }
@@ -943,7 +943,7 @@ fn main() {
             let backup_manager = match BackupManager::new(&backup_dir) {
                 Ok(manager) => Arc::new(manager),
                 Err(e) => {
-                    eprintln!("Warning: Failed to initialize backup manager: {}. Using temp directory.", e);
+                    warn!(" Failed to initialize backup manager: {}. Using temp directory.", e);
                     let temp_dir = std::env::temp_dir().join("virtual-ip-browser/backups");
                     Arc::new(BackupManager::new(&temp_dir).expect("Failed to create backup manager"))
                 }

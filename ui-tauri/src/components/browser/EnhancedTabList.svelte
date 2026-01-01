@@ -11,8 +11,15 @@
   
   const dispatch = createEventDispatcher();
   
-  let virtualList: any;
+  // Interface for VirtualList component methods
+  interface VirtualListRef {
+    scrollToItem: (index: number) => void;
+    getVisibleRange: () => { start: number; end: number };
+  }
+  
+  let virtualList: VirtualListRef | null = null;
   let useVirtualScroll = false;
+
   
   // Determine whether to use virtual scroll
   $: useVirtualScroll = $virtualScrollEnabled && tabs.length > $virtualScrollThreshold;

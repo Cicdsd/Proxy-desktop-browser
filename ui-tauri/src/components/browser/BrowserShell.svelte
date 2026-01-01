@@ -1,7 +1,11 @@
 <script lang="ts">
   import { invoke } from '@tauri-apps/api/core';
   import { listen } from '@tauri-apps/api/event';
-  import type { WebviewTab, FreeProxy, PublicIpInfo, HistoryEntry, Bookmark, BrowserSettings } from '../../lib/types';
+  import type { 
+    WebviewTab, FreeProxy, PublicIpInfo, HistoryEntry, Bookmark, BrowserSettings,
+    NavigationChangedPayload, TitleChangedPayload 
+  } from '../../lib/types';
+
   
   interface BrowserTab extends WebviewTab {
     favicon?: string;
@@ -72,15 +76,16 @@
     detectIp();
     
     // Listen for navigation changes from backend
-    const unlistenNav = listen('navigation_changed', (event: any) => {
+    const unlistenNav = listen<NavigationChangedPayload>('navigation_changed', (event) => {
       const { tab_id, url, title } = event.payload;
       updateTabState(tab_id, { url, title });
     });
     
-    const unlistenTitle = listen('title_changed', (event: any) => {
+    const unlistenTitle = listen<TitleChangedPayload>('title_changed', (event) => {
       const { tab_id, title } = event.payload;
       updateTabState(tab_id, { title });
     });
+
     
     window.addEventListener('keydown', handleGlobalKeydown);
     
@@ -261,7 +266,8 @@
     }
   }
   
-  async function setRotationStrategy(strategy: string, params?: any) {
+  async function setRotationStrategy(strategy: string, params?: Record<string, unknown>) {
+
     try {
       await invoke('update_rotation_strategy', { strategy, params });
       rotationStrategy = strategy;
