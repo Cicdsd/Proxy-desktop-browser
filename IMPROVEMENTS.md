@@ -154,12 +154,34 @@ This document summarizes the code quality improvements made to the Proxy-Desktop
 
 ## Recent Code Quality Fixes
 
+### Complexity Reduction (Issue #18)
+- **chromium_engine.rs**: Refactored `apply_fingerprint_spoofing` (complexity 25 → <10)
+  - Extracted `get_canvas_spoofing_script()` helper
+  - Extracted `get_webgl_spoofing_script()` helper
+  - Extracted `get_audio_spoofing_script()` helper
+  - Extracted `add_screen_spoofing_script()` helper
+  - Extracted `add_navigator_spoofing_scripts()` helper
+  - Extracted `execute_spoofing_scripts()` helper
+  
+- **storage.rs**: Refactored `import_with_options` (complexity 21 → <10)
+  - Extracted `import_cookies_data()` helper
+  - Extracted `import_history_data()` helper
+  - Extracted `merge_history_entry()` helper
+  - Extracted `import_bookmarks_data()` helper
+  - Extracted `import_local_storage_data()` helper
+
 ### Long Line Fixes
 - **lib.rs**: Split long `pub use` statements across multiple lines for better readability
 - **automation.rs**: Split long function signature `record_action()` into multi-line format
 
 ### Files Formatted
 - All modified files pass `rustfmt --check` validation
+
+### Complexity Metrics After Refactoring
+- No functions with complexity > 20 (was 2)
+- Maximum function complexity: 18 (launch function)
+- Average function complexity: 2.10
+- Total functions: 782
 
 ## Build System
 

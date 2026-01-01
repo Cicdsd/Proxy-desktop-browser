@@ -20,6 +20,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Code Quality Improvements**
   - Fixed long lines in `lib.rs` by splitting `pub use` statements
   - Fixed long function signature in `automation.rs` (record_action)
+  - Reduced complexity in `chromium_engine.rs` (apply_fingerprint_spoofing: 25 → <10)
+  - Reduced complexity in `storage.rs` (import_with_options: 21 → <10)
+  - No functions with complexity > 20 remaining
   - All modified Rust files pass `rustfmt --check` validation
   - Updated code quality metrics in IMPROVEMENTS.md
 

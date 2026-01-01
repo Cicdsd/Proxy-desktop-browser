@@ -817,70 +817,90 @@ impl ChromiumEngine {
     }
     
     /// Apply fingerprint spoofing based on configuration
+    /// Generate canvas fingerprint randomization script
+    fn get_canvas_spoofing_script() -> &'static str {
+        r#"
+            try {
+                const originalToDataURL = HTMLCanvasElement.prototype.toDataURL;
+                HTMLCanvasElement.prototype.toDataURL = function(type) {
+                    const shift = Math.random() * 0.0000001;
+                    const context = this.getContext('2d');
+                    if (context) {
+                        try {
+                            const imageData = context.getImageData(0, 0, this.width, this.height);
+                            for (let i = 0; i < imageData.data.length; i += 4) {
+                                imageData.data[i] = Math.min(255, Math.max(0, imageData.data[i] + shift));
+                            }
+                            context.putImageData(imageData, 0, 0);
+                        } catch(e) {}
+                    }
+                    return originalToDataURL.apply(this, arguments);
+                };
+            } catch(e) { console.log('Canvas spoofing error:', e); }
+        "#
+    }
+
+    /// Generate WebGL fingerprint randomization script
+    fn get_webgl_spoofing_script() -> &'static str {
+        r#"
+            const getParameter = WebGLRenderingContext.prototype.getParameter;
+            WebGLRenderingContext.prototype.getParameter = function(parameter) {
+                if (parameter === 37445) {
+                    return 'Intel Inc.';
+                }
+                if (parameter === 37446) {
+                    return 'Intel Iris OpenGL Engine';
+                }
+                return getParameter.apply(this, arguments);
+            };
+        "#
+    }
+
+    /// Generate audio context fingerprint randomization script
+    fn get_audio_spoofing_script() -> &'static str {
+        r#"
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            if (AudioContext) {
+                const originalCreateOscillator = AudioContext.prototype.createOscillator;
+                AudioContext.prototype.createOscillator = function() {
+                    const oscillator = originalCreateOscillator.apply(this, arguments);
+                    const originalStart = oscillator.start;
+                    oscillator.start = function() {
+                        arguments[0] = (arguments[0] || 0) + Math.random() * 0.0001;
+                        return originalStart.apply(this, arguments);
+                    };
+                    return oscillator;
+                };
+            }
+        "#
+    }
+
+    /// Apply fingerprint spoofing to prevent browser fingerprinting
     async fn apply_fingerprint_spoofing(&self, page: &Page) -> Result<()> {
         let fp = &self.config.fingerprint;
-        
         let mut scripts = Vec::new();
         
-        // Canvas fingerprint randomization
+        // Add static spoofing scripts based on config
         if fp.randomize_canvas {
-            scripts.push(r#"
-                try {
-                    const originalToDataURL = HTMLCanvasElement.prototype.toDataURL;
-                    HTMLCanvasElement.prototype.toDataURL = function(type) {
-                        const shift = Math.random() * 0.0000001;
-                        const context = this.getContext('2d');
-                        if (context) {
-                            try {
-                                const imageData = context.getImageData(0, 0, this.width, this.height);
-                                for (let i = 0; i < imageData.data.length; i += 4) {
-                                    imageData.data[i] = Math.min(255, Math.max(0, imageData.data[i] + shift));
-                                }
-                                context.putImageData(imageData, 0, 0);
-                            } catch(e) {}
-                        }
-                        return originalToDataURL.apply(this, arguments);
-                    };
-                } catch(e) { console.log('Canvas spoofing error:', e); }
-            "#.to_string());
+            scripts.push(Self::get_canvas_spoofing_script().to_string());
         }
-        
-        // WebGL fingerprint randomization
         if fp.randomize_webgl {
-            scripts.push(r#"
-                const getParameter = WebGLRenderingContext.prototype.getParameter;
-                WebGLRenderingContext.prototype.getParameter = function(parameter) {
-                    if (parameter === 37445) {
-                        return 'Intel Inc.';
-                    }
-                    if (parameter === 37446) {
-                        return 'Intel Iris OpenGL Engine';
-                    }
-                    return getParameter.apply(this, arguments);
-                };
-            "#.to_string());
+            scripts.push(Self::get_webgl_spoofing_script().to_string());
         }
-        
-        // Audio context fingerprint randomization
         if fp.randomize_audio {
-            scripts.push(r#"
-                const AudioContext = window.AudioContext || window.webkitAudioContext;
-                if (AudioContext) {
-                    const originalCreateOscillator = AudioContext.prototype.createOscillator;
-                    AudioContext.prototype.createOscillator = function() {
-                        const oscillator = originalCreateOscillator.apply(this, arguments);
-                        const originalStart = oscillator.start;
-                        oscillator.start = function() {
-                            arguments[0] = (arguments[0] || 0) + Math.random() * 0.0001;
-                            return originalStart.apply(this, arguments);
-                        };
-                        return oscillator;
-                    };
-                }
-            "#.to_string());
+            scripts.push(Self::get_audio_spoofing_script().to_string());
         }
         
-        // Screen resolution spoofing
+        // Add dynamic spoofing scripts with config values
+        self.add_screen_spoofing_script(&mut scripts, fp);
+        self.add_navigator_spoofing_scripts(&mut scripts, fp);
+        
+        // Apply all scripts
+        self.execute_spoofing_scripts(page, scripts).await
+    }
+
+    /// Add screen resolution spoofing script
+    fn add_screen_spoofing_script(&self, scripts: &mut Vec<String>, fp: &FingerprintConfig) {
         if fp.spoof_screen {
             scripts.push(format!(
                 r#"
@@ -894,87 +914,58 @@ impl ChromiumEngine {
                 fp.screen_width, fp.screen_height, fp.screen_width, fp.screen_height
             ));
         }
-        
-        // Hardware concurrency spoofing
+    }
+
+    /// Add navigator property spoofing scripts
+    fn add_navigator_spoofing_scripts(&self, scripts: &mut Vec<String>, fp: &FingerprintConfig) {
         if fp.spoof_hardware_concurrency {
             scripts.push(format!(
-                r#"
-                try {{
-                    Object.defineProperty(navigator, 'hardwareConcurrency', {{ get: () => {} }});
-                }} catch(e) {{}}
-                "#,
+                "try {{ Object.defineProperty(navigator, 'hardwareConcurrency', {{ get: () => {} }}); }} catch(e) {{}}",
                 fp.hardware_concurrency
             ));
         }
-        
-        // Device memory spoofing
         if fp.spoof_device_memory {
             scripts.push(format!(
-                r#"
-                try {{
-                    Object.defineProperty(navigator, 'deviceMemory', {{ get: () => {} }});
-                }} catch(e) {{}}
-                "#,
+                "try {{ Object.defineProperty(navigator, 'deviceMemory', {{ get: () => {} }}); }} catch(e) {{}}",
                 fp.device_memory
             ));
         }
-        
-        // Timezone spoofing
         if fp.spoof_timezone {
             scripts.push(format!(
-                r#"
-                try {{
-                    const original = Intl.DateTimeFormat.prototype.resolvedOptions;
-                    Intl.DateTimeFormat.prototype.resolvedOptions = function() {{
-                        const opts = original.call(this);
-                        opts.timeZone = '{}';
-                        return opts;
-                    }};
-                }} catch(e) {{}}
-                "#,
+                r#"try {{ const original = Intl.DateTimeFormat.prototype.resolvedOptions; Intl.DateTimeFormat.prototype.resolvedOptions = function() {{ const opts = original.call(this); opts.timeZone = '{}'; return opts; }}; }} catch(e) {{}}"#,
                 fp.timezone
             ));
         }
-        
-        // Language spoofing
         if fp.spoof_language {
             scripts.push(format!(
-                r#"
-                try {{
-                    Object.defineProperty(navigator, 'language', {{ get: () => '{}' }});
-                    Object.defineProperty(navigator, 'languages', {{ get: () => ['{}'] }});
-                }} catch(e) {{}}
-                "#,
+                "try {{ Object.defineProperty(navigator, 'language', {{ get: () => '{}' }}); Object.defineProperty(navigator, 'languages', {{ get: () => ['{}'] }}); }} catch(e) {{}}",
                 fp.language, fp.language
             ));
         }
-        
-        // Platform spoofing
         if fp.spoof_platform {
             scripts.push(format!(
-                r#"
-                try {{
-                    Object.defineProperty(navigator, 'platform', {{ get: () => '{}' }});
-                }} catch(e) {{}}
-                "#,
+                "try {{ Object.defineProperty(navigator, 'platform', {{ get: () => '{}' }}); }} catch(e) {{}}",
                 fp.platform
             ));
         }
-        
-        // Combine all scripts and inject
-        if !scripts.is_empty() {
-            let combined_script = scripts.join("\n");
-            page.evaluate(combined_script)
-                .await
-                .map_err(|e| anyhow!("Failed to apply fingerprint spoofing: {}", e))?;
-            
-            info!("Applied fingerprint spoofing with {} modifications", scripts.len());
+    }
+
+    /// Execute all spoofing scripts on the page
+    async fn execute_spoofing_scripts(&self, page: &Page, scripts: Vec<String>) -> Result<()> {
+        if scripts.is_empty() {
+            return Ok(());
         }
         
+        let combined_script = scripts.join("\n");
+        page.evaluate(combined_script)
+            .await
+            .map_err(|e| anyhow!("Failed to apply fingerprint spoofing: {}", e))?;
+        
+        info!("Applied fingerprint spoofing with {} modifications", scripts.len());
         Ok(())
     }
 
-    /// Inject stealth scripts to avoid bot detection
+    /// Inject stealth scripts to avoid bot detection    /// Inject stealth scripts to avoid bot detection
     async fn inject_stealth_scripts(&self, page: &Page) -> Result<()> {
         let stealth_script = r#"
             // Override navigator.webdriver

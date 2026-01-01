@@ -253,6 +253,114 @@ impl StorageEngine {
     }
 
     /// Import storage data with specific options
+    /// Import cookies from export data
+    async fn import_cookies_data(
+        &self,
+        cookies: &[Cookie],
+        merge: bool,
+    ) -> Result<usize> {
+        if !merge {
+            self.clear_cookies().await?;
+        }
+        for cookie in cookies {
+            self.set_cookie(cookie.clone()).await?;
+        }
+        Ok(cookies.len())
+    }
+
+    /// Import history entries from export data
+    async fn import_history_data(
+        &self,
+        history_entries: Vec<HistoryEntry>,
+        merge: bool,
+    ) -> Result<usize> {
+        if !merge {
+            self.clear_history().await?;
+        }
+        
+        let mut history = self.history.write().await;
+        let mut next_id = self.next_history_id.write().await;
+        let count = history_entries.len();
+        
+        for mut entry in history_entries {
+            if merge && history.contains_key(&entry.url) {
+                self.merge_history_entry(&mut history, &entry);
+            } else {
+                entry.id = *next_id;
+                *next_id += 1;
+                history.insert(entry.url.clone(), entry);
+            }
+        }
+        Ok(count)
+    }
+
+    /// Merge a history entry with an existing one
+    fn merge_history_entry(
+        &self,
+        history: &mut HashMap<String, HistoryEntry>,
+        entry: &HistoryEntry,
+    ) {
+        if let Some(existing) = history.get_mut(&entry.url) {
+            existing.visit_count += entry.visit_count;
+            if entry.last_visit > existing.last_visit {
+                existing.last_visit = entry.last_visit;
+                existing.title = entry.title.clone();
+            }
+        }
+    }
+
+    /// Import bookmarks from export data
+    async fn import_bookmarks_data(
+        &self,
+        bookmarks_data: Vec<Bookmark>,
+        merge: bool,
+    ) -> Result<usize> {
+        if !merge {
+            self.bookmarks.write().await.clear();
+        }
+        
+        let mut bookmarks = self.bookmarks.write().await;
+        let mut next_id = self.next_bookmark_id.write().await;
+        let count = bookmarks_data.len();
+        
+        for mut bookmark in bookmarks_data {
+            if merge && bookmarks.values().any(|b| b.url == bookmark.url) {
+                continue;
+            }
+            bookmark.id = *next_id;
+            *next_id += 1;
+            bookmarks.insert(bookmark.id, bookmark);
+        }
+        Ok(count)
+    }
+
+    /// Import local storage from export data
+    async fn import_local_storage_data(
+        &self,
+        local_storage_data: HashMap<String, HashMap<String, String>>,
+        merge: bool,
+    ) -> Result<(usize, usize)> {
+        if !merge {
+            self.local_storage.write().await.clear();
+        }
+        
+        let mut storage = self.local_storage.write().await;
+        let mut items_count = 0;
+        
+        for (origin, items) in local_storage_data {
+            items_count += items.len();
+            if merge {
+                let origin_storage = storage.entry(origin).or_insert_with(HashMap::new);
+                origin_storage.extend(items);
+            } else {
+                storage.insert(origin, items);
+            }
+        }
+        
+        Ok((storage.len(), items_count))
+    }
+
+    /// Import storage data with specific options
     pub async fn import_with_options(
         &self,
         data: StorageExport,
@@ -260,87 +368,22 @@ impl StorageEngine {
     ) -> Result<ImportExportStats> {
         let mut stats = ImportExportStats::default();
 
-        // Import cookies
         if options.import_cookies {
-            if !options.merge {
-                self.clear_cookies().await?;
-            }
-            for cookie in &data.cookies {
-                self.set_cookie(cookie.clone()).await?;
-            }
-            stats.cookies_count = data.cookies.len();
+            stats.cookies_count = self.import_cookies_data(&data.cookies, options.merge).await?;
         }
 
-        // Import history
         if options.import_history {
-            if !options.merge {
-                self.clear_history().await?;
-            }
-            let mut history = self.history.write().await;
-            let mut next_id = self.next_history_id.write().await;
-            
-            for mut entry in data.history {
-                if options.merge && history.contains_key(&entry.url) {
-                    // Merge: update existing entry
-                    if let Some(existing) = history.get_mut(&entry.url) {
-                        existing.visit_count += entry.visit_count;
-                        if entry.last_visit > existing.last_visit {
-                            existing.last_visit = entry.last_visit;
-                            existing.title = entry.title;
-                        }
-                    }
-                } else {
-                    // Add new entry with new ID
-                    entry.id = *next_id;
-                    *next_id += 1;
-                    history.insert(entry.url.clone(), entry);
-                }
-            }
-            stats.history_count = data.history.len();
+            stats.history_count = self.import_history_data(data.history, options.merge).await?;
         }
 
-        // Import bookmarks
         if options.import_bookmarks {
-            if !options.merge {
-                self.bookmarks.write().await.clear();
-            }
-            let mut bookmarks = self.bookmarks.write().await;
-            let mut next_id = self.next_bookmark_id.write().await;
-            
-            for mut bookmark in data.bookmarks {
-                // Check for duplicate URLs in merge mode
-                if options.merge {
-                    let exists = bookmarks.values().any(|b| b.url == bookmark.url);
-                    if exists {
-                        continue;
-                    }
-                }
-                bookmark.id = *next_id;
-                *next_id += 1;
-                bookmarks.insert(bookmark.id, bookmark);
-            }
-            stats.bookmarks_count = data.bookmarks.len();
+            stats.bookmarks_count = self.import_bookmarks_data(data.bookmarks, options.merge).await?;
         }
 
-        // Import local storage
         if options.import_local_storage {
-            if !options.merge {
-                self.local_storage.write().await.clear();
-            }
-            let mut storage = self.local_storage.write().await;
-            
-            for (origin, items) in data.local_storage {
-                stats.local_storage_items += items.len();
-                if options.merge {
-                    let origin_storage = storage.entry(origin).or_insert_with(HashMap::new);
-                    for (key, value) in items {
-                        origin_storage.insert(key, value);
-                    }
-                } else {
-                    storage.insert(origin, items);
-                }
-            }
-            stats.local_storage_origins = storage.len();
+            let (origins, items) = self.import_local_storage_data(data.local_storage, options.merge).await?;
+            stats.local_storage_origins = origins;
+            stats.local_storage_items = items;
         }
 
         info!(
