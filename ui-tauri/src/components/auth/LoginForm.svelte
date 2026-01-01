@@ -26,9 +26,10 @@
       const tokens = await loginUser(username, password);
       onLoginSuccess(tokens);
       dispatch('loginSuccess', { tokens });
-    } catch (err: any) {
-      error = err || 'Login failed';
+    } catch (err: unknown) {
+      error = err instanceof Error ? err.message : 'Login failed';
     } finally {
+
       loading = false;
     }
   }

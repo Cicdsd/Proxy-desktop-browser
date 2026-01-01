@@ -4,7 +4,7 @@ import type { Tab, Country, ValidationResponse, WebviewTab } from './types';
 import { createDebounce } from './utils';
 
 // Request deduplication cache
-const requestCache = new Map<string, Promise<any>>();
+const requestCache = new Map<string, Promise<unknown>>();
 const CACHE_TTL = {
   tabs: 30000, // 30 seconds
   countries: 300000, // 5 minutes
@@ -203,7 +203,7 @@ export const performanceStore = writable({
 
 // Enhanced API wrapper with performance tracking
 const optimizedAPIImpl = {
-  invoke: async <T>(command: string, args?: any): Promise<T> => {
+  invoke: async <T>(command: string, args?: Record<string, unknown>): Promise<T> => {
     const start = performance.now();
     performanceStore.update(p => ({ ...p, apiCalls: p.apiCalls + 1 }));
     
@@ -228,13 +228,13 @@ export const optimizedAPI = {
   ...optimizedAPIImpl,
   
   // Batch multiple API calls
-  batch: async <T>(calls: Array<{ command: string; args?: any }>): Promise<T[]> => {
+  batch: async <T>(calls: Array<{ command: string; args?: Record<string, unknown> }>): Promise<T[]> => {
     const promises = calls.map(call => optimizedAPIImpl.invoke<T>(call.command, call.args));
     return Promise.all(promises);
   },
 
   // Debounced API calls
-  debounced: createDebounce(<T>(command: string, args?: any) => 
+  debounced: createDebounce(<T>(command: string, args?: Record<string, unknown>) => 
     optimizedAPIImpl.invoke<T>(command, args), 300),
 };
 

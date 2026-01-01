@@ -230,10 +230,10 @@ impl FreeIpProviderManager {
             
             let mut proxy = proxy.clone();
             proxy.is_working = test_result.is_working;
-            tested_proxies.push(proxy);
+            tested_proxies.push(proxy.clone());
             
             if test_result.is_working {
-                working_proxies.push(tested_proxies.last().unwrap().clone());
+                working_proxies.push(proxy);
             }
         }
         
@@ -242,7 +242,7 @@ impl FreeIpProviderManager {
             if !sample_indices.contains(&i) {
                 let mut proxy = proxy;
                 proxy.is_working = false;
-                tested_proxies.push(proxy);
+                tested_proxies.push(proxy.clone());
             }
         }
         

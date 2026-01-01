@@ -1,13 +1,14 @@
 // Advanced error handling system with retry mechanisms
 
 import { invoke } from '@tauri-apps/api/tauri';
+import { logInfo, logWarn, logError, logDebug } from './logger';
 import { performanceStore } from './stores';
 
 // Development mode detection for Tauri
 const isDevelopment = () => {
   // Check for Tauri development environment
   return typeof window !== 'undefined' && 
-         ((window as any).__TAURI_METADATA__?.__currentWindow?.label === 'main' ||
+         (window.__TAURI_METADATA__?.__currentWindow?.label === 'main' ||
           window.location.hostname === 'localhost' ||
           window.location.hostname === '127.0.0.1');
 };
@@ -18,7 +19,7 @@ export interface RetryOptions {
   maxDelay?: number;
   backoffFactor?: number;
   jitter?: boolean;
-  retryCondition?: (error: any) => boolean;
+  retryCondition?: (error: unknown) => boolean;
 }
 
 export interface ErrorContext {
@@ -109,7 +110,7 @@ class AdvancedErrorHandler {
    */
   async invokeWithRetry<T>(
     command: string,
-    args?: any,
+    args?: Record<string, unknown>,
     options: RetryOptions = {}
   ): Promise<T> {
     // Update performance metrics
@@ -149,7 +150,7 @@ class AdvancedErrorHandler {
       // Check if we should attempt to reset
       if (state === 'OPEN' && now - lastFailureTime > resetTimeout) {
         state = 'HALF_OPEN';
-        console.log(`Circuit breaker entering HALF_OPEN state`);
+        logInfo(`Circuit breaker entering HALF_OPEN state`);
       }
 
       // Reject if circuit is open
@@ -164,7 +165,7 @@ class AdvancedErrorHandler {
         if (state === 'HALF_OPEN') {
           state = 'CLOSED';
           failureCount = 0;
-          console.log(`Circuit breaker reset to CLOSED state`);
+          logInfo(`Circuit breaker reset to CLOSED state`);
         }
         
         return result;
@@ -175,7 +176,7 @@ class AdvancedErrorHandler {
         // Open circuit if threshold exceeded
         if (failureCount >= failureThreshold) {
           state = 'OPEN';
-          console.error(`Circuit breaker opened after ${failureCount} failures`);
+          logError(`Circuit breaker opened after ${failureCount} failures`);
         }
 
         throw error;
@@ -285,7 +286,7 @@ class AdvancedErrorHandler {
     return delay;
   }
 
-  private shouldRetry(error: any): boolean {
+  private shouldRetry(error: unknown): boolean {
     // Retry on network errors, timeouts, and 5xx server errors
     if (error.name === 'NetworkError' || error.name === 'TimeoutError') {
       return true;
@@ -324,7 +325,7 @@ class AdvancedErrorHandler {
     const lastLogTime = this.lastLogTimes.get(errorKey);
     
     if (isDevelopment() && (!lastLogTime || now - lastLogTime > this.logThrottleMs)) {
-      console.error(`[Error] ${context.operation} (attempt ${context.attempt}):`, context.error);
+      logError(`[Error] ${context.operation} (attempt ${context.attempt}):`, context.error);
       this.lastLogTimes.set(errorKey, now);
       
       // Clean old entries from throttle map
@@ -341,7 +342,7 @@ class AdvancedErrorHandler {
 
   private logSuccess(operation: string, attempts: number, duration: number): void {
     if (isDevelopment()) {
-      console.log(
+      logInfo(
         `[Success] ${operation} succeeded after ${attempts} attempts in ${duration.toFixed(2)}ms`
       );
     }
@@ -352,7 +353,7 @@ class AdvancedErrorHandler {
 export const errorHandler = new AdvancedErrorHandler();
 
 // Convenience functions
-export const invokeWithRetry = <T>(command: string, args?: any, options?: RetryOptions) =>
+export const invokeWithRetry = <T>(command: string, args?: Record<string, unknown>, options?: RetryOptions) =>
   errorHandler.invokeWithRetry<T>(command, args, options);
 
 export const executeWithRetry = <T>(

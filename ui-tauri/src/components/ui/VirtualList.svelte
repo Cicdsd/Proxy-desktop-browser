@@ -1,14 +1,37 @@
-<script lang="ts">
+<script lang="ts" generics="T">
   import { onMount, onDestroy, createEventDispatcher } from 'svelte';
+  import type { ComponentType, SvelteComponent } from 'svelte';
   
-  export let items: any[] = [];
+  // Generic type T is defined in the script tag
+  export let items: T[] = [];
   export let itemHeight: number = 40;
   export let containerHeight: number = 400;
   export let overscan: number = 5;
-  export let renderItem: (item: any, index: number) => string = () => '';
-  export let itemComponent: any = null;
+  export let renderItem: (item: T, index: number) => string = () => '';
+  export let itemComponent: ComponentType<SvelteComponent<{ item: T; index: number }>> | null = null;
+  export let selected: number = -1;
   
-  const dispatch = createEventDispatcher();
+  interface ScrollEventDetail {
+    scrollTop: number;
+    visibleStart: number;
+    visibleEnd: number;
+  }
+  
+  interface SelectEventDetail {
+    index: number;
+    item: T;
+  }
+  
+  interface ItemVisibleEventDetail {
+    index: number;
+    item: T;
+  }
+  
+  const dispatch = createEventDispatcher<{
+    scroll: ScrollEventDetail;
+    select: SelectEventDetail;
+    itemVisible: ItemVisibleEventDetail;
+  }>();
   
   let scrollTop = 0;
   let container: HTMLElement;
@@ -31,7 +54,7 @@
   $: visibleItems = items.slice(visibleStart, visibleEnd + 1);
   
   // Intersection Observer for dynamic loading
-  let io: IntersectionObserver;
+  let io: IntersectionObserver | null = null;
   
   onMount(() => {
     // Setup intersection observer for lazy loading
@@ -39,8 +62,11 @@
       (entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            const index = parseInt(entry.target.getAttribute('data-index') || '0');
-            dispatch('itemVisible', { index, item: items[index] });
+            const indexAttr = entry.target.getAttribute('data-index');
+            const index = parseInt(indexAttr ?? '0', 10);
+            if (index >= 0 && index < items.length) {
+              dispatch('itemVisible', { index, item: items[index] });
+            }
           }
         });
       },
@@ -68,14 +94,15 @@
     io?.disconnect();
   });
   
-  function handleScroll(e: Event) {
+  function handleScroll(e: Event): void {
     const target = e.target as HTMLElement;
     scrollTop = target.scrollTop;
     dispatch('scroll', { scrollTop, visibleStart, visibleEnd });
   }
   
-  function handleKeydown(e: KeyboardEvent) {
+  function handleKeydown(e: KeyboardEvent): void {
     let newIndex = -1;
+    const pageSize = Math.floor(containerHeight / itemHeight);
     
     switch (e.key) {
       case 'ArrowDown':
@@ -88,11 +115,11 @@
         break;
       case 'PageDown':
         e.preventDefault();
-        newIndex = Math.min(visibleStart + Math.floor(containerHeight / itemHeight), items.length - 1);
+        newIndex = Math.min(visibleStart + pageSize, items.length - 1);
         break;
       case 'PageUp':
         e.preventDefault();
-        newIndex = Math.max(visibleStart - Math.floor(containerHeight / itemHeight), 0);
+        newIndex = Math.max(visibleStart - pageSize, 0);
         break;
       case 'Home':
         e.preventDefault();
@@ -111,7 +138,7 @@
     }
   }
   
-  function scrollToIndex(index: number) {
+  function scrollToIndex(index: number): void {
     if (viewport) {
       const targetScrollTop = index * itemHeight;
       viewport.scrollTo({
@@ -122,12 +149,12 @@
   }
   
   // Export method for programmatic scrolling
-  export function scrollToItem(index: number) {
+  export function scrollToItem(index: number): void {
     scrollToIndex(index);
   }
   
   // Export method to get visible range
-  export function getVisibleRange() {
+  export function getVisibleRange(): { start: number; end: number } {
     return { start: visibleStart, end: visibleEnd };
   }
 </script>
@@ -163,7 +190,7 @@
             aria-selected={visibleStart + i === selected}
           >
             {#if itemComponent}
-              <svelte:component this={itemComponent} item={item} index={visibleStart + i} />
+              <svelte:component this={itemComponent} {item} index={visibleStart + i} />
             {:else}
               {@html renderItem(item, visibleStart + i)}
             {/if}

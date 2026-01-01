@@ -413,7 +413,14 @@ impl ActionRecorder {
     }
 
     /// Record an action
-    pub fn record_action(&mut self, action_type: ActionType, url: Option<&str>, selector: Option<&str>, value: Option<&str>, coordinates: Option<(i32, i32)>) {
+    pub fn record_action(
+        &mut self,
+        action_type: ActionType,
+        url: Option<&str>,
+        selector: Option<&str>,
+        value: Option<&str>,
+        coordinates: Option<(i32, i32)>,
+    ) {
         if !self.recording {
             return;
         }

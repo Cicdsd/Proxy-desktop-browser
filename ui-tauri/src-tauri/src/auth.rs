@@ -52,8 +52,10 @@ pub struct RefreshToken {
 pub struct AuthManager {
     jwt_secret: String,
     users: Arc<RwLock<HashMap<String, User>>>, // In-memory for demo, use DB in production
+    password_hashes: Arc<RwLock<HashMap<String, String>>>, // user_id -> password_hash
     refresh_tokens: Arc<RwLock<HashMap<String, RefreshToken>>>,
-    argon2: Argon2,
+    argon2: Argon2<'static>,
+
 }
 
 impl AuthManager {
@@ -61,10 +63,12 @@ impl AuthManager {
         Self {
             jwt_secret,
             users: Arc::new(RwLock::new(HashMap::new())),
+            password_hashes: Arc::new(RwLock::new(HashMap::new())),
             refresh_tokens: Arc::new(RwLock::new(HashMap::new())),
             argon2: Argon2::default(),
         }
     }
+
 
     /// Register a new user
     pub async fn register(&self, username: String, email: String, password: String) -> Result<User> {
@@ -104,12 +108,18 @@ impl AuthManager {
             enterprise_id: None,
         };
 
-        // Store user (in production, store password hash separately)
+        // Store user and password hash
         let mut users = self.users.write().await;
         users.insert(user.id.clone(), user.clone());
+        drop(users);
+
+        // Store password hash separately for security
+        let mut hashes = self.password_hashes.write().await;
+        hashes.insert(user.id.clone(), password_hash);
 
         Ok(user)
     }
+
 
     /// Authenticate user and return tokens
     pub async fn login(&self, username: String, password: String) -> Result<(String, String)> {
@@ -122,11 +132,22 @@ impl AuthManager {
             .clone();
         drop(users);
 
-        // In production, verify password hash from database
-        // For demo, we'll accept any password for existing users
-        // TODO: Implement proper password verification
+        // Verify password hash
+        let hashes = self.password_hashes.read().await;
+        let stored_hash = hashes
+            .get(&user.id)
+            .ok_or_else(|| anyhow!("Invalid credentials"))?;
+        
+        let parsed_hash = PasswordHash::new(stored_hash)
+            .map_err(|_| anyhow!("Invalid credentials"))?;
+        
+        self.argon2
+            .verify_password(password.as_bytes(), &parsed_hash)
+            .map_err(|_| anyhow!("Invalid credentials"))?;
+        drop(hashes);
 
         // Update last login
+
         let mut users = self.users.write().await;
         if let Some(stored_user) = users.get_mut(&user.id) {
             stored_user.last_login = Some(Utc::now());
@@ -274,7 +295,7 @@ impl AuthManager {
         drop(users);
 
         let salt = SaltString::generate(&mut OsRng);
-        let _password_hash = self
+        let password_hash = self
             .argon2
             .hash_password(password.as_bytes(), &salt)?
             .to_string();
@@ -289,11 +310,18 @@ impl AuthManager {
             enterprise_id: Some(enterprise_id),
         };
 
+        // Store user and password hash
         let mut users = self.users.write().await;
         users.insert(user.id.clone(), user.clone());
+        drop(users);
+
+        // Store password hash
+        let mut hashes = self.password_hashes.write().await;
+        hashes.insert(user.id.clone(), password_hash);
 
         Ok(user)
     }
+
 
     /// Promote user to admin
     pub async fn promote_to_admin(&self, user_id: &str) -> Result<()> {

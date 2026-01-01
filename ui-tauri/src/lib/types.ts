@@ -161,3 +161,93 @@ export type WebviewTab = {
   country_code?: string;
   ip_address?: string;
 };
+
+// Enterprise user creation data
+export type EnterpriseUserData = {
+  username: string;
+  email: string;
+  password: string;
+  role?: string;
+  enterpriseId?: string;
+  permissions?: string[];
+};
+
+// API response types
+export type AuthResponse = {
+  id: string;
+  username: string;
+  token?: string;
+  email?: string;
+};
+
+export type SuccessResponse = {
+  success: boolean;
+  message?: string;
+};
+
+// Tauri event payload types
+export type NavigationChangedPayload = {
+  tab_id: string;
+  url: string;
+  title: string;
+};
+
+export type TitleChangedPayload = {
+  tab_id: string;
+  title: string;
+};
+
+export type TauriEvent<T> = {
+  payload: T;
+  event: string;
+  id: number;
+};
+
+// Proxy Provider API Configuration
+export type ProxyProviderType = 
+  | 'iproyal' 
+  | 'brightdata' 
+  | 'oxylabs' 
+  | 'smartproxy' 
+  | 'webshare'
+  | 'custom';
+
+export type ProxyProviderConfig = {
+  id: string;
+  name: string;
+  provider: ProxyProviderType;
+  api_token: string;
+  api_endpoint?: string;
+  enabled: boolean;
+  created_at: string;
+  last_used?: string;
+  settings: ProxyProviderSettings;
+};
+
+export type ProxyProviderSettings = {
+  country?: string;
+  city?: string;
+  session_type?: 'rotating' | 'sticky';
+  session_duration?: number; // in minutes
+  protocol?: 'http' | 'https' | 'socks5';
+  format?: string;
+};
+
+export type IPRoyalProxyResponse = {
+  ip: string;
+  port: number;
+  username: string;
+  password: string;
+  protocol: string;
+  country: string;
+  expires_at?: string;
+};
+
+export type ProxyProviderStatus = {
+  provider: ProxyProviderType;
+  connected: boolean;
+  balance?: number;
+  bandwidth_used?: number;
+  bandwidth_limit?: number;
+  error?: string;
+};

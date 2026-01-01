@@ -49,9 +49,10 @@
       await registerUser(username, email, password);
       onRegisterSuccess();
       dispatch('registerSuccess');
-    } catch (err: any) {
-      error = err || 'Registration failed';
+    } catch (err: unknown) {
+      error = err instanceof Error ? err.message : 'Registration failed';
     } finally {
+
       loading = false;
     }
   }

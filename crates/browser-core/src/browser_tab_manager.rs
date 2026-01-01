@@ -14,7 +14,8 @@ use crate::tab_isolation::TabProfile;
 use crate::proxy::ProxySettings;
 use virtual_ip::VirtualIP;
 use virtual_ip::IPGenerator;
-use sqlx::SqlitePool;
+// Database removed - using in-memory storage
+
 
 /// Combined browser tab information
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -63,29 +64,25 @@ pub struct BrowserTabManager {
 
 impl BrowserTabManager {
     /// Create a new BrowserTabManager
-    pub async fn new(
+    pub fn new(
         ip_generator: IPGenerator,
-        db_pool: SqlitePool,
         app_handle: tauri::AppHandle,
-    ) -> Result<Self> {
-        // Create the managers
-        let tab_ip_manager = Arc::new(
-            TabIPManager::new(ip_generator, db_pool)
-                .await
-                .map_err(|e| anyhow!("Failed to create TabIPManager: {}", e))?
-        );
+    ) -> Self {
+        // Create the managers with in-memory storage
+        let tab_ip_manager = Arc::new(TabIPManager::new(ip_generator));
         
         let webview_manager = Arc::new(
             WebviewManager::new(app_handle)
         );
 
-        Ok(Self {
+        Self {
             tab_ip_manager,
             webview_manager,
             tabs: Arc::new(RwLock::new(HashMap::new())),
             active_tab: Arc::new(RwLock::new(None)),
-        })
+        }
     }
+
 
     /// Create a new browser tab
     pub async fn create_tab(&self, config: CreateTabConfig) -> Result<BrowserTab> {
@@ -666,16 +663,16 @@ mod tests {
     async fn test_browser_tab_manager_creation() {
         let app = mock_app();
         let ip_generator = IPGenerator::new();
-        let db_pool = sqlx::SqlitePool::connect(":memory:").await.unwrap();
         
         let manager = BrowserTabManager::new(
             ip_generator,
-            db_pool,
             app.handle(),
-        ).await;
+        );
         
-        assert!(manager.is_ok());
+        // Manager should be created successfully
+        assert!(manager.tabs.read().await.is_empty());
     }
+
 
     #[tokio::test]
     async fn test_create_tab_config_default() {

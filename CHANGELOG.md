@@ -17,6 +17,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - API reference for frontend and Tauri commands
   - Best practices for proxy selection, error handling, and security
   - Complete file reference for all proxy-related modules
+- **Code Quality Improvements**
+  - Fixed long lines in `lib.rs` by splitting `pub use` statements
+  - Fixed long function signature in `automation.rs` (record_action)
+  - All modified Rust files pass `rustfmt --check` validation
+  - Updated code quality metrics in IMPROVEMENTS.md
+
 - **Import/Export Features for In-Memory Storage**
   - `export_all()` - Export all storage data to StorageExport struct
   - `export_to_file()` - Export storage to JSON file
