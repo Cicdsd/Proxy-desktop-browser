@@ -697,6 +697,133 @@ impl EnhancedProxyHealthChecker {
         }
     }
 
+    /// Process a single proxy validation result
+    async fn process_validation_result(
+        &self,
+        proxy: &FreeProxy,
+        result: &ValidationResult,
+        proxies_lock: &mut tokio::sync::RwLockWriteGuard<'_, Vec<FreeProxy>>,
+    ) {
+        if result.is_working {
+            self.handle_working_proxy(proxy, result, proxies_lock).await;
+        } else {
+            self.handle_failed_proxy(proxy, result, proxies_lock).await;
+        }
+    }
+
+    /// Handle a proxy that passed validation
+    async fn handle_working_proxy(
+        &self,
+        proxy: &FreeProxy,
+        result: &ValidationResult,
+        proxies_lock: &mut tokio::sync::RwLockWriteGuard<'_, Vec<FreeProxy>>,
+    ) {
+        let geo_verified = self.verify_geo_location(proxy, result).await;
+        
+        if geo_verified && !result.has_ip_leak {
+            self.mark_proxy_success(proxy, proxies_lock).await;
+        } else {
+            let reason = if !geo_verified {
+                "Geographic verification failed".to_string()
+            } else {
+                "IP leak detected".to_string()
+            };
+            self.quarantine_proxy(proxy, reason, proxies_lock).await;
+        }
+    }
+
+    /// Handle a proxy that failed validation
+    async fn handle_failed_proxy(
+        &self,
+        proxy: &FreeProxy,
+        result: &ValidationResult,
+        proxies_lock: &mut tokio::sync::RwLockWriteGuard<'_, Vec<FreeProxy>>,
+    ) {
+        let reason = result.error.clone().unwrap_or_else(|| "Connection failed".to_string());
+        let quarantined = self.quarantine_manager.record_failure(proxy, reason).await;
+        
+        if quarantined {
+            proxies_lock.retain(|p| !(p.ip == proxy.ip && p.port == proxy.port));
+        } else {
+            self.update_proxy_status(proxy, false, proxies_lock);
+        }
+    }
+
+    /// Verify geographic location of proxy
+    async fn verify_geo_location(&self, proxy: &FreeProxy, result: &ValidationResult) -> bool {
+        match (&self.geo_verifier, &result.detected_ip) {
+            (Some(verifier), Some(detected_ip)) => {
+                verifier.verify_proxy_location(proxy, detected_ip).await.is_verified
+            }
+            _ => true, // No geo verification available, assume OK
+        }
+    }
+
+    /// Mark proxy as successful and update status
+    async fn mark_proxy_success(
+        &self,
+        proxy: &FreeProxy,
+        proxies_lock: &mut tokio::sync::RwLockWriteGuard<'_, Vec<FreeProxy>>,
+    ) {
+        self.quarantine_manager.record_success(proxy).await;
+        self.update_proxy_status(proxy, true, proxies_lock);
+    }
+
+    /// Quarantine a proxy and optionally remove from pool
+    async fn quarantine_proxy(
+        &self,
+        proxy: &FreeProxy,
+        reason: String,
+        proxies_lock: &mut tokio::sync::RwLockWriteGuard<'_, Vec<FreeProxy>>,
+    ) {
+        let quarantined = self.quarantine_manager.record_failure(proxy, reason).await;
+        if quarantined {
+            proxies_lock.retain(|p| !(p.ip == proxy.ip && p.port == proxy.port));
+        }
+    }
+
+    /// Update proxy status in the pool
+    fn update_proxy_status(
+        &self,
+        proxy: &FreeProxy,
+        is_working: bool,
+        proxies_lock: &mut tokio::sync::RwLockWriteGuard<'_, Vec<FreeProxy>>,
+    ) {
+        if let Some(p) = proxies_lock.iter_mut().find(|p| p.ip == proxy.ip && p.port == proxy.port) {
+            p.is_working = is_working;
+            p.last_checked = Utc::now().to_rfc3339();
+        }
+    }
+
+    /// Release expired quarantined proxies back to the pool
+    async fn release_expired_proxies(&self, proxies: &Arc<RwLock<Vec<FreeProxy>>>) {
+        let released = self.quarantine_manager.release_expired().await;
+        if released.is_empty() {
+            return;
+        }
+        
+        info!("Released {} proxies from quarantine", released.len());
+        let mut proxies_lock = proxies.write().await;
+        for proxy in released {
+            let already_exists = proxies_lock.iter().any(|p| p.ip == proxy.ip && p.port == proxy.port);
+            if !already_exists {
+                proxies_lock.push(proxy);
+            }
+        }
+    }
+
+    /// Get non-quarantined proxies to check
+    async fn get_proxies_to_check(&self, proxies: &Arc<RwLock<Vec<FreeProxy>>>) -> Vec<FreeProxy> {
+        let proxies_lock = proxies.read().await;
+        let mut to_check = Vec::new();
+        for proxy in proxies_lock.iter() {
+            if !self.quarantine_manager.is_quarantined(proxy).await {
+                to_check.push(proxy.clone());
+            }
+        }
+        to_check
+    }
+
     /// Start the enhanced health monitoring loop
     pub async fn start_monitoring(&self, proxies: Arc<RwLock<Vec<FreeProxy>>>) {
         let mut interval = tokio::time::interval(self.check_interval);
@@ -704,29 +831,9 @@ impl EnhancedProxyHealthChecker {
         loop {
             interval.tick().await;
             
-            // Release expired quarantined proxies
-            let released = self.quarantine_manager.release_expired().await;
-            if !released.is_empty() {
-                info!("Released {} proxies from quarantine", released.len());
-                let mut proxies_lock = proxies.write().await;
-                for proxy in released {
-                    if !proxies_lock.iter().any(|p| p.ip == proxy.ip && p.port == proxy.port) {
-                        proxies_lock.push(proxy);
-                    }
-                }
-            }
+            self.release_expired_proxies(&proxies).await;
             
-            // Get non-quarantined proxies to check
-            let proxies_to_check: Vec<FreeProxy> = {
-                let proxies_lock = proxies.read().await;
-                let mut to_check = Vec::new();
-                for proxy in proxies_lock.iter() {
-                    if !self.quarantine_manager.is_quarantined(proxy).await {
-                        to_check.push(proxy.clone());
-                    }
-                }
-                to_check
-            };
+            let proxies_to_check = self.get_proxies_to_check(&proxies).await;
             
             if proxies_to_check.is_empty() {
                 debug!("No proxies to check (all quarantined or empty pool)");
@@ -735,65 +842,24 @@ impl EnhancedProxyHealthChecker {
             
             info!("Starting enhanced health check for {} proxies", proxies_to_check.len());
             
-            // Validate proxies
             let results = self.validator.validate_batch(&proxies_to_check).await;
             
-            // Process results
             let mut proxies_lock = proxies.write().await;
             for (proxy, result) in results {
-                if result.is_working {
-                    // Verify geographic location if geo verifier is available
-                    let geo_verified = if let (Some(verifier), Some(detected_ip)) = (&self.geo_verifier, &result.detected_ip) {
-                        let geo_result = verifier.verify_proxy_location(&proxy, detected_ip).await;
-                        geo_result.is_verified
-                    } else {
-                        true // No geo verification available, assume OK
-                    };
-                    
-                    if geo_verified && !result.has_ip_leak {
-                        self.quarantine_manager.record_success(&proxy).await;
-                        
-                        // Update proxy status
-                        if let Some(p) = proxies_lock.iter_mut().find(|p| p.ip == proxy.ip && p.port == proxy.port) {
-                            p.is_working = true;
-                            p.last_checked = Utc::now().to_rfc3339();
-                        }
-                    } else {
-                        let reason = if !geo_verified {
-                            "Geographic verification failed".to_string()
-                        } else {
-                            "IP leak detected".to_string()
-                        };
-                        
-                        let quarantined = self.quarantine_manager.record_failure(&proxy, reason).await;
-                        if quarantined {
-                            // Remove from active pool
-                            proxies_lock.retain(|p| !(p.ip == proxy.ip && p.port == proxy.port));
-                        }
-                    }
-                } else {
-                    let reason = result.error.unwrap_or_else(|| "Connection failed".to_string());
-                    let quarantined = self.quarantine_manager.record_failure(&proxy, reason).await;
-                    
-                    if quarantined {
-                        // Remove from active pool
-                        proxies_lock.retain(|p| !(p.ip == proxy.ip && p.port == proxy.port));
-                    } else {
-                        // Update as not working but keep in pool
-                        if let Some(p) = proxies_lock.iter_mut().find(|p| p.ip == proxy.ip && p.port == proxy.port) {
-                            p.is_working = false;
-                            p.last_checked = Utc::now().to_rfc3339();
-                        }
-                    }
-                }
+                self.process_validation_result(&proxy, &result, &mut proxies_lock).await;
             }
             
-            let stats = self.quarantine_manager.get_stats().await;
-            let working_count = proxies_lock.iter().filter(|p| p.is_working).count();
-            info!(
-                "Health check completed: {}/{} working, {} quarantined",
-                working_count, proxies_lock.len(), stats.actively_quarantined
-            );
+            self.log_health_check_stats(&proxies_lock).await;
         }
+    }
+
+    /// Log health check statistics
+    async fn log_health_check_stats(&self, proxies_lock: &tokio::sync::RwLockWriteGuard<'_, Vec<FreeProxy>>) {
+        let stats = self.quarantine_manager.get_stats().await;
+        let working_count = proxies_lock.iter().filter(|p| p.is_working).count();
+        info!(
+            "Health check completed: {}/{} working, {} quarantined",
+            working_count, proxies_lock.len(), stats.actively_quarantined
+        );
     }
 }

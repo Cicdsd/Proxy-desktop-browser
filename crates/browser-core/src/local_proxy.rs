@@ -554,6 +554,29 @@ impl WebSocketProxyHandler {
         request
     }
 
+    /// Forward WebSocket messages from reader to writer until close or error
+    async fn forward_websocket_messages<R, W>(
+        mut reader: R,
+        mut writer: W,
+    ) where
+        R: futures_util::Stream<Item = Result<tokio_tungstenite::tungstenite::Message, tokio_tungstenite::tungstenite::Error>> + Unpin,
+        W: futures_util::Sink<tokio_tungstenite::tungstenite::Message, Error = tokio_tungstenite::tungstenite::Error> + Unpin,
+    {
+        use futures_util::{StreamExt, SinkExt};
+        
+        while let Some(msg_result) = reader.next().await {
+            match msg_result {
+                Ok(msg) if msg.is_close() => break,
+                Ok(msg) => {
+                    if writer.send(msg).await.is_err() {
+                        break;
+                    }
+                }
+                Err(_) => break,
+            }
+        }
+    }
+
     /// Proxy WebSocket messages between client and target
     async fn proxy_websocket<S1, S2>(
         &self,
@@ -564,44 +587,13 @@ impl WebSocketProxyHandler {
         S1: tokio::io::AsyncRead + tokio::io::AsyncWrite + Unpin,
         S2: tokio::io::AsyncRead + tokio::io::AsyncWrite + Unpin,
     {
-        let (mut client_write, mut client_read) = client.split();
-        let (mut target_write, mut target_read) = target.split();
+        let (client_write, client_read) = client.split();
+        let (target_write, target_read) = target.split();
 
-        // Forward messages from client to target
-        let client_to_target = async {
-            while let Some(msg) = client_read.next().await {
-                match msg {
-                    Ok(msg) => {
-                        if msg.is_close() {
-                            break;
-                        }
-                        if target_write.send(msg).await.is_err() {
-                            break;
-                        }
-                    }
-                    Err(_) => break,
-                }
-            }
-        };
+        let client_to_target = Self::forward_websocket_messages(client_read, target_write);
+        let target_to_client = Self::forward_websocket_messages(target_read, client_write);
 
-        // Forward messages from target to client
-        let target_to_client = async {
-            while let Some(msg) = target_read.next().await {
-                match msg {
-                    Ok(msg) => {
-                        if msg.is_close() {
-                            break;
-                        }
-                        if client_write.send(msg).await.is_err() {
-                            break;
-                        }
-                    }
-                    Err(_) => break,
-                }
-            }
-        };
-
-        // Run both forwarding tasks concurrently
+        // Run both forwarding tasks concurrently until one completes
         tokio::select! {
             _ = client_to_target => {}
             _ = target_to_client => {}
@@ -731,33 +723,39 @@ impl NetworkInterceptor {
     }
 
     /// Apply modification rules to a request
+    /// Apply a single modification rule to a request
+    fn apply_rule_to_request(request: &mut InterceptedRequest, rule: &ModificationRule) {
+        // Add headers
+        for (key, value) in &rule.modifications.add_headers {
+            request.headers.insert(key.clone(), value.clone());
+        }
+        
+        // Remove headers
+        for key in &rule.modifications.remove_headers {
+            request.headers.remove(key);
+        }
+        
+        // Modify existing headers
+        for (key, value) in &rule.modifications.modify_headers {
+            if request.headers.contains_key(key) {
+                request.headers.insert(key.clone(), value.clone());
+            }
+        }
+        
+        request.modified = true;
+    }
+
+    /// Check if a rule matches the request
+    fn rule_matches_request(request: &InterceptedRequest, rule: &ModificationRule) -> bool {
+        rule.enabled && request.url.contains(&rule.url_pattern)
+    }
+
     pub async fn apply_modifications(&self, mut request: InterceptedRequest) -> InterceptedRequest {
         let rules = self.modification_rules.read().await;
         
         for rule in rules.iter() {
-            if !rule.enabled {
-                continue;
-            }
-            
-            if request.url.contains(&rule.url_pattern) {
-                // Add headers
-                for (key, value) in &rule.modifications.add_headers {
-                    request.headers.insert(key.clone(), value.clone());
-                }
-                
-                // Remove headers
-                for key in &rule.modifications.remove_headers {
-                    request.headers.remove(key);
-                }
-                
-                // Modify headers
-                for (key, value) in &rule.modifications.modify_headers {
-                    if request.headers.contains_key(key) {
-                        request.headers.insert(key.clone(), value.clone());
-                    }
-                }
-                
-                request.modified = true;
+            if Self::rule_matches_request(&request, rule) {
+                Self::apply_rule_to_request(&mut request, rule);
             }
         }
         

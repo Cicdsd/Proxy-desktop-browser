@@ -14,6 +14,79 @@ use std::collections::HashMap;
 use chrono::Utc;
 
 // ============================================================================
+// Test Helper Functions
+// ============================================================================
+
+/// Create a basic test request with default values
+fn create_test_request(id: &str, url: &str) -> InterceptedRequest {
+    create_test_request_with_headers(id, url, HashMap::new())
+}
+
+/// Create a test request with custom headers
+fn create_test_request_with_headers(id: &str, url: &str, headers: HashMap<String, String>) -> InterceptedRequest {
+    InterceptedRequest {
+        id: id.to_string(),
+        method: "GET".to_string(),
+        url: url.to_string(),
+        headers,
+        body: None,
+        timestamp: Utc::now(),
+        response_status: None,
+        response_headers: None,
+        blocked: false,
+        modified: false,
+    }
+}
+
+/// Create a test request with response status
+fn create_test_request_with_status(id: &str, url: &str, status: u16) -> InterceptedRequest {
+    InterceptedRequest {
+        id: id.to_string(),
+        method: "GET".to_string(),
+        url: url.to_string(),
+        headers: HashMap::new(),
+        body: None,
+        timestamp: Utc::now(),
+        response_status: Some(status),
+        response_headers: None,
+        blocked: false,
+        modified: false,
+    }
+}
+
+/// Create a modification rule that adds headers
+fn create_add_header_rule(id: &str, name: &str, pattern: &str, headers: HashMap<String, String>) -> ModificationRule {
+    ModificationRule {
+        id: id.to_string(),
+        name: name.to_string(),
+        url_pattern: pattern.to_string(),
+        enabled: true,
+        modifications: RequestModifications {
+            add_headers: headers,
+            remove_headers: vec![],
+            modify_headers: HashMap::new(),
+            redirect_url: None,
+        },
+    }
+}
+
+/// Create a modification rule that removes headers
+fn create_remove_header_rule(id: &str, name: &str, pattern: &str, headers_to_remove: Vec<String>) -> ModificationRule {
+    ModificationRule {
+        id: id.to_string(),
+        name: name.to_string(),
+        url_pattern: pattern.to_string(),
+        enabled: true,
+        modifications: RequestModifications {
+            add_headers: HashMap::new(),
+            remove_headers: headers_to_remove,
+            modify_headers: HashMap::new(),
+            redirect_url: None,
+        },
+    }
+}
+
+// ============================================================================
 // NetworkInterceptor Tests
 // ============================================================================
 
@@ -32,18 +105,7 @@ async fn test_network_interceptor_creation() {
 async fn test_network_interceptor_log_request() {
     let interceptor = NetworkInterceptor::new();
     
-    let request = InterceptedRequest {
-        id: "req-1".to_string(),
-        method: "GET".to_string(),
-        url: "https://example.com/api/data".to_string(),
-        headers: HashMap::new(),
-        body: None,
-        timestamp: Utc::now(),
-        response_status: Some(200),
-        response_headers: None,
-        blocked: false,
-        modified: false,
-    };
+    let request = create_test_request_with_status("req-1", "https://example.com/api/data", 200);
     
     interceptor.log_request(request).await;
     
@@ -57,18 +119,11 @@ async fn test_network_interceptor_multiple_requests() {
     let interceptor = NetworkInterceptor::new();
     
     for i in 0..5 {
-        let request = InterceptedRequest {
-            id: format!("req-{}", i),
-            method: "GET".to_string(),
-            url: format!("https://example.com/page{}", i),
-            headers: HashMap::new(),
-            body: None,
-            timestamp: Utc::now(),
-            response_status: Some(200),
-            response_headers: None,
-            blocked: false,
-            modified: false,
-        };
+        let request = create_test_request_with_status(
+            &format!("req-{}", i),
+            &format!("https://example.com/page{}", i),
+            200,
+        );
         interceptor.log_request(request).await;
     }
     
@@ -80,18 +135,7 @@ async fn test_network_interceptor_multiple_requests() {
 async fn test_network_interceptor_clear_requests() {
     let interceptor = NetworkInterceptor::new();
     
-    let request = InterceptedRequest {
-        id: "req-1".to_string(),
-        method: "GET".to_string(),
-        url: "https://example.com".to_string(),
-        headers: HashMap::new(),
-        body: None,
-        timestamp: Utc::now(),
-        response_status: None,
-        response_headers: None,
-        blocked: false,
-        modified: false,
-    };
+    let request = create_test_request("req-1", "https://example.com");
     
     interceptor.log_request(request).await;
     assert_eq!(interceptor.get_intercepted_requests().await.len(), 1);
@@ -99,7 +143,6 @@ async fn test_network_interceptor_clear_requests() {
     interceptor.clear_requests().await;
     assert!(interceptor.get_intercepted_requests().await.is_empty());
 }
-
 // ============================================================================
 // Modification Rules Tests
 // ============================================================================
@@ -108,22 +151,9 @@ async fn test_network_interceptor_clear_requests() {
 async fn test_add_modification_rule() {
     let interceptor = NetworkInterceptor::new();
     
-    let rule = ModificationRule {
-        id: "rule-1".to_string(),
-        name: "Add Auth Header".to_string(),
-        url_pattern: "api.example.com".to_string(),
-        enabled: true,
-        modifications: RequestModifications {
-            add_headers: {
-                let mut h = HashMap::new();
-                h.insert("Authorization".to_string(), "Bearer token123".to_string());
-                h
-            },
-            remove_headers: vec![],
-            modify_headers: HashMap::new(),
-            redirect_url: None,
-        },
-    };
+    let mut headers = HashMap::new();
+    headers.insert("Authorization".to_string(), "Bearer token123".to_string());
+    let rule = create_add_header_rule("rule-1", "Add Auth Header", "api.example.com", headers);
     
     interceptor.add_rule(rule).await;
     
@@ -136,31 +166,8 @@ async fn test_add_modification_rule() {
 async fn test_remove_modification_rule() {
     let interceptor = NetworkInterceptor::new();
     
-    let rule1 = ModificationRule {
-        id: "rule-1".to_string(),
-        name: "Rule 1".to_string(),
-        url_pattern: "*.example.com".to_string(),
-        enabled: true,
-        modifications: RequestModifications {
-            add_headers: HashMap::new(),
-            remove_headers: vec![],
-            modify_headers: HashMap::new(),
-            redirect_url: None,
-        },
-    };
-    
-    let rule2 = ModificationRule {
-        id: "rule-2".to_string(),
-        name: "Rule 2".to_string(),
-        url_pattern: "*.test.com".to_string(),
-        enabled: true,
-        modifications: RequestModifications {
-            add_headers: HashMap::new(),
-            remove_headers: vec![],
-            modify_headers: HashMap::new(),
-            redirect_url: None,
-        },
-    };
+    let rule1 = create_add_header_rule("rule-1", "Rule 1", "*.example.com", HashMap::new());
+    let rule2 = create_add_header_rule("rule-2", "Rule 2", "*.test.com", HashMap::new());
     
     interceptor.add_rule(rule1).await;
     interceptor.add_rule(rule2).await;
@@ -178,37 +185,13 @@ async fn test_remove_modification_rule() {
 async fn test_apply_modifications_add_headers() {
     let interceptor = NetworkInterceptor::new();
     
-    let rule = ModificationRule {
-        id: "rule-1".to_string(),
-        name: "Add Custom Header".to_string(),
-        url_pattern: "api.example.com".to_string(),
-        enabled: true,
-        modifications: RequestModifications {
-            add_headers: {
-                let mut h = HashMap::new();
-                h.insert("X-Custom-Header".to_string(), "custom-value".to_string());
-                h
-            },
-            remove_headers: vec![],
-            modify_headers: HashMap::new(),
-            redirect_url: None,
-        },
-    };
+    let mut headers = HashMap::new();
+    headers.insert("X-Custom-Header".to_string(), "custom-value".to_string());
+    let rule = create_add_header_rule("rule-1", "Add Custom Header", "api.example.com", headers);
     
     interceptor.add_rule(rule).await;
     
-    let request = InterceptedRequest {
-        id: "req-1".to_string(),
-        method: "GET".to_string(),
-        url: "https://api.example.com/users".to_string(),
-        headers: HashMap::new(),
-        body: None,
-        timestamp: Utc::now(),
-        response_status: None,
-        response_headers: None,
-        blocked: false,
-        modified: false,
-    };
+    let request = create_test_request("req-1", "https://api.example.com/users");
     
     let modified = interceptor.apply_modifications(request).await;
     
@@ -223,18 +206,12 @@ async fn test_apply_modifications_add_headers() {
 async fn test_apply_modifications_remove_headers() {
     let interceptor = NetworkInterceptor::new();
     
-    let rule = ModificationRule {
-        id: "rule-1".to_string(),
-        name: "Remove Tracking".to_string(),
-        url_pattern: "example.com".to_string(),
-        enabled: true,
-        modifications: RequestModifications {
-            add_headers: HashMap::new(),
-            remove_headers: vec!["X-Tracking-Id".to_string()],
-            modify_headers: HashMap::new(),
-            redirect_url: None,
-        },
-    };
+    let rule = create_remove_header_rule(
+        "rule-1",
+        "Remove Tracking",
+        "example.com",
+        vec!["X-Tracking-Id".to_string()],
+    );
     
     interceptor.add_rule(rule).await;
     
@@ -242,18 +219,7 @@ async fn test_apply_modifications_remove_headers() {
     headers.insert("X-Tracking-Id".to_string(), "track-123".to_string());
     headers.insert("Content-Type".to_string(), "application/json".to_string());
     
-    let request = InterceptedRequest {
-        id: "req-1".to_string(),
-        method: "GET".to_string(),
-        url: "https://example.com/page".to_string(),
-        headers,
-        body: None,
-        timestamp: Utc::now(),
-        response_status: None,
-        response_headers: None,
-        blocked: false,
-        modified: false,
-    };
+    let request = create_test_request_with_headers("req-1", "https://example.com/page", headers);
     
     let modified = interceptor.apply_modifications(request).await;
     
@@ -266,42 +232,26 @@ async fn test_apply_modifications_remove_headers() {
 async fn test_disabled_rule_not_applied() {
     let interceptor = NetworkInterceptor::new();
     
-    let rule = ModificationRule {
-        id: "rule-1".to_string(),
-        name: "Disabled Rule".to_string(),
-        url_pattern: "example.com".to_string(),
-        enabled: false, // Disabled
-        modifications: RequestModifications {
-            add_headers: {
-                let mut h = HashMap::new();
-                h.insert("X-Should-Not-Exist".to_string(), "value".to_string());
-                h
-            },
-            remove_headers: vec![],
-            modify_headers: HashMap::new(),
-            redirect_url: None,
+    let mut rule = create_add_header_rule(
+        "rule-1",
+        "Disabled Rule",
+        "example.com",
+        {
+            let mut h = HashMap::new();
+            h.insert("X-Should-Not-Exist".to_string(), "value".to_string());
+            h
         },
-    };
+    );
+    rule.enabled = false; // Disable the rule
     
     interceptor.add_rule(rule).await;
     
-    let request = InterceptedRequest {
-        id: "req-1".to_string(),
-        method: "GET".to_string(),
-        url: "https://example.com/page".to_string(),
-        headers: HashMap::new(),
-        body: None,
-        timestamp: Utc::now(),
-        response_status: None,
-        response_headers: None,
-        blocked: false,
-        modified: false,
-    };
+    let request = create_test_request("req-1", "https://example.com/page");
     
-    let result = interceptor.apply_modifications(request).await;
+    let modified = interceptor.apply_modifications(request).await;
     
-    assert!(!result.modified);
-    assert!(result.headers.get("X-Should-Not-Exist").is_none());
+    assert!(!modified.modified);
+    assert!(modified.headers.get("X-Should-Not-Exist").is_none());
 }
 
 // ============================================================================
