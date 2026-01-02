@@ -47,6 +47,7 @@
 | **IMPLEMENTATION_CHECKLIST.md** | Track progress (200+ tasks) | Throughout - daily checklist |
 | **COMPREHENSIVE_DEVELOPMENT_PLAN.md** | Architecture & current state | Week 1 - initial review |
 | **CODING_EFFICIENCY.md** | Developer productivity & best practices | Throughout - coding reference |
+| **DEVELOPER_QUICKREF.md** | Quick reference for common tasks | Throughout - daily reference |
 
 ---
 
