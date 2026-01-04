@@ -31,6 +31,74 @@ struct AppState {
     browser_controller: Arc<BrowserController>,
 }
 
+// ============================================================================
+// Helper Functions - Reduce Code Duplication
+// ============================================================================
+
+/// Convert a FreeProxy to a proxy URL string
+fn format_proxy_url(proxy: &FreeProxy) -> String {
+    let protocol = match proxy.protocol {
+        ProxyType::Http => "http",
+        ProxyType::Https => "https",
+        ProxyType::Socks4 => "socks4",
+        ProxyType::Socks5 => "socks5",
+        _ => "http",
+    };
+    format!("{}://{}:{}", protocol, proxy.ip, proxy.port)
+}
+
+/// Get the first available proxy URL from the proxy manager
+async fn get_first_proxy_url(proxy_manager: &ProxyManager) -> Option<String> {
+    let proxies = proxy_manager.get_free_proxies().await;
+    debug!("Available proxies: {}", proxies.len());
+    
+    if let Some(proxy) = proxies.first() {
+        let url = format_proxy_url(proxy);
+        info!("Using proxy: {}", url);
+        Some(url)
+    } else {
+        warn!("No proxies available. Tab will use direct connection.");
+        None
+    }
+}
+
+/// Create a tab response from virtual IP and tab info
+fn build_tab_response(tab_id: String, virtual_ip: &VirtualIP) -> TabResponse {
+    TabResponse {
+        tab_id,
+        ip: virtual_ip.ip.to_string(),
+        country_code: virtual_ip.country_code.clone(),
+        country_name: virtual_ip.country.clone(),
+        city: virtual_ip.city.clone(),
+        timezone: virtual_ip.timezone.clone(),
+        isp: virtual_ip.isp.clone(),
+    }
+}
+
+/// Common logic for creating a tab with a virtual IP
+async fn create_tab_internal(
+    state: &AppState,
+    app_handle: &tauri::AppHandle,
+    virtual_ip: VirtualIP,
+) -> Result<TabResponse, String> {
+    // Get a working proxy
+    let proxy_url = get_first_proxy_url(&state.proxy_manager).await;
+    
+    // Create webview tab with proxy settings
+    let webview_manager = app_handle.state::<WebviewManager>();
+    let tab = webview_manager.create_tab_with_proxy(
+        Some("https://www.google.com".to_string()),
+        proxy_url
+    ).await.map_err(|e| {
+        error!("Failed to create webview tab: {}", e);
+        e.to_string()
+    })?;
+    
+    info!("Successfully created tab with ID: {}", tab.tab_id);
+    Ok(build_tab_response(tab.tab_id, &virtual_ip))
+}
+
+
 #[tauri::command]
 async fn create_tab(
     state: State<'_, AppState>,
@@ -43,100 +111,20 @@ async fn create_tab(
     let virtual_ip = state.ip_generator.generate_for_country(&country_code)
         .map_err(|e| format!("No IP ranges available for country {}: {}", country_code, e))?;
     
-    // Get a working proxy for the virtual IP
-    let proxy_manager = &state.proxy_manager;
-    let proxies = proxy_manager.get_free_proxies().await;
-    debug!("Available proxies: {}", proxies.len());
-    
-    let proxy_url = if let Some(proxy) = proxies.first() {
-        let url = format!("{}://{}:{}", 
-            match proxy.protocol {
-                browser_core::ProxyType::Http => "http",
-                browser_core::ProxyType::Https => "https",
-                browser_core::ProxyType::Socks4 => "socks4",
-                browser_core::ProxyType::Socks5 => "socks5",
-                _ => "http",
-            },
-            proxy.ip,
-            proxy.port
-        );
-        info!("Using proxy: {}", url);
-        Some(url)
-    } else {
-        warn!("No proxies available. Tab will use direct connection.");
-        None
-    };
-    
-    // Create webview tab with proxy settings
-    let webview_manager = app_handle.state::<WebviewManager>();
-    let tab = webview_manager.create_tab_with_proxy(
-        Some("https://www.google.com".to_string()),
-        proxy_url.clone()
-    ).await.map_err(|e| {
-        error!("Failed to create webview tab: {}", e);
-        e.to_string()
-    })?;
-    
-    info!("Successfully created tab with ID: {}", tab.tab_id);
-    Ok(TabResponse {
-        tab_id: tab.tab_id,
-        ip: virtual_ip.ip.to_string(),
-        country_code: virtual_ip.country_code.clone(),
-        country_name: virtual_ip.country.clone(),
-        city: virtual_ip.city.clone(),
-        timezone: virtual_ip.timezone.clone(),
-        isp: virtual_ip.isp.clone(),
-    })
+    create_tab_internal(&state, &app_handle, virtual_ip).await
 }
 
 #[tauri::command]
 async fn create_tab_random(state: State<'_, AppState>, app_handle: tauri::AppHandle) -> Result<TabResponse, String> {
+    info!("Creating random tab");
+    
     // Generate random virtual IP
     let virtual_ip = state.ip_generator.generate_random()
         .map_err(|e| format!("No IP ranges available: {}", e))?;
     
-    // Get a working proxy for the virtual IP
-    let proxy_manager = &state.proxy_manager;
-    let proxies = proxy_manager.get_free_proxies().await;
-    
-    let proxy_url = if let Some(proxy) = proxies.first() {
-        Some(format!("{}://{}:{}", 
-            match proxy.protocol {
-                browser_core::ProxyType::Http => "http",
-                browser_core::ProxyType::Https => "https",
-                browser_core::ProxyType::Socks4 => "socks4",
-                browser_core::ProxyType::Socks5 => "socks5",
-                _ => "http",
-            },
-            proxy.ip,
-            proxy.port
-        ))
-    } else {
-        warn!("No proxies available. Tab will use direct connection.");
-        None
-    };
-    
-    // Create webview tab with proxy settings
-    let webview_manager = app_handle.state::<WebviewManager>();
-    let tab = webview_manager.create_tab_with_proxy(
-        Some("https://www.google.com".to_string()),
-        proxy_url.clone()
-    ).await.map_err(|e| {
-        error!("Failed to create webview tab: {}", e);
-        e.to_string()
-    })?;
-    
-    info!("Successfully created random tab with ID: {}", tab.tab_id);
-    Ok(TabResponse {
-        tab_id: tab.tab_id,
-        ip: virtual_ip.ip.to_string(),
-        country_code: virtual_ip.country_code.clone(),
-        country_name: virtual_ip.country.clone(),
-        city: virtual_ip.city.clone(),
-        timezone: virtual_ip.timezone.clone(),
-        isp: virtual_ip.isp.clone(),
-    })
+    create_tab_internal(&state, &app_handle, virtual_ip).await
 }
+
 
 #[tauri::command]
 async fn list_tabs(app_handle: tauri::AppHandle) -> Result<Vec<WebviewTab>, String> {
