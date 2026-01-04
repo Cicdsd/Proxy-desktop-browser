@@ -56,6 +56,23 @@ async fn send_connect_request(
     Ok(())
 }
 
+/// Extract proxy address from ProxySettings
+fn get_proxy_address(proxy: &ProxySettings) -> Result<String> {
+    let host = proxy.host.as_ref()
+        .ok_or_else(|| anyhow!("Proxy host not set"))?;
+    let port = proxy.port
+        .ok_or_else(|| anyhow!("Proxy port not set"))?;
+    Ok(format!("{}:{}", host, port))
+}
+
+/// Connect to a proxy server
+async fn connect_to_proxy(proxy: &ProxySettings) -> Result<TcpStream> {
+    let proxy_addr = get_proxy_address(proxy)?;
+    TcpStream::connect(&proxy_addr)
+        .await
+        .map_err(|e| anyhow!("Failed to connect to proxy {} - {}", proxy_addr, e))
+}
+
 /// Forward data from reader to writer until EOF or error
 async fn forward_data<R, W>(mut reader: R, mut writer: W)
 where
@@ -298,18 +315,7 @@ impl LocalProxyServer {
         target_host: &str,
         target_port: u16,
     ) -> Result<TcpStream> {
-        let proxy_addr = format!(
-            "{}:{}",
-            proxy
-                .host
-                .as_ref()
-                .ok_or_else(|| anyhow!("Proxy host not set"))?,
-            proxy.port.ok_or_else(|| anyhow!("Proxy port not set"))?
-        );
-
-        let mut proxy_stream = TcpStream::connect(&proxy_addr)
-            .await
-            .map_err(|e| anyhow!("Failed to connect to proxy {} - {}", proxy_addr, e))?;
+        let mut proxy_stream = connect_to_proxy(proxy).await?;
 
         // Send CONNECT request and verify response
         send_connect_request(&mut proxy_stream, target_host, target_port, proxy).await?;
@@ -522,18 +528,7 @@ impl WebSocketProxyHandler {
         url: &url::Url,
         proxy: &ProxySettings,
     ) -> Result<TcpStream> {
-        let proxy_host = proxy
-            .host
-            .as_ref()
-            .ok_or_else(|| anyhow!("Proxy host not configured"))?;
-        let proxy_port = proxy
-            .port
-            .ok_or_else(|| anyhow!("Proxy port not configured"))?;
-
-        let proxy_addr = format!("{}:{}", proxy_host, proxy_port);
-        let mut proxy_stream = TcpStream::connect(&proxy_addr)
-            .await
-            .map_err(|e| anyhow!("Failed to connect to proxy: {}", e))?;
+        let mut proxy_stream = connect_to_proxy(proxy).await?;
 
         let target_host = url
             .host_str()
