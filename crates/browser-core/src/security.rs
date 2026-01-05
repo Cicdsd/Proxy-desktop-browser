@@ -33,7 +33,7 @@ impl<'a> SecurityManager<'a> {
             .link_rel(Some("noopener noreferrer"));
 
         // URL validation regex
-        let url_regex = Regex::new(r"^(https?|mailto):[^\s/$.?#].[^\s]*$").unwrap();
+        let url_regex = Regex::new(r"^(https?|mailto):[^\s/$.?#].[^\s]*$").expect("Invalid URL regex pattern");
 
         Self {
             html_sanitizer: sanitizer,
@@ -291,9 +291,9 @@ mod tests {
         let security = SecurityManager::new();
         let password = "TestPassword123!";
         
-        let hash = security.hash_password(password).unwrap();
-        assert!(security.verify_password(password, &hash).unwrap());
-        assert!(!security.verify_password("WrongPassword", &hash).unwrap());
+        let hash = security.hash_password(password).expect("Operation should succeed in test");
+        assert!(security.verify_password(password, &hash).expect("Operation should succeed in test"));
+        assert!(!security.verify_password("WrongPassword", &hash).expect("Operation should succeed in test"));
     }
 
     #[test]

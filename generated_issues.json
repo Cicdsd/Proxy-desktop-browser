@@ -1,0 +1,4457 @@
+[
+  {
+    "id": 1,
+    "title": "[Docs] Add module documentation to crates/api-server/tests/api_routes.rs",
+    "body": "## File\n`crates/api-server/tests/api_routes.rs`\n\n## Issue\nThis module lacks documentation comments.\n\n## Required\n- Add `//!` module-level documentation\n- Document public functions and structs\n- Add usage examples",
+    "category": "documentation",
+    "priority": "medium",
+    "labels": [
+      "documentation",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 2,
+    "title": "[Docs] Add module documentation to crates/api-server/src/lib.rs",
+    "body": "## File\n`crates/api-server/src/lib.rs`\n\n## Issue\nThis module lacks documentation comments.\n\n## Required\n- Add `//!` module-level documentation\n- Document public functions and structs\n- Add usage examples",
+    "category": "documentation",
+    "priority": "medium",
+    "labels": [
+      "documentation",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 3,
+    "title": "[Docs] Add module documentation to crates/api-server/src/main.rs",
+    "body": "## File\n`crates/api-server/src/main.rs`\n\n## Issue\nThis module lacks documentation comments.\n\n## Required\n- Add `//!` module-level documentation\n- Document public functions and structs\n- Add usage examples",
+    "category": "documentation",
+    "priority": "medium",
+    "labels": [
+      "documentation",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 4,
+    "title": "[Docs] Add module documentation to crates/browser-core/tests/stability_tests.rs",
+    "body": "## File\n`crates/browser-core/tests/stability_tests.rs`\n\n## Issue\nThis module lacks documentation comments.\n\n## Required\n- Add `//!` module-level documentation\n- Document public functions and structs\n- Add usage examples",
+    "category": "documentation",
+    "priority": "medium",
+    "labels": [
+      "documentation",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 5,
+    "title": "[Docs] Add module documentation to crates/browser-core/tests/network_privacy_tests.rs",
+    "body": "## File\n`crates/browser-core/tests/network_privacy_tests.rs`\n\n## Issue\nThis module lacks documentation comments.\n\n## Required\n- Add `//!` module-level documentation\n- Document public functions and structs\n- Add usage examples",
+    "category": "documentation",
+    "priority": "medium",
+    "labels": [
+      "documentation",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 6,
+    "title": "[Docs] Add module documentation to crates/browser-core/tests/tab_lifecycle.rs",
+    "body": "## File\n`crates/browser-core/tests/tab_lifecycle.rs`\n\n## Issue\nThis module lacks documentation comments.\n\n## Required\n- Add `//!` module-level documentation\n- Document public functions and structs\n- Add usage examples",
+    "category": "documentation",
+    "priority": "medium",
+    "labels": [
+      "documentation",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 7,
+    "title": "[Docs] Add module documentation to crates/browser-core/tests/security_tests.rs",
+    "body": "## File\n`crates/browser-core/tests/security_tests.rs`\n\n## Issue\nThis module lacks documentation comments.\n\n## Required\n- Add `//!` module-level documentation\n- Document public functions and structs\n- Add usage examples",
+    "category": "documentation",
+    "priority": "medium",
+    "labels": [
+      "documentation",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 8,
+    "title": "[Reliability] Review panic! usage in crates/browser-core/tests/proxy_rotation_tests.rs",
+    "body": "## File\n`crates/browser-core/tests/proxy_rotation_tests.rs`\n\n## Issue\nUsing `panic!` can crash the application.\n\n## Required\n- Replace with proper error handling\n- Use Result<> types\n- Only panic in truly unrecoverable situations",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 9,
+    "title": "[Docs] Add module documentation to crates/browser-core/src/free_ip_providers.rs",
+    "body": "## File\n`crates/browser-core/src/free_ip_providers.rs`\n\n## Issue\nThis module lacks documentation comments.\n\n## Required\n- Add `//!` module-level documentation\n- Document public functions and structs\n- Add usage examples",
+    "category": "documentation",
+    "priority": "medium",
+    "labels": [
+      "documentation",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 10,
+    "title": "[Docs] Add module documentation to crates/browser-core/src/browser_controls.rs",
+    "body": "## File\n`crates/browser-core/src/browser_controls.rs`\n\n## Issue\nThis module lacks documentation comments.\n\n## Required\n- Add `//!` module-level documentation\n- Document public functions and structs\n- Add usage examples",
+    "category": "documentation",
+    "priority": "medium",
+    "labels": [
+      "documentation",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 11,
+    "title": "[Performance] Reduce excessive cloning in crates/browser-core/src/browser_controls.rs",
+    "body": "## File\n`crates/browser-core/src/browser_controls.rs`\n\n## Issue\nFound 11 `.clone()` calls which may impact performance.\n\n## Suggested\n- Use references where possible\n- Consider Cow<> for conditional ownership\n- Review data ownership patterns",
+    "category": "performance",
+    "priority": "medium",
+    "labels": [
+      "performance",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 12,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/automation.rs",
+    "body": "## Location\n`crates/browser-core/src/automation.rs` line 117\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\n.unwrap()\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 13,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/automation.rs",
+    "body": "## Location\n`crates/browser-core/src/automation.rs` line 467\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\n.unwrap()\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 14,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/automation.rs",
+    "body": "## Location\n`crates/browser-core/src/automation.rs` line 657\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\n.unwrap()\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 15,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/automation.rs",
+    "body": "## Location\n`crates/browser-core/src/automation.rs` line 829\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nassert_eq!(builder.get_workflow(&id).unwrap().steps.len(), 1);\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 16,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/automation.rs",
+    "body": "## Location\n`crates/browser-core/src/automation.rs` line 896\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nassert_eq!(workflow.unwrap().steps.len(), 3);\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 17,
+    "title": "[Performance] Reduce excessive cloning in crates/browser-core/src/automation.rs",
+    "body": "## File\n`crates/browser-core/src/automation.rs`\n\n## Issue\nFound 12 `.clone()` calls which may impact performance.\n\n## Suggested\n- Use references where possible\n- Consider Cow<> for conditional ownership\n- Review data ownership patterns",
+    "category": "performance",
+    "priority": "medium",
+    "labels": [
+      "performance",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 18,
+    "title": "[Docs] Add module documentation to crates/browser-core/src/pac_server.rs",
+    "body": "## File\n`crates/browser-core/src/pac_server.rs`\n\n## Issue\nThis module lacks documentation comments.\n\n## Required\n- Add `//!` module-level documentation\n- Document public functions and structs\n- Add usage examples",
+    "category": "documentation",
+    "priority": "medium",
+    "labels": [
+      "documentation",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 19,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/http_client.rs",
+    "body": "## Location\n`crates/browser-core/src/http_client.rs` line 36\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nQuota::per_second(NonZeroU32::new(10).unwrap())\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 20,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/http_client.rs",
+    "body": "## Location\n`crates/browser-core/src/http_client.rs` line 37\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\n.allow_burst(NonZeroU32::new(20).unwrap())\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 21,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/http_client.rs",
+    "body": "## Location\n`crates/browser-core/src/http_client.rs` line 68\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nQuota::per_second(NonZeroU32::new(10).unwrap())\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 22,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/http_client.rs",
+    "body": "## Location\n`crates/browser-core/src/http_client.rs` line 69\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\n.allow_burst(NonZeroU32::new(20).unwrap())\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 23,
+    "title": "[Docs] Add module documentation to crates/browser-core/src/http_client.rs",
+    "body": "## File\n`crates/browser-core/src/http_client.rs`\n\n## Issue\nThis module lacks documentation comments.\n\n## Required\n- Add `//!` module-level documentation\n- Document public functions and structs\n- Add usage examples",
+    "category": "documentation",
+    "priority": "medium",
+    "labels": [
+      "documentation",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 24,
+    "title": "[Docs] Add module documentation to crates/browser-core/src/backup.rs",
+    "body": "## File\n`crates/browser-core/src/backup.rs`\n\n## Issue\nThis module lacks documentation comments.\n\n## Required\n- Add `//!` module-level documentation\n- Document public functions and structs\n- Add usage examples",
+    "category": "documentation",
+    "priority": "medium",
+    "labels": [
+      "documentation",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 25,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/proxy_rotation.rs",
+    "body": "## Location\n`crates/browser-core/src/proxy_rotation.rs` line 828\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nlet health = monitor.get_health(\"proxy1\").await.unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 26,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/proxy_rotation.rs",
+    "body": "## Location\n`crates/browser-core/src/proxy_rotation.rs` line 834\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nlet health2 = monitor.get_health(\"proxy2\").await.unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 27,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/proxy_rotation.rs",
+    "body": "## Location\n`crates/browser-core/src/proxy_rotation.rs` line 845\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nlet stats = monitor.get_bandwidth_stats(\"proxy1\").await.unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 28,
+    "title": "[Docs] Add module documentation to crates/browser-core/src/proxy_rotation.rs",
+    "body": "## File\n`crates/browser-core/src/proxy_rotation.rs`\n\n## Issue\nThis module lacks documentation comments.\n\n## Required\n- Add `//!` module-level documentation\n- Document public functions and structs\n- Add usage examples",
+    "category": "documentation",
+    "priority": "medium",
+    "labels": [
+      "documentation",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 29,
+    "title": "[Performance] Reduce excessive cloning in crates/browser-core/src/proxy_rotation.rs",
+    "body": "## File\n`crates/browser-core/src/proxy_rotation.rs`\n\n## Issue\nFound 17 `.clone()` calls which may impact performance.\n\n## Suggested\n- Use references where possible\n- Consider Cow<> for conditional ownership\n- Review data ownership patterns",
+    "category": "performance",
+    "priority": "medium",
+    "labels": [
+      "performance",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 30,
+    "title": "[TODO] Address TODO/FIXME in crates/browser-core/src/chromium_engine.rs:1071",
+    "body": "## Location\n`crates/browser-core/src/chromium_engine.rs` line 1071\n\n## Comment\n```\n// TODO: Implement proper page-to-tab mapping when chromiumoxide supports target IDs\n```\n\n## Action Required\nReview and address this TODO/FIXME comment.",
+    "category": "maintenance",
+    "priority": "medium",
+    "labels": [
+      "maintenance",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 31,
+    "title": "[Performance] Reduce excessive cloning in crates/browser-core/src/chromium_engine.rs",
+    "body": "## File\n`crates/browser-core/src/chromium_engine.rs`\n\n## Issue\nFound 12 `.clone()` calls which may impact performance.\n\n## Suggested\n- Use references where possible\n- Consider Cow<> for conditional ownership\n- Review data ownership patterns",
+    "category": "performance",
+    "priority": "medium",
+    "labels": [
+      "performance",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 32,
+    "title": "[Docs] Add module documentation to crates/browser-core/src/webview_manager.rs",
+    "body": "## File\n`crates/browser-core/src/webview_manager.rs`\n\n## Issue\nThis module lacks documentation comments.\n\n## Required\n- Add `//!` module-level documentation\n- Document public functions and structs\n- Add usage examples",
+    "category": "documentation",
+    "priority": "medium",
+    "labels": [
+      "documentation",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 33,
+    "title": "[Docs] Add module documentation to crates/browser-core/src/fingerprint.rs",
+    "body": "## File\n`crates/browser-core/src/fingerprint.rs`\n\n## Issue\nThis module lacks documentation comments.\n\n## Required\n- Add `//!` module-level documentation\n- Document public functions and structs\n- Add usage examples",
+    "category": "documentation",
+    "priority": "medium",
+    "labels": [
+      "documentation",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 34,
+    "title": "[Docs] Add module documentation to crates/browser-core/src/tab_manager.rs",
+    "body": "## File\n`crates/browser-core/src/tab_manager.rs`\n\n## Issue\nThis module lacks documentation comments.\n\n## Required\n- Add `//!` module-level documentation\n- Document public functions and structs\n- Add usage examples",
+    "category": "documentation",
+    "priority": "medium",
+    "labels": [
+      "documentation",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 35,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/performance_optimizer.rs",
+    "body": "## Location\n`crates/browser-core/src/performance_optimizer.rs` line 580\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nassert_eq!(next.unwrap().priority, CachePriority::Critical);\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 36,
+    "title": "[Docs] Add module documentation to crates/browser-core/src/proxy.rs",
+    "body": "## File\n`crates/browser-core/src/proxy.rs`\n\n## Issue\nThis module lacks documentation comments.\n\n## Required\n- Add `//!` module-level documentation\n- Document public functions and structs\n- Add usage examples",
+    "category": "documentation",
+    "priority": "medium",
+    "labels": [
+      "documentation",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 37,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/security.rs",
+    "body": "## Location\n`crates/browser-core/src/security.rs` line 36\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nlet url_regex = Regex::new(r\"^(https?|mailto):[^\\s/$.?#].[^\\s]*$\").unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 38,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/security.rs",
+    "body": "## Location\n`crates/browser-core/src/security.rs` line 294\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nlet hash = security.hash_password(password).unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 39,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/security.rs",
+    "body": "## Location\n`crates/browser-core/src/security.rs` line 295\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nassert!(security.verify_password(password, &hash).unwrap());\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 40,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/security.rs",
+    "body": "## Location\n`crates/browser-core/src/security.rs` line 296\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nassert!(!security.verify_password(\"WrongPassword\", &hash).unwrap());\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 41,
+    "title": "[Docs] Add module documentation to crates/browser-core/src/security.rs",
+    "body": "## File\n`crates/browser-core/src/security.rs`\n\n## Issue\nThis module lacks documentation comments.\n\n## Required\n- Add `//!` module-level documentation\n- Document public functions and structs\n- Add usage examples",
+    "category": "documentation",
+    "priority": "medium",
+    "labels": [
+      "documentation",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 42,
+    "title": "[Docs] Add module documentation to crates/browser-core/src/local_proxy.rs",
+    "body": "## File\n`crates/browser-core/src/local_proxy.rs`\n\n## Issue\nThis module lacks documentation comments.\n\n## Required\n- Add `//!` module-level documentation\n- Document public functions and structs\n- Add usage examples",
+    "category": "documentation",
+    "priority": "medium",
+    "labels": [
+      "documentation",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 43,
+    "title": "[Performance] Reduce excessive cloning in crates/browser-core/src/local_proxy.rs",
+    "body": "## File\n`crates/browser-core/src/local_proxy.rs`\n\n## Issue\nFound 17 `.clone()` calls which may impact performance.\n\n## Suggested\n- Use references where possible\n- Consider Cow<> for conditional ownership\n- Review data ownership patterns",
+    "category": "performance",
+    "priority": "medium",
+    "labels": [
+      "performance",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 44,
+    "title": "[Docs] Add module documentation to crates/browser-core/src/ad_verification.rs",
+    "body": "## File\n`crates/browser-core/src/ad_verification.rs`\n\n## Issue\nThis module lacks documentation comments.\n\n## Required\n- Add `//!` module-level documentation\n- Document public functions and structs\n- Add usage examples",
+    "category": "documentation",
+    "priority": "medium",
+    "labels": [
+      "documentation",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 45,
+    "title": "[Performance] Reduce excessive cloning in crates/browser-core/src/ad_verification.rs",
+    "body": "## File\n`crates/browser-core/src/ad_verification.rs`\n\n## Issue\nFound 12 `.clone()` calls which may impact performance.\n\n## Suggested\n- Use references where possible\n- Consider Cow<> for conditional ownership\n- Review data ownership patterns",
+    "category": "performance",
+    "priority": "medium",
+    "labels": [
+      "performance",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 46,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/prelude.rs",
+    "body": "## Location\n`crates/browser-core/src/prelude.rs` line 548\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nlet password_pattern = regex::Regex::new(r\"(?i)(password|passwd|pwd|secret|token|api_key|apikey)[\\s:=]+\\S+\").unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 47,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/prelude.rs",
+    "body": "## Location\n`crates/browser-core/src/prelude.rs` line 552\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nlet bearer_pattern = regex::Regex::new(r\"(?i)bearer\\s+\\S+\").unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 48,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/prelude.rs",
+    "body": "## Location\n`crates/browser-core/src/prelude.rs` line 566\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nresult.push(c.to_lowercase().next().unwrap());\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 49,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/prelude.rs",
+    "body": "## Location\n`crates/browser-core/src/prelude.rs` line 582\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nresult.push(c.to_uppercase().next().unwrap());\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 50,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/prelude.rs",
+    "body": "## Location\n`crates/browser-core/src/prelude.rs` line 667\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nlet stats = metrics.get_histogram_stats(\"latency\").await.unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 51,
+    "title": "[Docs] Add module documentation to crates/browser-core/src/browser_tab_manager.rs",
+    "body": "## File\n`crates/browser-core/src/browser_tab_manager.rs`\n\n## Issue\nThis module lacks documentation comments.\n\n## Required\n- Add `//!` module-level documentation\n- Document public functions and structs\n- Add usage examples",
+    "category": "documentation",
+    "priority": "medium",
+    "labels": [
+      "documentation",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 52,
+    "title": "[Performance] Reduce excessive cloning in crates/browser-core/src/browser_tab_manager.rs",
+    "body": "## File\n`crates/browser-core/src/browser_tab_manager.rs`\n\n## Issue\nFound 12 `.clone()` calls which may impact performance.\n\n## Suggested\n- Use references where possible\n- Consider Cow<> for conditional ownership\n- Review data ownership patterns",
+    "category": "performance",
+    "priority": "medium",
+    "labels": [
+      "performance",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 53,
+    "title": "[Docs] Add module documentation to crates/browser-core/src/tab_isolation.rs",
+    "body": "## File\n`crates/browser-core/src/tab_isolation.rs`\n\n## Issue\nThis module lacks documentation comments.\n\n## Required\n- Add `//!` module-level documentation\n- Document public functions and structs\n- Add usage examples",
+    "category": "documentation",
+    "priority": "medium",
+    "labels": [
+      "documentation",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 54,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/storage.rs",
+    "body": "## Location\n`crates/browser-core/src/storage.rs` line 759\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nlet temp_dir = TempDir::new().unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 55,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/storage.rs",
+    "body": "## Location\n`crates/browser-core/src/storage.rs` line 760\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nlet storage = StorageEngine::new(temp_dir.path()).unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 56,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/storage.rs",
+    "body": "## Location\n`crates/browser-core/src/storage.rs` line 778\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\n}).await.unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 57,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/storage.rs",
+    "body": "## Location\n`crates/browser-core/src/storage.rs` line 780\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nstorage.add_history(\"https://example.com\", Some(\"Example\")).await.unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 58,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/storage.rs",
+    "body": "## Location\n`crates/browser-core/src/storage.rs` line 781\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nstorage.add_bookmark(\"https://example.com\", \"Example Site\", None).await.unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 59,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/storage.rs",
+    "body": "## Location\n`crates/browser-core/src/storage.rs` line 782\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nstorage.set_local_storage(\"https://example.com\", \"key1\", \"value1\").await.unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 60,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/storage.rs",
+    "body": "## Location\n`crates/browser-core/src/storage.rs` line 785\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nlet export = storage.export_all().await.unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 61,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/storage.rs",
+    "body": "## Location\n`crates/browser-core/src/storage.rs` line 792\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nstorage.clear_all().await.unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 62,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/storage.rs",
+    "body": "## Location\n`crates/browser-core/src/storage.rs` line 793\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nlet stats = storage.import_all(export).await.unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 63,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/storage.rs",
+    "body": "## Location\n`crates/browser-core/src/storage.rs` line 805\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nstorage.add_bookmark(\"https://test.com\", \"Test\", None).await.unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 64,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/storage.rs",
+    "body": "## Location\n`crates/browser-core/src/storage.rs` line 807\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nlet json = storage.export_to_json().await.unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 65,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/storage.rs",
+    "body": "## Location\n`crates/browser-core/src/storage.rs` line 810\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nstorage.clear_all().await.unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 66,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/storage.rs",
+    "body": "## Location\n`crates/browser-core/src/storage.rs` line 812\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nlet stats = storage.import_from_json(&json).await.unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 67,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/storage.rs",
+    "body": "## Location\n`crates/browser-core/src/storage.rs` line 829\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\n}).await.unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 68,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/storage.rs",
+    "body": "## Location\n`crates/browser-core/src/storage.rs` line 830\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nstorage.add_bookmark(\"https://test.com\", \"Test\", None).await.unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 69,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/storage.rs",
+    "body": "## Location\n`crates/browser-core/src/storage.rs` line 832\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nlet export = storage.export_all().await.unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 70,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/storage.rs",
+    "body": "## Location\n`crates/browser-core/src/storage.rs` line 833\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nstorage.clear_all().await.unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 71,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/storage.rs",
+    "body": "## Location\n`crates/browser-core/src/storage.rs` line 844\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nstorage.import_with_options(export, &options).await.unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 72,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/storage.rs",
+    "body": "## Location\n`crates/browser-core/src/storage.rs` line 846\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nassert_eq!(storage.get_all_cookies().await.unwrap().len(), 0);\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 73,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/storage.rs",
+    "body": "## Location\n`crates/browser-core/src/storage.rs` line 847\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nassert_eq!(storage.get_bookmarks().await.unwrap().len(), 1);\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 74,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/storage.rs",
+    "body": "## Location\n`crates/browser-core/src/storage.rs` line 854\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nstorage.add_bookmark(\"https://first.com\", \"First\", None).await.unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 75,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/storage.rs",
+    "body": "## Location\n`crates/browser-core/src/storage.rs` line 855\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nlet export = storage.export_all().await.unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 76,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/storage.rs",
+    "body": "## Location\n`crates/browser-core/src/storage.rs` line 857\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nstorage.add_bookmark(\"https://second.com\", \"Second\", None).await.unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 77,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/storage.rs",
+    "body": "## Location\n`crates/browser-core/src/storage.rs` line 861\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nstorage.import_with_options(export, &options).await.unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 78,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/storage.rs",
+    "body": "## Location\n`crates/browser-core/src/storage.rs` line 864\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nlet bookmarks = storage.get_bookmarks().await.unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 79,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/storage.rs",
+    "body": "## Location\n`crates/browser-core/src/storage.rs` line 1368\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nlet temp_dir = TempDir::new().unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 80,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/storage.rs",
+    "body": "## Location\n`crates/browser-core/src/storage.rs` line 1377\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nlet session = manager.create_session(\"Test Session\", false).await.unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 81,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/storage.rs",
+    "body": "## Location\n`crates/browser-core/src/storage.rs` line 1386\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nlet session = manager.get_or_create_default_session().await.unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 82,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/storage.rs",
+    "body": "## Location\n`crates/browser-core/src/storage.rs` line 1394\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nlet session = manager.create_session(\"Test\", false).await.unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 83,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/storage.rs",
+    "body": "## Location\n`crates/browser-core/src/storage.rs` line 1409\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nmanager.add_tab_to_session(&session.session_id, tab).await.unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 84,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/storage.rs",
+    "body": "## Location\n`crates/browser-core/src/storage.rs` line 1411\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nlet updated = manager.get_session(&session.session_id).await.unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 85,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/storage.rs",
+    "body": "## Location\n`crates/browser-core/src/storage.rs` line 1417\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nlet temp_dir = TempDir::new().unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 86,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/storage.rs",
+    "body": "## Location\n`crates/browser-core/src/storage.rs` line 1422\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nmanager.create_session(\"Persistent Session\", true).await.unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 87,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/storage.rs",
+    "body": "## Location\n`crates/browser-core/src/storage.rs` line 1428\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nlet count = manager.load_sessions().await.unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 88,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/storage.rs",
+    "body": "## Location\n`crates/browser-core/src/storage.rs` line 1440\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nlet original = manager.create_session(\"Original\", false).await.unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 89,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/storage.rs",
+    "body": "## Location\n`crates/browser-core/src/storage.rs` line 1441\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nlet duplicate = manager.duplicate_session(&original.session_id, \"Copy\").await.unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 90,
+    "title": "[Docs] Add module documentation to crates/browser-core/src/storage.rs",
+    "body": "## File\n`crates/browser-core/src/storage.rs`\n\n## Issue\nThis module lacks documentation comments.\n\n## Required\n- Add `//!` module-level documentation\n- Document public functions and structs\n- Add usage examples",
+    "category": "documentation",
+    "priority": "medium",
+    "labels": [
+      "documentation",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 91,
+    "title": "[Performance] Reduce excessive cloning in crates/browser-core/src/storage.rs",
+    "body": "## File\n`crates/browser-core/src/storage.rs`\n\n## Issue\nFound 22 `.clone()` calls which may impact performance.\n\n## Suggested\n- Use references where possible\n- Consider Cow<> for conditional ownership\n- Review data ownership patterns",
+    "category": "performance",
+    "priority": "medium",
+    "labels": [
+      "performance",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 92,
+    "title": "[Docs] Add module documentation to crates/browser-core/src/proxy_validator.rs",
+    "body": "## File\n`crates/browser-core/src/proxy_validator.rs`\n\n## Issue\nThis module lacks documentation comments.\n\n## Required\n- Add `//!` module-level documentation\n- Document public functions and structs\n- Add usage examples",
+    "category": "documentation",
+    "priority": "medium",
+    "labels": [
+      "documentation",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 93,
+    "title": "[Performance] Reduce excessive cloning in crates/browser-core/src/proxy_validator.rs",
+    "body": "## File\n`crates/browser-core/src/proxy_validator.rs`\n\n## Issue\nFound 14 `.clone()` calls which may impact performance.\n\n## Suggested\n- Use references where possible\n- Consider Cow<> for conditional ownership\n- Review data ownership patterns",
+    "category": "performance",
+    "priority": "medium",
+    "labels": [
+      "performance",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 94,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/config_manager.rs",
+    "body": "## Location\n`crates/browser-core/src/config_manager.rs` line 661\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\n}).await.unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 95,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/config_manager.rs",
+    "body": "## Location\n`crates/browser-core/src/config_manager.rs` line 671\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nlet temp_dir = TempDir::new().unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 96,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/config_manager.rs",
+    "body": "## Location\n`crates/browser-core/src/config_manager.rs` line 679\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\n}).await.unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 97,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/config_manager.rs",
+    "body": "## Location\n`crates/browser-core/src/config_manager.rs` line 680\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nmanager.save().await.unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 98,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/config_manager.rs",
+    "body": "## Location\n`crates/browser-core/src/config_manager.rs` line 686\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nmanager.load().await.unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 99,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/config_manager.rs",
+    "body": "## Location\n`crates/browser-core/src/config_manager.rs` line 701\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\n}).await.unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 100,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/config_manager.rs",
+    "body": "## Location\n`crates/browser-core/src/config_manager.rs` line 713\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\n}).await.unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 101,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/config_manager.rs",
+    "body": "## Location\n`crates/browser-core/src/config_manager.rs` line 715\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nlet warnings = manager.validate().await.unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 102,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/config_manager.rs",
+    "body": "## Location\n`crates/browser-core/src/config_manager.rs` line 725\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\n}).await.unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 103,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/config_manager.rs",
+    "body": "## Location\n`crates/browser-core/src/config_manager.rs` line 727\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nlet json = manager.export_json().await.unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 104,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/config_manager.rs",
+    "body": "## Location\n`crates/browser-core/src/config_manager.rs` line 731\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nmanager.reset().await.unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 105,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/config_manager.rs",
+    "body": "## Location\n`crates/browser-core/src/config_manager.rs` line 732\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nmanager.import_json(&json).await.unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 106,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/scraper_util.rs",
+    "body": "## Location\n`crates/browser-core/src/scraper_util.rs` line 32\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nlet table_selector = Selector::parse(\"table.table tbody tr\").unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 107,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/scraper_util.rs",
+    "body": "## Location\n`crates/browser-core/src/scraper_util.rs` line 33\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nlet cell_selector = Selector::parse(\"td\").unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 108,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/scraper_util.rs",
+    "body": "## Location\n`crates/browser-core/src/scraper_util.rs` line 100\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nlet row_selector = Selector::parse(\"table#tbl_proxy_list tbody tr\").unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 109,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/scraper_util.rs",
+    "body": "## Location\n`crates/browser-core/src/scraper_util.rs` line 101\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nlet cell_selector = Selector::parse(\"td\").unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 110,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/scraper_util.rs",
+    "body": "## Location\n`crates/browser-core/src/scraper_util.rs` line 102\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nlet ip_selector = Selector::parse(\"abbr[data-proxy]\").unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 111,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/scraper_util.rs",
+    "body": "## Location\n`crates/browser-core/src/scraper_util.rs` line 172\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nlet row_selector = Selector::parse(\"table tr[onclick]\").unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 112,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/scraper_util.rs",
+    "body": "## Location\n`crates/browser-core/src/scraper_util.rs` line 173\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nlet cell_selector = Selector::parse(\"td\").unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 113,
+    "title": "[Safety] Replace unwrap() with proper error handling in crates/browser-core/src/scraper_util.rs",
+    "body": "## Location\n`crates/browser-core/src/scraper_util.rs` line 294\n\n## Issue\nUsing `.unwrap()` can cause panics. Consider using proper error handling.\n\n## Code\n```rust\nlet client = HttpClient::new().unwrap();\n```\n\n## Suggested Fix\nUse `?` operator, `.unwrap_or()`, `.unwrap_or_default()`, or match expression.",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 114,
+    "title": "[Docs] Add module documentation to crates/browser-core/src/scraper_util.rs",
+    "body": "## File\n`crates/browser-core/src/scraper_util.rs`\n\n## Issue\nThis module lacks documentation comments.\n\n## Required\n- Add `//!` module-level documentation\n- Document public functions and structs\n- Add usage examples",
+    "category": "documentation",
+    "priority": "medium",
+    "labels": [
+      "documentation",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 115,
+    "title": "[Docs] Add module documentation to crates/virtual-ip/src/generator.rs",
+    "body": "## File\n`crates/virtual-ip/src/generator.rs`\n\n## Issue\nThis module lacks documentation comments.\n\n## Required\n- Add `//!` module-level documentation\n- Document public functions and structs\n- Add usage examples",
+    "category": "documentation",
+    "priority": "medium",
+    "labels": [
+      "documentation",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 116,
+    "title": "[Docs] Add module documentation to crates/virtual-ip/src/validator.rs",
+    "body": "## File\n`crates/virtual-ip/src/validator.rs`\n\n## Issue\nThis module lacks documentation comments.\n\n## Required\n- Add `//!` module-level documentation\n- Document public functions and structs\n- Add usage examples",
+    "category": "documentation",
+    "priority": "medium",
+    "labels": [
+      "documentation",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 117,
+    "title": "[Docs] Add module documentation to crates/virtual-ip/src/models.rs",
+    "body": "## File\n`crates/virtual-ip/src/models.rs`\n\n## Issue\nThis module lacks documentation comments.\n\n## Required\n- Add `//!` module-level documentation\n- Document public functions and structs\n- Add usage examples",
+    "category": "documentation",
+    "priority": "medium",
+    "labels": [
+      "documentation",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 118,
+    "title": "[Docs] Add module documentation to crates/virtual-ip/src/rotation.rs",
+    "body": "## File\n`crates/virtual-ip/src/rotation.rs`\n\n## Issue\nThis module lacks documentation comments.\n\n## Required\n- Add `//!` module-level documentation\n- Document public functions and structs\n- Add usage examples",
+    "category": "documentation",
+    "priority": "medium",
+    "labels": [
+      "documentation",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 119,
+    "title": "[Docs] Add module documentation to ui-tauri/src-tauri/build.rs",
+    "body": "## File\n`ui-tauri/src-tauri/build.rs`\n\n## Issue\nThis module lacks documentation comments.\n\n## Required\n- Add `//!` module-level documentation\n- Document public functions and structs\n- Add usage examples",
+    "category": "documentation",
+    "priority": "medium",
+    "labels": [
+      "documentation",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 120,
+    "title": "[Docs] Add module documentation to ui-tauri/src-tauri/src/auth.rs",
+    "body": "## File\n`ui-tauri/src-tauri/src/auth.rs`\n\n## Issue\nThis module lacks documentation comments.\n\n## Required\n- Add `//!` module-level documentation\n- Document public functions and structs\n- Add usage examples",
+    "category": "documentation",
+    "priority": "medium",
+    "labels": [
+      "documentation",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 121,
+    "title": "[Performance] Reduce excessive cloning in ui-tauri/src-tauri/src/auth.rs",
+    "body": "## File\n`ui-tauri/src-tauri/src/auth.rs`\n\n## Issue\nFound 16 `.clone()` calls which may impact performance.\n\n## Suggested\n- Use references where possible\n- Consider Cow<> for conditional ownership\n- Review data ownership patterns",
+    "category": "performance",
+    "priority": "medium",
+    "labels": [
+      "performance",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 122,
+    "title": "[Docs] Add module documentation to ui-tauri/src-tauri/src/webview_manager.rs",
+    "body": "## File\n`ui-tauri/src-tauri/src/webview_manager.rs`\n\n## Issue\nThis module lacks documentation comments.\n\n## Required\n- Add `//!` module-level documentation\n- Document public functions and structs\n- Add usage examples",
+    "category": "documentation",
+    "priority": "medium",
+    "labels": [
+      "documentation",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 123,
+    "title": "[Docs] Add module documentation to ui-tauri/src-tauri/src/main.rs",
+    "body": "## File\n`ui-tauri/src-tauri/src/main.rs`\n\n## Issue\nThis module lacks documentation comments.\n\n## Required\n- Add `//!` module-level documentation\n- Document public functions and structs\n- Add usage examples",
+    "category": "documentation",
+    "priority": "medium",
+    "labels": [
+      "documentation",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 124,
+    "title": "[A11y] Add ARIA attributes to CreateTabForm",
+    "body": "## Component\n`ui-tauri/src/components/CreateTabForm.svelte`\n\n## Issue\nButtons found without ARIA attributes.\n\n## Required\n- Add aria-label for icon buttons\n- Add aria-describedby for complex actions\n- Ensure keyboard navigation",
+    "category": "accessibility",
+    "priority": "medium",
+    "labels": [
+      "accessibility",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 125,
+    "title": "[A11y] Add ARIA attributes to MainApp",
+    "body": "## Component\n`ui-tauri/src/components/MainApp.svelte`\n\n## Issue\nButtons found without ARIA attributes.\n\n## Required\n- Add aria-label for icon buttons\n- Add aria-describedby for complex actions\n- Ensure keyboard navigation",
+    "category": "accessibility",
+    "priority": "medium",
+    "labels": [
+      "accessibility",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 126,
+    "title": "[Refactor] Split large component MainApp",
+    "body": "## Component\n`ui-tauri/src/components/MainApp.svelte`\n\n## Issue\nComponent has 479 lines and may be too complex.\n\n## Suggested\n- Extract sub-components\n- Move logic to stores\n- Create utility functions",
+    "category": "refactoring",
+    "priority": "medium",
+    "labels": [
+      "refactoring",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 127,
+    "title": "[A11y] Add ARIA attributes to TabDetails",
+    "body": "## Component\n`ui-tauri/src/components/TabDetails.svelte`\n\n## Issue\nButtons found without ARIA attributes.\n\n## Required\n- Add aria-label for icon buttons\n- Add aria-describedby for complex actions\n- Ensure keyboard navigation",
+    "category": "accessibility",
+    "priority": "medium",
+    "labels": [
+      "accessibility",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 128,
+    "title": "[A11y] Add ARIA attributes to TabList",
+    "body": "## Component\n`ui-tauri/src/components/TabList.svelte`\n\n## Issue\nButtons found without ARIA attributes.\n\n## Required\n- Add aria-label for icon buttons\n- Add aria-describedby for complex actions\n- Ensure keyboard navigation",
+    "category": "accessibility",
+    "priority": "medium",
+    "labels": [
+      "accessibility",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 129,
+    "title": "[A11y] Add ARIA attributes to WebviewBrowser",
+    "body": "## Component\n`ui-tauri/src/components/browser/WebviewBrowser.svelte`\n\n## Issue\nButtons found without ARIA attributes.\n\n## Required\n- Add aria-label for icon buttons\n- Add aria-describedby for complex actions\n- Ensure keyboard navigation",
+    "category": "accessibility",
+    "priority": "medium",
+    "labels": [
+      "accessibility",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 130,
+    "title": "[Refactor] Split large component WebviewBrowser",
+    "body": "## Component\n`ui-tauri/src/components/browser/WebviewBrowser.svelte`\n\n## Issue\nComponent has 349 lines and may be too complex.\n\n## Suggested\n- Extract sub-components\n- Move logic to stores\n- Create utility functions",
+    "category": "refactoring",
+    "priority": "medium",
+    "labels": [
+      "refactoring",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 131,
+    "title": "[A11y] Add ARIA attributes to BrowserShell",
+    "body": "## Component\n`ui-tauri/src/components/browser/BrowserShell.svelte`\n\n## Issue\nButtons found without ARIA attributes.\n\n## Required\n- Add aria-label for icon buttons\n- Add aria-describedby for complex actions\n- Ensure keyboard navigation",
+    "category": "accessibility",
+    "priority": "medium",
+    "labels": [
+      "accessibility",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 132,
+    "title": "[Refactor] Split large component BrowserShell",
+    "body": "## Component\n`ui-tauri/src/components/browser/BrowserShell.svelte`\n\n## Issue\nComponent has 2246 lines and may be too complex.\n\n## Suggested\n- Extract sub-components\n- Move logic to stores\n- Create utility functions",
+    "category": "refactoring",
+    "priority": "medium",
+    "labels": [
+      "refactoring",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 133,
+    "title": "[A11y] Add ARIA attributes to NavigationBar",
+    "body": "## Component\n`ui-tauri/src/components/browser/NavigationBar.svelte`\n\n## Issue\nButtons found without ARIA attributes.\n\n## Required\n- Add aria-label for icon buttons\n- Add aria-describedby for complex actions\n- Ensure keyboard navigation",
+    "category": "accessibility",
+    "priority": "medium",
+    "labels": [
+      "accessibility",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 134,
+    "title": "[Refactor] Split large component NavigationBar",
+    "body": "## Component\n`ui-tauri/src/components/browser/NavigationBar.svelte`\n\n## Issue\nComponent has 306 lines and may be too complex.\n\n## Suggested\n- Extract sub-components\n- Move logic to stores\n- Create utility functions",
+    "category": "refactoring",
+    "priority": "medium",
+    "labels": [
+      "refactoring",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 135,
+    "title": "[Style] Extract inline styles from EnhancedTabList",
+    "body": "## Component\n`ui-tauri/src/components/browser/EnhancedTabList.svelte`\n\n## Issue\nInline styles found which reduce maintainability.\n\n## Required\n- Move to <style> block\n- Use CSS classes\n- Consider CSS variables for theming",
+    "category": "ui-ux",
+    "priority": "medium",
+    "labels": [
+      "ui/ux",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 136,
+    "title": "[Refactor] Split large component EnhancedTabList",
+    "body": "## Component\n`ui-tauri/src/components/browser/EnhancedTabList.svelte`\n\n## Issue\nComponent has 315 lines and may be too complex.\n\n## Suggested\n- Extract sub-components\n- Move logic to stores\n- Create utility functions",
+    "category": "refactoring",
+    "priority": "medium",
+    "labels": [
+      "refactoring",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 137,
+    "title": "[A11y] Add ARIA attributes to LoginForm",
+    "body": "## Component\n`ui-tauri/src/components/auth/LoginForm.svelte`\n\n## Issue\nButtons found without ARIA attributes.\n\n## Required\n- Add aria-label for icon buttons\n- Add aria-describedby for complex actions\n- Ensure keyboard navigation",
+    "category": "accessibility",
+    "priority": "medium",
+    "labels": [
+      "accessibility",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 138,
+    "title": "[A11y] Add ARIA attributes to RegisterForm",
+    "body": "## Component\n`ui-tauri/src/components/auth/RegisterForm.svelte`\n\n## Issue\nButtons found without ARIA attributes.\n\n## Required\n- Add aria-label for icon buttons\n- Add aria-describedby for complex actions\n- Ensure keyboard navigation",
+    "category": "accessibility",
+    "priority": "medium",
+    "labels": [
+      "accessibility",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 139,
+    "title": "[A11y] Add ARIA attributes to UserManagement",
+    "body": "## Component\n`ui-tauri/src/components/auth/UserManagement.svelte`\n\n## Issue\nButtons found without ARIA attributes.\n\n## Required\n- Add aria-label for icon buttons\n- Add aria-describedby for complex actions\n- Ensure keyboard navigation",
+    "category": "accessibility",
+    "priority": "medium",
+    "labels": [
+      "accessibility",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 140,
+    "title": "[Refactor] Split large component UserManagement",
+    "body": "## Component\n`ui-tauri/src/components/auth/UserManagement.svelte`\n\n## Issue\nComponent has 453 lines and may be too complex.\n\n## Suggested\n- Extract sub-components\n- Move logic to stores\n- Create utility functions",
+    "category": "refactoring",
+    "priority": "medium",
+    "labels": [
+      "refactoring",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 141,
+    "title": "[Style] Extract inline styles from VirtualList",
+    "body": "## Component\n`ui-tauri/src/components/ui/VirtualList.svelte`\n\n## Issue\nInline styles found which reduce maintainability.\n\n## Required\n- Move to <style> block\n- Use CSS classes\n- Consider CSS variables for theming",
+    "category": "ui-ux",
+    "priority": "medium",
+    "labels": [
+      "ui/ux",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 142,
+    "title": "[A11y] Add ARIA attributes to ErrorBoundary",
+    "body": "## Component\n`ui-tauri/src/components/ui/ErrorBoundary.svelte`\n\n## Issue\nButtons found without ARIA attributes.\n\n## Required\n- Add aria-label for icon buttons\n- Add aria-describedby for complex actions\n- Ensure keyboard navigation",
+    "category": "accessibility",
+    "priority": "medium",
+    "labels": [
+      "accessibility",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 143,
+    "title": "[Style] Extract inline styles from LoadingSpinner",
+    "body": "## Component\n`ui-tauri/src/components/ui/LoadingSpinner.svelte`\n\n## Issue\nInline styles found which reduce maintainability.\n\n## Required\n- Move to <style> block\n- Use CSS classes\n- Consider CSS variables for theming",
+    "category": "ui-ux",
+    "priority": "medium",
+    "labels": [
+      "ui/ux",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 144,
+    "title": "[Style] Extract inline styles from SkeletonLoader",
+    "body": "## Component\n`ui-tauri/src/components/ui/SkeletonLoader.svelte`\n\n## Issue\nInline styles found which reduce maintainability.\n\n## Required\n- Move to <style> block\n- Use CSS classes\n- Consider CSS variables for theming",
+    "category": "ui-ux",
+    "priority": "medium",
+    "labels": [
+      "ui/ux",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 145,
+    "title": "[A11y] Add ARIA attributes to BrowserSettingsPanel",
+    "body": "## Component\n`ui-tauri/src/components/config/BrowserSettingsPanel.svelte`\n\n## Issue\nButtons found without ARIA attributes.\n\n## Required\n- Add aria-label for icon buttons\n- Add aria-describedby for complex actions\n- Ensure keyboard navigation",
+    "category": "accessibility",
+    "priority": "medium",
+    "labels": [
+      "accessibility",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 146,
+    "title": "[Refactor] Split large component BrowserSettingsPanel",
+    "body": "## Component\n`ui-tauri/src/components/config/BrowserSettingsPanel.svelte`\n\n## Issue\nComponent has 415 lines and may be too complex.\n\n## Suggested\n- Extract sub-components\n- Move logic to stores\n- Create utility functions",
+    "category": "refactoring",
+    "priority": "medium",
+    "labels": [
+      "refactoring",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 147,
+    "title": "[A11y] Add ARIA attributes to ProxyConfiguration",
+    "body": "## Component\n`ui-tauri/src/components/config/ProxyConfiguration.svelte`\n\n## Issue\nButtons found without ARIA attributes.\n\n## Required\n- Add aria-label for icon buttons\n- Add aria-describedby for complex actions\n- Ensure keyboard navigation",
+    "category": "accessibility",
+    "priority": "medium",
+    "labels": [
+      "accessibility",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 148,
+    "title": "[A11y] Add ARIA attributes to FreeProxiesPanel",
+    "body": "## Component\n`ui-tauri/src/components/config/FreeProxiesPanel.svelte`\n\n## Issue\nButtons found without ARIA attributes.\n\n## Required\n- Add aria-label for icon buttons\n- Add aria-describedby for complex actions\n- Ensure keyboard navigation",
+    "category": "accessibility",
+    "priority": "medium",
+    "labels": [
+      "accessibility",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 149,
+    "title": "[Refactor] Split large component FreeProxiesPanel",
+    "body": "## Component\n`ui-tauri/src/components/config/FreeProxiesPanel.svelte`\n\n## Issue\nComponent has 301 lines and may be too complex.\n\n## Suggested\n- Extract sub-components\n- Move logic to stores\n- Create utility functions",
+    "category": "refactoring",
+    "priority": "medium",
+    "labels": [
+      "refactoring",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 150,
+    "title": "[A11y] Add ARIA attributes to BackupRestorePanel",
+    "body": "## Component\n`ui-tauri/src/components/config/BackupRestorePanel.svelte`\n\n## Issue\nButtons found without ARIA attributes.\n\n## Required\n- Add aria-label for icon buttons\n- Add aria-describedby for complex actions\n- Ensure keyboard navigation",
+    "category": "accessibility",
+    "priority": "medium",
+    "labels": [
+      "accessibility",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 151,
+    "title": "[Refactor] Split large component BackupRestorePanel",
+    "body": "## Component\n`ui-tauri/src/components/config/BackupRestorePanel.svelte`\n\n## Issue\nComponent has 342 lines and may be too complex.\n\n## Suggested\n- Extract sub-components\n- Move logic to stores\n- Create utility functions",
+    "category": "refactoring",
+    "priority": "medium",
+    "labels": [
+      "refactoring",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 152,
+    "title": "[A11y] Add ARIA attributes to FreeIpProvidersPanel",
+    "body": "## Component\n`ui-tauri/src/components/config/FreeIpProvidersPanel.svelte`\n\n## Issue\nButtons found without ARIA attributes.\n\n## Required\n- Add aria-label for icon buttons\n- Add aria-describedby for complex actions\n- Ensure keyboard navigation",
+    "category": "accessibility",
+    "priority": "medium",
+    "labels": [
+      "accessibility",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 153,
+    "title": "[Refactor] Split large component FreeIpProvidersPanel",
+    "body": "## Component\n`ui-tauri/src/components/config/FreeIpProvidersPanel.svelte`\n\n## Issue\nComponent has 335 lines and may be too complex.\n\n## Suggested\n- Extract sub-components\n- Move logic to stores\n- Create utility functions",
+    "category": "refactoring",
+    "priority": "medium",
+    "labels": [
+      "refactoring",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 154,
+    "title": "[A11y] Add ARIA attributes to ApiSettingsPanel",
+    "body": "## Component\n`ui-tauri/src/components/config/ApiSettingsPanel.svelte`\n\n## Issue\nButtons found without ARIA attributes.\n\n## Required\n- Add aria-label for icon buttons\n- Add aria-describedby for complex actions\n- Ensure keyboard navigation",
+    "category": "accessibility",
+    "priority": "medium",
+    "labels": [
+      "accessibility",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 155,
+    "title": "[Refactor] Split large component ApiSettingsPanel",
+    "body": "## Component\n`ui-tauri/src/components/config/ApiSettingsPanel.svelte`\n\n## Issue\nComponent has 1130 lines and may be too complex.\n\n## Suggested\n- Extract sub-components\n- Move logic to stores\n- Create utility functions",
+    "category": "refactoring",
+    "priority": "medium",
+    "labels": [
+      "refactoring",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 156,
+    "title": "[A11y] Add ARIA attributes to PublicIpPanel",
+    "body": "## Component\n`ui-tauri/src/components/config/PublicIpPanel.svelte`\n\n## Issue\nButtons found without ARIA attributes.\n\n## Required\n- Add aria-label for icon buttons\n- Add aria-describedby for complex actions\n- Ensure keyboard navigation",
+    "category": "accessibility",
+    "priority": "medium",
+    "labels": [
+      "accessibility",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 157,
+    "title": "[A11y] Add ARIA attributes to RightPanel",
+    "body": "## Component\n`ui-tauri/src/components/layout/RightPanel.svelte`\n\n## Issue\nButtons found without ARIA attributes.\n\n## Required\n- Add aria-label for icon buttons\n- Add aria-describedby for complex actions\n- Ensure keyboard navigation",
+    "category": "accessibility",
+    "priority": "medium",
+    "labels": [
+      "accessibility",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 158,
+    "title": "[Style] Extract inline styles from TwoPanelLayout",
+    "body": "## Component\n`ui-tauri/src/components/layout/TwoPanelLayout.svelte`\n\n## Issue\nInline styles found which reduce maintainability.\n\n## Required\n- Move to <style> block\n- Use CSS classes\n- Consider CSS variables for theming",
+    "category": "ui-ux",
+    "priority": "medium",
+    "labels": [
+      "ui/ux",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 159,
+    "title": "[A11y] Add ARIA attributes to LeftPanel",
+    "body": "## Component\n`ui-tauri/src/components/layout/LeftPanel.svelte`\n\n## Issue\nButtons found without ARIA attributes.\n\n## Required\n- Add aria-label for icon buttons\n- Add aria-describedby for complex actions\n- Ensure keyboard navigation",
+    "category": "accessibility",
+    "priority": "medium",
+    "labels": [
+      "accessibility",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 160,
+    "title": "[Feature] Implement proxy chain rotation",
+    "body": "## Description\nAdd automatic proxy chain rotation with configurable intervals\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "high",
+    "labels": [
+      "feature",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 161,
+    "title": "[Feature] Add proxy health monitoring dashboard",
+    "body": "## Description\nCreate a visual dashboard showing proxy health metrics\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "medium",
+    "labels": [
+      "feature",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 162,
+    "title": "[Feature] Implement proxy bandwidth tracking",
+    "body": "## Description\nTrack and display bandwidth usage per proxy\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "medium",
+    "labels": [
+      "feature",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 163,
+    "title": "[Feature] Add proxy geolocation verification",
+    "body": "## Description\nVerify that proxies are actually in their claimed locations\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "high",
+    "labels": [
+      "feature",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 164,
+    "title": "[Feature] Implement smart proxy selection",
+    "body": "## Description\nAI-based proxy selection based on target website requirements\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "medium",
+    "labels": [
+      "feature",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 165,
+    "title": "[Feature] Add proxy pool management",
+    "body": "## Description\nAllow users to create and manage proxy pools\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "medium",
+    "labels": [
+      "feature",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 166,
+    "title": "[Feature] Implement proxy authentication caching",
+    "body": "## Description\nCache proxy authentication to reduce latency\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "performance",
+    "priority": "medium",
+    "labels": [
+      "performance",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 167,
+    "title": "[Feature] Add SOCKS5 UDP support",
+    "body": "## Description\nImplement UDP relay support for SOCKS5 proxies\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "low",
+    "labels": [
+      "feature",
+      "priority-low"
+    ]
+  },
+  {
+    "id": 168,
+    "title": "[Feature] Implement proxy cost tracking",
+    "body": "## Description\nTrack costs for paid proxy services\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "low",
+    "labels": [
+      "feature",
+      "priority-low"
+    ]
+  },
+  {
+    "id": 169,
+    "title": "[Feature] Add residential proxy detection",
+    "body": "## Description\nDetect and categorize residential vs datacenter proxies\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "medium",
+    "labels": [
+      "feature",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 170,
+    "title": "[Feature] Implement browser profile management",
+    "body": "## Description\nAllow creating and switching between browser profiles\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "high",
+    "labels": [
+      "feature",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 171,
+    "title": "[Feature] Add session persistence",
+    "body": "## Description\nSave and restore browser sessions across restarts\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "high",
+    "labels": [
+      "feature",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 172,
+    "title": "[Feature] Implement cookie manager",
+    "body": "## Description\nAdd UI for viewing and managing cookies\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "medium",
+    "labels": [
+      "feature",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 173,
+    "title": "[Feature] Add bookmark synchronization",
+    "body": "## Description\nSync bookmarks across devices\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "medium",
+    "labels": [
+      "feature",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 174,
+    "title": "[Feature] Implement download manager",
+    "body": "## Description\nCreate a full-featured download manager\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "medium",
+    "labels": [
+      "feature",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 175,
+    "title": "[Feature] Add browser history search",
+    "body": "## Description\nImplement full-text search in browser history\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "low",
+    "labels": [
+      "feature",
+      "priority-low"
+    ]
+  },
+  {
+    "id": 176,
+    "title": "[Feature] Implement reading mode",
+    "body": "## Description\nAdd distraction-free reading mode for articles\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "low",
+    "labels": [
+      "feature",
+      "priority-low"
+    ]
+  },
+  {
+    "id": 177,
+    "title": "[Feature] Add screenshot capture",
+    "body": "## Description\nImplement full-page and region screenshot capture\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "medium",
+    "labels": [
+      "feature",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 178,
+    "title": "[Feature] Implement print preview",
+    "body": "## Description\nAdd print preview functionality\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "low",
+    "labels": [
+      "feature",
+      "priority-low"
+    ]
+  },
+  {
+    "id": 179,
+    "title": "[Feature] Add page translation",
+    "body": "## Description\nIntegrate automatic page translation\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "medium",
+    "labels": [
+      "feature",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 180,
+    "title": "[Feature] Implement certificate pinning",
+    "body": "## Description\nAdd SSL certificate pinning for sensitive connections\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "security",
+    "priority": "high",
+    "labels": [
+      "security",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 181,
+    "title": "[Feature] Add malware URL detection",
+    "body": "## Description\nIntegrate malware URL database checking\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "security",
+    "priority": "high",
+    "labels": [
+      "security",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 182,
+    "title": "[Feature] Implement content security policy",
+    "body": "## Description\nEnforce strict CSP headers\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "security",
+    "priority": "medium",
+    "labels": [
+      "security",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 183,
+    "title": "[Feature] Add two-factor authentication",
+    "body": "## Description\nImplement 2FA for user accounts\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "security",
+    "priority": "high",
+    "labels": [
+      "security",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 184,
+    "title": "[Feature] Implement secure password storage",
+    "body": "## Description\nUse hardware-backed keystore for passwords\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "security",
+    "priority": "high",
+    "labels": [
+      "security",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 185,
+    "title": "[Feature] Add security audit logging",
+    "body": "## Description\nLog security-relevant events for auditing\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "security",
+    "priority": "medium",
+    "labels": [
+      "security",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 186,
+    "title": "[Feature] Implement sandboxed JavaScript",
+    "body": "## Description\nRun third-party JS in sandboxed environment\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "security",
+    "priority": "medium",
+    "labels": [
+      "security",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 187,
+    "title": "[Feature] Add WebRTC leak protection",
+    "body": "## Description\nPrevent WebRTC IP leaks\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "security",
+    "priority": "high",
+    "labels": [
+      "security",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 188,
+    "title": "[Feature] Implement DNS-over-HTTPS",
+    "body": "## Description\nAdd DoH support for DNS privacy\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "security",
+    "priority": "high",
+    "labels": [
+      "security",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 189,
+    "title": "[Feature] Add tracker blocking",
+    "body": "## Description\nImplement built-in tracker blocker\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "security",
+    "priority": "medium",
+    "labels": [
+      "security",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 190,
+    "title": "[Feature] Implement fingerprint randomization",
+    "body": "## Description\nRandomize browser fingerprint parameters\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "security",
+    "priority": "high",
+    "labels": [
+      "security",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 191,
+    "title": "[Feature] Add canvas fingerprint protection",
+    "body": "## Description\nProtect against canvas fingerprinting\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "security",
+    "priority": "high",
+    "labels": [
+      "security",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 192,
+    "title": "[Feature] Implement WebGL fingerprint protection",
+    "body": "## Description\nProtect against WebGL fingerprinting\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "security",
+    "priority": "medium",
+    "labels": [
+      "security",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 193,
+    "title": "[Feature] Add audio fingerprint protection",
+    "body": "## Description\nProtect against audio context fingerprinting\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "security",
+    "priority": "medium",
+    "labels": [
+      "security",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 194,
+    "title": "[Feature] Implement font fingerprint protection",
+    "body": "## Description\nRandomize or limit font enumeration\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "security",
+    "priority": "medium",
+    "labels": [
+      "security",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 195,
+    "title": "[Feature] Add timezone spoofing",
+    "body": "## Description\nAllow setting custom timezone\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "medium",
+    "labels": [
+      "feature",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 196,
+    "title": "[Feature] Implement language spoofing",
+    "body": "## Description\nAllow setting custom browser language\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "low",
+    "labels": [
+      "feature",
+      "priority-low"
+    ]
+  },
+  {
+    "id": 197,
+    "title": "[Feature] Add screen resolution spoofing",
+    "body": "## Description\nAllow reporting custom screen dimensions\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "low",
+    "labels": [
+      "feature",
+      "priority-low"
+    ]
+  },
+  {
+    "id": 198,
+    "title": "[Feature] Implement hardware concurrency spoofing",
+    "body": "## Description\nSpoof CPU core count\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "security",
+    "priority": "low",
+    "labels": [
+      "security",
+      "priority-low"
+    ]
+  },
+  {
+    "id": 199,
+    "title": "[Feature] Add memory spoofing",
+    "body": "## Description\nSpoof device memory size\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "security",
+    "priority": "low",
+    "labels": [
+      "security",
+      "priority-low"
+    ]
+  },
+  {
+    "id": 200,
+    "title": "[Feature] Implement dark mode",
+    "body": "## Description\nAdd system-aware dark mode support\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "ui-ux",
+    "priority": "high",
+    "labels": [
+      "ui/ux",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 201,
+    "title": "[Feature] Add customizable themes",
+    "body": "## Description\nAllow users to create custom color themes\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "ui-ux",
+    "priority": "medium",
+    "labels": [
+      "ui/ux",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 202,
+    "title": "[Feature] Implement keyboard shortcuts guide",
+    "body": "## Description\nAdd discoverable keyboard shortcuts overlay\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "ui-ux",
+    "priority": "medium",
+    "labels": [
+      "ui/ux",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 203,
+    "title": "[Feature] Add tab grouping",
+    "body": "## Description\nAllow grouping tabs into collapsible groups\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "ui-ux",
+    "priority": "high",
+    "labels": [
+      "ui/ux",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 204,
+    "title": "[Feature] Implement split view",
+    "body": "## Description\nAdd side-by-side tab viewing\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "ui-ux",
+    "priority": "medium",
+    "labels": [
+      "ui/ux",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 205,
+    "title": "[Feature] Add tab preview on hover",
+    "body": "## Description\nShow tab content preview on hover\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "ui-ux",
+    "priority": "low",
+    "labels": [
+      "ui/ux",
+      "priority-low"
+    ]
+  },
+  {
+    "id": 206,
+    "title": "[Feature] Implement gesture support",
+    "body": "## Description\nAdd trackpad gesture support\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "ui-ux",
+    "priority": "medium",
+    "labels": [
+      "ui/ux",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 207,
+    "title": "[Feature] Add quick actions menu",
+    "body": "## Description\nImplement command palette for quick actions\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "ui-ux",
+    "priority": "medium",
+    "labels": [
+      "ui/ux",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 208,
+    "title": "[Feature] Implement progressive loading UI",
+    "body": "## Description\nAdd skeleton loaders for better perceived performance\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "ui-ux",
+    "priority": "medium",
+    "labels": [
+      "ui/ux",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 209,
+    "title": "[Feature] Add notification center",
+    "body": "## Description\nCentralized notification management\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "ui-ux",
+    "priority": "medium",
+    "labels": [
+      "ui/ux",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 210,
+    "title": "[Feature] Implement lazy tab loading",
+    "body": "## Description\nLoad tabs on demand to reduce memory\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "performance",
+    "priority": "high",
+    "labels": [
+      "performance",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 211,
+    "title": "[Feature] Add memory usage monitoring",
+    "body": "## Description\nShow real-time memory usage per tab\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "performance",
+    "priority": "medium",
+    "labels": [
+      "performance",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 212,
+    "title": "[Feature] Implement tab suspension",
+    "body": "## Description\nAutomatically suspend inactive tabs\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "performance",
+    "priority": "high",
+    "labels": [
+      "performance",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 213,
+    "title": "[Feature] Add resource usage limits",
+    "body": "## Description\nAllow setting CPU/memory limits per tab\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "performance",
+    "priority": "medium",
+    "labels": [
+      "performance",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 214,
+    "title": "[Feature] Implement connection pooling",
+    "body": "## Description\nPool HTTP connections for better performance\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "performance",
+    "priority": "medium",
+    "labels": [
+      "performance",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 215,
+    "title": "[Feature] Add request caching",
+    "body": "## Description\nImplement intelligent request caching\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "performance",
+    "priority": "medium",
+    "labels": [
+      "performance",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 216,
+    "title": "[Feature] Implement DNS caching",
+    "body": "## Description\nCache DNS resolutions\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "performance",
+    "priority": "medium",
+    "labels": [
+      "performance",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 217,
+    "title": "[Feature] Add preloading hints",
+    "body": "## Description\nImplement resource preloading\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "performance",
+    "priority": "low",
+    "labels": [
+      "performance",
+      "priority-low"
+    ]
+  },
+  {
+    "id": 218,
+    "title": "[Feature] Implement service worker support",
+    "body": "## Description\nAdd full service worker support\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "performance",
+    "priority": "medium",
+    "labels": [
+      "performance",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 219,
+    "title": "[Feature] Add WebAssembly optimization",
+    "body": "## Description\nOptimize WebAssembly execution\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "performance",
+    "priority": "low",
+    "labels": [
+      "performance",
+      "priority-low"
+    ]
+  },
+  {
+    "id": 220,
+    "title": "[Feature] Implement network inspector",
+    "body": "## Description\nAdd detailed network request inspector\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "high",
+    "labels": [
+      "feature",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 221,
+    "title": "[Feature] Add console panel",
+    "body": "## Description\nImplement JavaScript console panel\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "high",
+    "labels": [
+      "feature",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 222,
+    "title": "[Feature] Implement element inspector",
+    "body": "## Description\nAdd DOM element inspector\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "high",
+    "labels": [
+      "feature",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 223,
+    "title": "[Feature] Add storage inspector",
+    "body": "## Description\nView localStorage, sessionStorage, IndexedDB\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "medium",
+    "labels": [
+      "feature",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 224,
+    "title": "[Feature] Implement source viewer",
+    "body": "## Description\nAdd page source viewer with syntax highlighting\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "medium",
+    "labels": [
+      "feature",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 225,
+    "title": "[Feature] Add cookie inspector",
+    "body": "## Description\nDetailed cookie inspection tool\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "medium",
+    "labels": [
+      "feature",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 226,
+    "title": "[Feature] Implement performance profiler",
+    "body": "## Description\nAdd page load performance profiler\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "medium",
+    "labels": [
+      "feature",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 227,
+    "title": "[Feature] Add accessibility inspector",
+    "body": "## Description\nCheck page accessibility issues\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "medium",
+    "labels": [
+      "feature",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 228,
+    "title": "[Feature] Implement network throttling",
+    "body": "## Description\nSimulate slow network conditions\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "medium",
+    "labels": [
+      "feature",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 229,
+    "title": "[Feature] Add device emulation",
+    "body": "## Description\nEmulate mobile device viewports\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "medium",
+    "labels": [
+      "feature",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 230,
+    "title": "[Feature] Implement macro recording",
+    "body": "## Description\nRecord and replay user actions\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "medium",
+    "labels": [
+      "feature",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 231,
+    "title": "[Feature] Add scheduled tasks",
+    "body": "## Description\nSchedule automated browsing tasks\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "medium",
+    "labels": [
+      "feature",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 232,
+    "title": "[Feature] Implement form auto-fill",
+    "body": "## Description\nSmart form auto-completion\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "medium",
+    "labels": [
+      "feature",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 233,
+    "title": "[Feature] Add batch URL opening",
+    "body": "## Description\nOpen multiple URLs at once\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "low",
+    "labels": [
+      "feature",
+      "priority-low"
+    ]
+  },
+  {
+    "id": 234,
+    "title": "[Feature] Implement auto-refresh",
+    "body": "## Description\nAutomatic page refresh with intervals\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "low",
+    "labels": [
+      "feature",
+      "priority-low"
+    ]
+  },
+  {
+    "id": 235,
+    "title": "[Feature] Add web scraping tools",
+    "body": "## Description\nBuilt-in web scraping utilities\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "medium",
+    "labels": [
+      "feature",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 236,
+    "title": "[Feature] Implement screenshot automation",
+    "body": "## Description\nAutomated screenshot capture\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "low",
+    "labels": [
+      "feature",
+      "priority-low"
+    ]
+  },
+  {
+    "id": 237,
+    "title": "[Feature] Add API integration",
+    "body": "## Description\nREST API for browser control\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "high",
+    "labels": [
+      "feature",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 238,
+    "title": "[Feature] Implement webhook support",
+    "body": "## Description\nTrigger webhooks on events\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "medium",
+    "labels": [
+      "feature",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 239,
+    "title": "[Feature] Add scripting support",
+    "body": "## Description\nJavaScript automation scripting\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "medium",
+    "labels": [
+      "feature",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 240,
+    "title": "[Feature] Implement data export",
+    "body": "## Description\nExport browsing data in various formats\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "medium",
+    "labels": [
+      "feature",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 241,
+    "title": "[Feature] Add data import",
+    "body": "## Description\nImport data from other browsers\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "medium",
+    "labels": [
+      "feature",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 242,
+    "title": "[Feature] Implement backup scheduling",
+    "body": "## Description\nAutomatic backup scheduling\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "medium",
+    "labels": [
+      "feature",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 243,
+    "title": "[Feature] Add cloud sync",
+    "body": "## Description\nSync data across devices via cloud\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "high",
+    "labels": [
+      "feature",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 244,
+    "title": "[Feature] Implement data encryption",
+    "body": "## Description\nEncrypt stored user data\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "security",
+    "priority": "high",
+    "labels": [
+      "security",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 245,
+    "title": "[Feature] Add data retention policies",
+    "body": "## Description\nAutomatic data cleanup based on policies\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "medium",
+    "labels": [
+      "feature",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 246,
+    "title": "[Feature] Implement selective sync",
+    "body": "## Description\nChoose what data to sync\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "low",
+    "labels": [
+      "feature",
+      "priority-low"
+    ]
+  },
+  {
+    "id": 247,
+    "title": "[Feature] Add data migration tools",
+    "body": "## Description\nTools for migrating from other browsers\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "medium",
+    "labels": [
+      "feature",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 248,
+    "title": "[Feature] Implement version history",
+    "body": "## Description\nKeep history of data changes\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "low",
+    "labels": [
+      "feature",
+      "priority-low"
+    ]
+  },
+  {
+    "id": 249,
+    "title": "[Feature] Add data compression",
+    "body": "## Description\nCompress stored data to save space\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "performance",
+    "priority": "low",
+    "labels": [
+      "performance",
+      "priority-low"
+    ]
+  },
+  {
+    "id": 250,
+    "title": "[Feature] Add browser extension support",
+    "body": "## Description\nSupport for browser extensions\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "high",
+    "labels": [
+      "feature",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 251,
+    "title": "[Feature] Implement password manager integration",
+    "body": "## Description\nIntegrate with popular password managers\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "high",
+    "labels": [
+      "feature",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 252,
+    "title": "[Feature] Add VPN integration",
+    "body": "## Description\nBuilt-in VPN support\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "high",
+    "labels": [
+      "feature",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 253,
+    "title": "[Feature] Implement Tor integration",
+    "body": "## Description\nRoute traffic through Tor network\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "medium",
+    "labels": [
+      "feature",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 254,
+    "title": "[Feature] Add RSS feed reader",
+    "body": "## Description\nBuilt-in RSS feed reader\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "low",
+    "labels": [
+      "feature",
+      "priority-low"
+    ]
+  },
+  {
+    "id": 255,
+    "title": "[Feature] Implement social media integration",
+    "body": "## Description\nQuick sharing to social media\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "low",
+    "labels": [
+      "feature",
+      "priority-low"
+    ]
+  },
+  {
+    "id": 256,
+    "title": "[Feature] Add clipboard manager",
+    "body": "## Description\nEnhanced clipboard functionality\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "low",
+    "labels": [
+      "feature",
+      "priority-low"
+    ]
+  },
+  {
+    "id": 257,
+    "title": "[Feature] Implement external app integration",
+    "body": "## Description\nOpen content in external apps\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "low",
+    "labels": [
+      "feature",
+      "priority-low"
+    ]
+  },
+  {
+    "id": 258,
+    "title": "[Feature] Add email integration",
+    "body": "## Description\nQuick email composition from browser\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "low",
+    "labels": [
+      "feature",
+      "priority-low"
+    ]
+  },
+  {
+    "id": 259,
+    "title": "[Feature] Implement calendar integration",
+    "body": "## Description\nAdd events to calendar from web pages\n\n## Acceptance Criteria\n- Feature is fully implemented\n- Unit tests are added\n- Documentation is updated\n- UI is intuitive and accessible",
+    "category": "feature",
+    "priority": "low",
+    "labels": [
+      "feature",
+      "priority-low"
+    ]
+  },
+  {
+    "id": 260,
+    "title": "[Testing] Add unit tests for lib",
+    "body": "## Module\n`crates/api-server/src/lib.rs`\n\n## Required Tests\n- Unit tests for all public functions\n- Edge case testing\n- Error handling tests\n- Mock external dependencies",
+    "category": "testing",
+    "priority": "medium",
+    "labels": [
+      "testing",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 261,
+    "title": "[Testing] Add unit tests for main",
+    "body": "## Module\n`crates/api-server/src/main.rs`\n\n## Required Tests\n- Unit tests for all public functions\n- Edge case testing\n- Error handling tests\n- Mock external dependencies",
+    "category": "testing",
+    "priority": "medium",
+    "labels": [
+      "testing",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 262,
+    "title": "[Testing] Add unit tests for free_ip_providers",
+    "body": "## Module\n`crates/browser-core/src/free_ip_providers.rs`\n\n## Required Tests\n- Unit tests for all public functions\n- Edge case testing\n- Error handling tests\n- Mock external dependencies",
+    "category": "testing",
+    "priority": "medium",
+    "labels": [
+      "testing",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 263,
+    "title": "[Testing] Add unit tests for lib",
+    "body": "## Module\n`crates/browser-core/src/lib.rs`\n\n## Required Tests\n- Unit tests for all public functions\n- Edge case testing\n- Error handling tests\n- Mock external dependencies",
+    "category": "testing",
+    "priority": "medium",
+    "labels": [
+      "testing",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 264,
+    "title": "[Testing] Add unit tests for browser_controls",
+    "body": "## Module\n`crates/browser-core/src/browser_controls.rs`\n\n## Required Tests\n- Unit tests for all public functions\n- Edge case testing\n- Error handling tests\n- Mock external dependencies",
+    "category": "testing",
+    "priority": "medium",
+    "labels": [
+      "testing",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 265,
+    "title": "[Testing] Add unit tests for automation",
+    "body": "## Module\n`crates/browser-core/src/automation.rs`\n\n## Required Tests\n- Unit tests for all public functions\n- Edge case testing\n- Error handling tests\n- Mock external dependencies",
+    "category": "testing",
+    "priority": "medium",
+    "labels": [
+      "testing",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 266,
+    "title": "[Testing] Add unit tests for error_recovery",
+    "body": "## Module\n`crates/browser-core/src/error_recovery.rs`\n\n## Required Tests\n- Unit tests for all public functions\n- Edge case testing\n- Error handling tests\n- Mock external dependencies",
+    "category": "testing",
+    "priority": "medium",
+    "labels": [
+      "testing",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 267,
+    "title": "[Testing] Add unit tests for pac_server",
+    "body": "## Module\n`crates/browser-core/src/pac_server.rs`\n\n## Required Tests\n- Unit tests for all public functions\n- Edge case testing\n- Error handling tests\n- Mock external dependencies",
+    "category": "testing",
+    "priority": "medium",
+    "labels": [
+      "testing",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 268,
+    "title": "[Testing] Add unit tests for http_client",
+    "body": "## Module\n`crates/browser-core/src/http_client.rs`\n\n## Required Tests\n- Unit tests for all public functions\n- Edge case testing\n- Error handling tests\n- Mock external dependencies",
+    "category": "testing",
+    "priority": "medium",
+    "labels": [
+      "testing",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 269,
+    "title": "[Testing] Add unit tests for backup",
+    "body": "## Module\n`crates/browser-core/src/backup.rs`\n\n## Required Tests\n- Unit tests for all public functions\n- Edge case testing\n- Error handling tests\n- Mock external dependencies",
+    "category": "testing",
+    "priority": "medium",
+    "labels": [
+      "testing",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 270,
+    "title": "[Testing] Add unit tests for proxy_rotation",
+    "body": "## Module\n`crates/browser-core/src/proxy_rotation.rs`\n\n## Required Tests\n- Unit tests for all public functions\n- Edge case testing\n- Error handling tests\n- Mock external dependencies",
+    "category": "testing",
+    "priority": "medium",
+    "labels": [
+      "testing",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 271,
+    "title": "[Testing] Add unit tests for chromium_engine",
+    "body": "## Module\n`crates/browser-core/src/chromium_engine.rs`\n\n## Required Tests\n- Unit tests for all public functions\n- Edge case testing\n- Error handling tests\n- Mock external dependencies",
+    "category": "testing",
+    "priority": "medium",
+    "labels": [
+      "testing",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 272,
+    "title": "[Testing] Add unit tests for content_enhancement",
+    "body": "## Module\n`crates/browser-core/src/content_enhancement.rs`\n\n## Required Tests\n- Unit tests for all public functions\n- Edge case testing\n- Error handling tests\n- Mock external dependencies",
+    "category": "testing",
+    "priority": "medium",
+    "labels": [
+      "testing",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 273,
+    "title": "[Testing] Add unit tests for webview_manager",
+    "body": "## Module\n`crates/browser-core/src/webview_manager.rs`\n\n## Required Tests\n- Unit tests for all public functions\n- Edge case testing\n- Error handling tests\n- Mock external dependencies",
+    "category": "testing",
+    "priority": "medium",
+    "labels": [
+      "testing",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 274,
+    "title": "[Testing] Add unit tests for fingerprint",
+    "body": "## Module\n`crates/browser-core/src/fingerprint.rs`\n\n## Required Tests\n- Unit tests for all public functions\n- Edge case testing\n- Error handling tests\n- Mock external dependencies",
+    "category": "testing",
+    "priority": "medium",
+    "labels": [
+      "testing",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 275,
+    "title": "[Testing] Add unit tests for tab_manager",
+    "body": "## Module\n`crates/browser-core/src/tab_manager.rs`\n\n## Required Tests\n- Unit tests for all public functions\n- Edge case testing\n- Error handling tests\n- Mock external dependencies",
+    "category": "testing",
+    "priority": "medium",
+    "labels": [
+      "testing",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 276,
+    "title": "[Testing] Add unit tests for performance_optimizer",
+    "body": "## Module\n`crates/browser-core/src/performance_optimizer.rs`\n\n## Required Tests\n- Unit tests for all public functions\n- Edge case testing\n- Error handling tests\n- Mock external dependencies",
+    "category": "testing",
+    "priority": "medium",
+    "labels": [
+      "testing",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 277,
+    "title": "[Testing] Add unit tests for proxy",
+    "body": "## Module\n`crates/browser-core/src/proxy.rs`\n\n## Required Tests\n- Unit tests for all public functions\n- Edge case testing\n- Error handling tests\n- Mock external dependencies",
+    "category": "testing",
+    "priority": "medium",
+    "labels": [
+      "testing",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 278,
+    "title": "[Testing] Add unit tests for experimental",
+    "body": "## Module\n`crates/browser-core/src/experimental.rs`\n\n## Required Tests\n- Unit tests for all public functions\n- Edge case testing\n- Error handling tests\n- Mock external dependencies",
+    "category": "testing",
+    "priority": "medium",
+    "labels": [
+      "testing",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 279,
+    "title": "[Testing] Add unit tests for memory_profiler",
+    "body": "## Module\n`crates/browser-core/src/memory_profiler.rs`\n\n## Required Tests\n- Unit tests for all public functions\n- Edge case testing\n- Error handling tests\n- Mock external dependencies",
+    "category": "testing",
+    "priority": "medium",
+    "labels": [
+      "testing",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 280,
+    "title": "[Testing] Add unit tests for security",
+    "body": "## Module\n`crates/browser-core/src/security.rs`\n\n## Required Tests\n- Unit tests for all public functions\n- Edge case testing\n- Error handling tests\n- Mock external dependencies",
+    "category": "testing",
+    "priority": "medium",
+    "labels": [
+      "testing",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 281,
+    "title": "[Testing] Add unit tests for network_intelligence",
+    "body": "## Module\n`crates/browser-core/src/network_intelligence.rs`\n\n## Required Tests\n- Unit tests for all public functions\n- Edge case testing\n- Error handling tests\n- Mock external dependencies",
+    "category": "testing",
+    "priority": "medium",
+    "labels": [
+      "testing",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 282,
+    "title": "[Testing] Add unit tests for local_proxy",
+    "body": "## Module\n`crates/browser-core/src/local_proxy.rs`\n\n## Required Tests\n- Unit tests for all public functions\n- Edge case testing\n- Error handling tests\n- Mock external dependencies",
+    "category": "testing",
+    "priority": "medium",
+    "labels": [
+      "testing",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 283,
+    "title": "[Testing] Add unit tests for privacy_fortress",
+    "body": "## Module\n`crates/browser-core/src/privacy_fortress.rs`\n\n## Required Tests\n- Unit tests for all public functions\n- Edge case testing\n- Error handling tests\n- Mock external dependencies",
+    "category": "testing",
+    "priority": "medium",
+    "labels": [
+      "testing",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 284,
+    "title": "[Testing] Add unit tests for ad_verification",
+    "body": "## Module\n`crates/browser-core/src/ad_verification.rs`\n\n## Required Tests\n- Unit tests for all public functions\n- Edge case testing\n- Error handling tests\n- Mock external dependencies",
+    "category": "testing",
+    "priority": "medium",
+    "labels": [
+      "testing",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 285,
+    "title": "[Testing] Add unit tests for prelude",
+    "body": "## Module\n`crates/browser-core/src/prelude.rs`\n\n## Required Tests\n- Unit tests for all public functions\n- Edge case testing\n- Error handling tests\n- Mock external dependencies",
+    "category": "testing",
+    "priority": "medium",
+    "labels": [
+      "testing",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 286,
+    "title": "[Testing] Add unit tests for browser_tab_manager",
+    "body": "## Module\n`crates/browser-core/src/browser_tab_manager.rs`\n\n## Required Tests\n- Unit tests for all public functions\n- Edge case testing\n- Error handling tests\n- Mock external dependencies",
+    "category": "testing",
+    "priority": "medium",
+    "labels": [
+      "testing",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 287,
+    "title": "[Testing] Add unit tests for tab_isolation",
+    "body": "## Module\n`crates/browser-core/src/tab_isolation.rs`\n\n## Required Tests\n- Unit tests for all public functions\n- Edge case testing\n- Error handling tests\n- Mock external dependencies",
+    "category": "testing",
+    "priority": "medium",
+    "labels": [
+      "testing",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 288,
+    "title": "[Testing] Add unit tests for storage",
+    "body": "## Module\n`crates/browser-core/src/storage.rs`\n\n## Required Tests\n- Unit tests for all public functions\n- Edge case testing\n- Error handling tests\n- Mock external dependencies",
+    "category": "testing",
+    "priority": "medium",
+    "labels": [
+      "testing",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 289,
+    "title": "[Testing] Add unit tests for proxy_validator",
+    "body": "## Module\n`crates/browser-core/src/proxy_validator.rs`\n\n## Required Tests\n- Unit tests for all public functions\n- Edge case testing\n- Error handling tests\n- Mock external dependencies",
+    "category": "testing",
+    "priority": "medium",
+    "labels": [
+      "testing",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 290,
+    "title": "[Testing] Add unit tests for config_manager",
+    "body": "## Module\n`crates/browser-core/src/config_manager.rs`\n\n## Required Tests\n- Unit tests for all public functions\n- Edge case testing\n- Error handling tests\n- Mock external dependencies",
+    "category": "testing",
+    "priority": "medium",
+    "labels": [
+      "testing",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 291,
+    "title": "[Testing] Add unit tests for scraper_util",
+    "body": "## Module\n`crates/browser-core/src/scraper_util.rs`\n\n## Required Tests\n- Unit tests for all public functions\n- Edge case testing\n- Error handling tests\n- Mock external dependencies",
+    "category": "testing",
+    "priority": "medium",
+    "labels": [
+      "testing",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 292,
+    "title": "[Testing] Add unit tests for generator",
+    "body": "## Module\n`crates/virtual-ip/src/generator.rs`\n\n## Required Tests\n- Unit tests for all public functions\n- Edge case testing\n- Error handling tests\n- Mock external dependencies",
+    "category": "testing",
+    "priority": "medium",
+    "labels": [
+      "testing",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 293,
+    "title": "[Testing] Add unit tests for validator",
+    "body": "## Module\n`crates/virtual-ip/src/validator.rs`\n\n## Required Tests\n- Unit tests for all public functions\n- Edge case testing\n- Error handling tests\n- Mock external dependencies",
+    "category": "testing",
+    "priority": "medium",
+    "labels": [
+      "testing",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 294,
+    "title": "[Testing] Add unit tests for lib",
+    "body": "## Module\n`crates/virtual-ip/src/lib.rs`\n\n## Required Tests\n- Unit tests for all public functions\n- Edge case testing\n- Error handling tests\n- Mock external dependencies",
+    "category": "testing",
+    "priority": "medium",
+    "labels": [
+      "testing",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 295,
+    "title": "[Testing] Add unit tests for models",
+    "body": "## Module\n`crates/virtual-ip/src/models.rs`\n\n## Required Tests\n- Unit tests for all public functions\n- Edge case testing\n- Error handling tests\n- Mock external dependencies",
+    "category": "testing",
+    "priority": "medium",
+    "labels": [
+      "testing",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 296,
+    "title": "[Testing] Add unit tests for rotation",
+    "body": "## Module\n`crates/virtual-ip/src/rotation.rs`\n\n## Required Tests\n- Unit tests for all public functions\n- Edge case testing\n- Error handling tests\n- Mock external dependencies",
+    "category": "testing",
+    "priority": "medium",
+    "labels": [
+      "testing",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 297,
+    "title": "[Testing] Add unit tests for auth",
+    "body": "## Module\n`ui-tauri/src-tauri/src/auth.rs`\n\n## Required Tests\n- Unit tests for all public functions\n- Edge case testing\n- Error handling tests\n- Mock external dependencies",
+    "category": "testing",
+    "priority": "medium",
+    "labels": [
+      "testing",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 298,
+    "title": "[Testing] Add unit tests for webview_manager",
+    "body": "## Module\n`ui-tauri/src-tauri/src/webview_manager.rs`\n\n## Required Tests\n- Unit tests for all public functions\n- Edge case testing\n- Error handling tests\n- Mock external dependencies",
+    "category": "testing",
+    "priority": "medium",
+    "labels": [
+      "testing",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 299,
+    "title": "[Testing] Add unit tests for main",
+    "body": "## Module\n`ui-tauri/src-tauri/src/main.rs`\n\n## Required Tests\n- Unit tests for all public functions\n- Edge case testing\n- Error handling tests\n- Mock external dependencies",
+    "category": "testing",
+    "priority": "medium",
+    "labels": [
+      "testing",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 300,
+    "title": "[Testing] Add unit tests for main",
+    "body": "## Module\n`ui-tauri/src/main.ts`\n\n## Required Tests\n- Unit tests for all public functions\n- Edge case testing\n- Error handling tests\n- Mock external dependencies",
+    "category": "testing",
+    "priority": "medium",
+    "labels": [
+      "testing",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 301,
+    "title": "[Testing] Add unit tests for tauri.d",
+    "body": "## Module\n`ui-tauri/src/lib/tauri.d.ts`\n\n## Required Tests\n- Unit tests for all public functions\n- Edge case testing\n- Error handling tests\n- Mock external dependencies",
+    "category": "testing",
+    "priority": "medium",
+    "labels": [
+      "testing",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 302,
+    "title": "[Testing] Add unit tests for errorHandling",
+    "body": "## Module\n`ui-tauri/src/lib/errorHandling.ts`\n\n## Required Tests\n- Unit tests for all public functions\n- Edge case testing\n- Error handling tests\n- Mock external dependencies",
+    "category": "testing",
+    "priority": "medium",
+    "labels": [
+      "testing",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 303,
+    "title": "[Testing] Add unit tests for stores",
+    "body": "## Module\n`ui-tauri/src/lib/stores.ts`\n\n## Required Tests\n- Unit tests for all public functions\n- Edge case testing\n- Error handling tests\n- Mock external dependencies",
+    "category": "testing",
+    "priority": "medium",
+    "labels": [
+      "testing",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 304,
+    "title": "[Testing] Add unit tests for api",
+    "body": "## Module\n`ui-tauri/src/lib/api.ts`\n\n## Required Tests\n- Unit tests for all public functions\n- Edge case testing\n- Error handling tests\n- Mock external dependencies",
+    "category": "testing",
+    "priority": "medium",
+    "labels": [
+      "testing",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 305,
+    "title": "[Testing] Add unit tests for logger",
+    "body": "## Module\n`ui-tauri/src/lib/logger.ts`\n\n## Required Tests\n- Unit tests for all public functions\n- Edge case testing\n- Error handling tests\n- Mock external dependencies",
+    "category": "testing",
+    "priority": "medium",
+    "labels": [
+      "testing",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 306,
+    "title": "[Testing] Add unit tests for utils",
+    "body": "## Module\n`ui-tauri/src/lib/utils.ts`\n\n## Required Tests\n- Unit tests for all public functions\n- Edge case testing\n- Error handling tests\n- Mock external dependencies",
+    "category": "testing",
+    "priority": "medium",
+    "labels": [
+      "testing",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 307,
+    "title": "[Testing] Add unit tests for settings",
+    "body": "## Module\n`ui-tauri/src/lib/settings.ts`\n\n## Required Tests\n- Unit tests for all public functions\n- Edge case testing\n- Error handling tests\n- Mock external dependencies",
+    "category": "testing",
+    "priority": "medium",
+    "labels": [
+      "testing",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 308,
+    "title": "[Testing] Add unit tests for shortcuts",
+    "body": "## Module\n`ui-tauri/src/lib/shortcuts.ts`\n\n## Required Tests\n- Unit tests for all public functions\n- Edge case testing\n- Error handling tests\n- Mock external dependencies",
+    "category": "testing",
+    "priority": "medium",
+    "labels": [
+      "testing",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 309,
+    "title": "[Testing] Add unit tests for connectionPool",
+    "body": "## Module\n`ui-tauri/src/lib/connectionPool.ts`\n\n## Required Tests\n- Unit tests for all public functions\n- Edge case testing\n- Error handling tests\n- Mock external dependencies",
+    "category": "testing",
+    "priority": "medium",
+    "labels": [
+      "testing",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 310,
+    "title": "[Testing] Proxy connection integration tests",
+    "body": "## Description\nTest proxy connection flow end-to-end\n\n## Scope\n- Integration tests\n- End-to-end scenarios\n- Error recovery testing",
+    "category": "testing",
+    "priority": "high",
+    "labels": [
+      "testing",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 311,
+    "title": "[Testing] Tab management integration tests",
+    "body": "## Description\nTest tab creation, navigation, and cleanup\n\n## Scope\n- Integration tests\n- End-to-end scenarios\n- Error recovery testing",
+    "category": "testing",
+    "priority": "high",
+    "labels": [
+      "testing",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 312,
+    "title": "[Testing] Authentication flow tests",
+    "body": "## Description\nTest user registration, login, and session management\n\n## Scope\n- Integration tests\n- End-to-end scenarios\n- Error recovery testing",
+    "category": "testing",
+    "priority": "high",
+    "labels": [
+      "testing",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 313,
+    "title": "[Testing] Settings persistence tests",
+    "body": "## Description\nTest that settings are correctly saved and loaded\n\n## Scope\n- Integration tests\n- End-to-end scenarios\n- Error recovery testing",
+    "category": "testing",
+    "priority": "high",
+    "labels": [
+      "testing",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 314,
+    "title": "[Testing] Browser profile tests",
+    "body": "## Description\nTest profile creation and switching\n\n## Scope\n- Integration tests\n- End-to-end scenarios\n- Error recovery testing",
+    "category": "testing",
+    "priority": "high",
+    "labels": [
+      "testing",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 315,
+    "title": "[Testing] Backup and restore tests",
+    "body": "## Description\nTest data backup and restore functionality\n\n## Scope\n- Integration tests\n- End-to-end scenarios\n- Error recovery testing",
+    "category": "testing",
+    "priority": "high",
+    "labels": [
+      "testing",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 316,
+    "title": "[Testing] Network interception tests",
+    "body": "## Description\nTest request/response interception\n\n## Scope\n- Integration tests\n- End-to-end scenarios\n- Error recovery testing",
+    "category": "testing",
+    "priority": "high",
+    "labels": [
+      "testing",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 317,
+    "title": "[Testing] WebView lifecycle tests",
+    "body": "## Description\nTest WebView creation, navigation, and destruction\n\n## Scope\n- Integration tests\n- End-to-end scenarios\n- Error recovery testing",
+    "category": "testing",
+    "priority": "high",
+    "labels": [
+      "testing",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 318,
+    "title": "[Docs] API documentation",
+    "body": "## Description\nDocument all public APIs with examples\n\n## Requirements\n- Clear and concise\n- Include examples\n- Keep up to date with code changes",
+    "category": "documentation",
+    "priority": "high",
+    "labels": [
+      "documentation",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 319,
+    "title": "[Docs] User guide",
+    "body": "## Description\nCreate comprehensive user documentation\n\n## Requirements\n- Clear and concise\n- Include examples\n- Keep up to date with code changes",
+    "category": "documentation",
+    "priority": "high",
+    "labels": [
+      "documentation",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 320,
+    "title": "[Docs] Developer setup guide",
+    "body": "## Description\nDocument development environment setup\n\n## Requirements\n- Clear and concise\n- Include examples\n- Keep up to date with code changes",
+    "category": "documentation",
+    "priority": "high",
+    "labels": [
+      "documentation",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 321,
+    "title": "[Docs] Architecture documentation",
+    "body": "## Description\nDocument system architecture and design decisions\n\n## Requirements\n- Clear and concise\n- Include examples\n- Keep up to date with code changes",
+    "category": "documentation",
+    "priority": "medium",
+    "labels": [
+      "documentation",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 322,
+    "title": "[Docs] Configuration reference",
+    "body": "## Description\nDocument all configuration options\n\n## Requirements\n- Clear and concise\n- Include examples\n- Keep up to date with code changes",
+    "category": "documentation",
+    "priority": "medium",
+    "labels": [
+      "documentation",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 323,
+    "title": "[Docs] Troubleshooting guide",
+    "body": "## Description\nCommon issues and solutions\n\n## Requirements\n- Clear and concise\n- Include examples\n- Keep up to date with code changes",
+    "category": "documentation",
+    "priority": "medium",
+    "labels": [
+      "documentation",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 324,
+    "title": "[Docs] Security best practices",
+    "body": "## Description\nDocument security recommendations\n\n## Requirements\n- Clear and concise\n- Include examples\n- Keep up to date with code changes",
+    "category": "documentation",
+    "priority": "high",
+    "labels": [
+      "documentation",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 325,
+    "title": "[Docs] Performance tuning guide",
+    "body": "## Description\nDocument performance optimization options\n\n## Requirements\n- Clear and concise\n- Include examples\n- Keep up to date with code changes",
+    "category": "documentation",
+    "priority": "medium",
+    "labels": [
+      "documentation",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 326,
+    "title": "[Docs] Plugin development guide",
+    "body": "## Description\nGuide for developing plugins/extensions\n\n## Requirements\n- Clear and concise\n- Include examples\n- Keep up to date with code changes",
+    "category": "documentation",
+    "priority": "low",
+    "labels": [
+      "documentation",
+      "priority-low"
+    ]
+  },
+  {
+    "id": 327,
+    "title": "[Docs] Contribution guidelines",
+    "body": "## Description\nDocument how to contribute to the project\n\n## Requirements\n- Clear and concise\n- Include examples\n- Keep up to date with code changes",
+    "category": "documentation",
+    "priority": "medium",
+    "labels": [
+      "documentation",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 328,
+    "title": "[Docs] Code style guide",
+    "body": "## Description\nDocument coding standards and conventions\n\n## Requirements\n- Clear and concise\n- Include examples\n- Keep up to date with code changes",
+    "category": "documentation",
+    "priority": "medium",
+    "labels": [
+      "documentation",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 329,
+    "title": "[Docs] Release process documentation",
+    "body": "## Description\nDocument the release workflow\n\n## Requirements\n- Clear and concise\n- Include examples\n- Keep up to date with code changes",
+    "category": "documentation",
+    "priority": "low",
+    "labels": [
+      "documentation",
+      "priority-low"
+    ]
+  },
+  {
+    "id": 330,
+    "title": "[Docs] Changelog maintenance",
+    "body": "## Description\nKeep changelog up to date\n\n## Requirements\n- Clear and concise\n- Include examples\n- Keep up to date with code changes",
+    "category": "documentation",
+    "priority": "medium",
+    "labels": [
+      "documentation",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 331,
+    "title": "[Docs] README improvements",
+    "body": "## Description\nEnhance README with badges, screenshots\n\n## Requirements\n- Clear and concise\n- Include examples\n- Keep up to date with code changes",
+    "category": "documentation",
+    "priority": "medium",
+    "labels": [
+      "documentation",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 332,
+    "title": "[Docs] Video tutorials",
+    "body": "## Description\nCreate video tutorials for common tasks\n\n## Requirements\n- Clear and concise\n- Include examples\n- Keep up to date with code changes",
+    "category": "documentation",
+    "priority": "low",
+    "labels": [
+      "documentation",
+      "priority-low"
+    ]
+  },
+  {
+    "id": 333,
+    "title": "[DevOps] Set up CI/CD pipeline",
+    "body": "## Description\nImplement automated build, test, and deploy\n\n## Requirements\n- Reliable and maintainable\n- Well documented\n- Follow best practices",
+    "category": "devops",
+    "priority": "high",
+    "labels": [
+      "devops",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 334,
+    "title": "[DevOps] Add automated testing in CI",
+    "body": "## Description\nRun all tests on every PR\n\n## Requirements\n- Reliable and maintainable\n- Well documented\n- Follow best practices",
+    "category": "devops",
+    "priority": "high",
+    "labels": [
+      "devops",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 335,
+    "title": "[DevOps] Implement code coverage reporting",
+    "body": "## Description\nTrack and report test coverage\n\n## Requirements\n- Reliable and maintainable\n- Well documented\n- Follow best practices",
+    "category": "devops",
+    "priority": "medium",
+    "labels": [
+      "devops",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 336,
+    "title": "[DevOps] Add linting to CI",
+    "body": "## Description\nEnforce code style in CI\n\n## Requirements\n- Reliable and maintainable\n- Well documented\n- Follow best practices",
+    "category": "devops",
+    "priority": "medium",
+    "labels": [
+      "devops",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 337,
+    "title": "[DevOps] Set up release automation",
+    "body": "## Description\nAutomate release builds and publishing\n\n## Requirements\n- Reliable and maintainable\n- Well documented\n- Follow best practices",
+    "category": "devops",
+    "priority": "high",
+    "labels": [
+      "devops",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 338,
+    "title": "[DevOps] Implement dependency scanning",
+    "body": "## Description\nScan for vulnerable dependencies\n\n## Requirements\n- Reliable and maintainable\n- Well documented\n- Follow best practices",
+    "category": "devops",
+    "priority": "high",
+    "labels": [
+      "devops",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 339,
+    "title": "[DevOps] Add performance benchmarks",
+    "body": "## Description\nTrack performance metrics over time\n\n## Requirements\n- Reliable and maintainable\n- Well documented\n- Follow best practices",
+    "category": "devops",
+    "priority": "medium",
+    "labels": [
+      "devops",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 340,
+    "title": "[DevOps] Set up staging environment",
+    "body": "## Description\nCreate staging environment for testing\n\n## Requirements\n- Reliable and maintainable\n- Well documented\n- Follow best practices",
+    "category": "devops",
+    "priority": "medium",
+    "labels": [
+      "devops",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 341,
+    "title": "[DevOps] Implement rollback mechanism",
+    "body": "## Description\nQuick rollback for failed releases\n\n## Requirements\n- Reliable and maintainable\n- Well documented\n- Follow best practices",
+    "category": "devops",
+    "priority": "medium",
+    "labels": [
+      "devops",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 342,
+    "title": "[DevOps] Add build caching",
+    "body": "## Description\nCache build artifacts for faster CI\n\n## Requirements\n- Reliable and maintainable\n- Well documented\n- Follow best practices",
+    "category": "devops",
+    "priority": "medium",
+    "labels": [
+      "devops",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 343,
+    "title": "[DevOps] Set up nightly builds",
+    "body": "## Description\nAutomated nightly development builds\n\n## Requirements\n- Reliable and maintainable\n- Well documented\n- Follow best practices",
+    "category": "devops",
+    "priority": "low",
+    "labels": [
+      "devops",
+      "priority-low"
+    ]
+  },
+  {
+    "id": 344,
+    "title": "[DevOps] Implement feature flags",
+    "body": "## Description\nFeature flag system for gradual rollout\n\n## Requirements\n- Reliable and maintainable\n- Well documented\n- Follow best practices",
+    "category": "devops",
+    "priority": "medium",
+    "labels": [
+      "devops",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 345,
+    "title": "[DevOps] Add error tracking integration",
+    "body": "## Description\nIntegrate with error tracking service\n\n## Requirements\n- Reliable and maintainable\n- Well documented\n- Follow best practices",
+    "category": "devops",
+    "priority": "high",
+    "labels": [
+      "devops",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 346,
+    "title": "[DevOps] Set up analytics",
+    "body": "## Description\nTrack usage analytics\n\n## Requirements\n- Reliable and maintainable\n- Well documented\n- Follow best practices",
+    "category": "devops",
+    "priority": "medium",
+    "labels": [
+      "devops",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 347,
+    "title": "[DevOps] Implement auto-update mechanism",
+    "body": "## Description\nAutomatic application updates\n\n## Requirements\n- Reliable and maintainable\n- Well documented\n- Follow best practices",
+    "category": "devops",
+    "priority": "high",
+    "labels": [
+      "devops",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 348,
+    "title": "[Refactor] Split large file chromium_engine_tests.rs",
+    "body": "## File\n`crates/browser-core/tests/chromium_engine_tests.rs`\n\n## Issue\nFile has 560 lines and should be split into smaller modules.\n\n## Suggested\n- Identify logical groupings\n- Extract into separate files\n- Maintain clean interfaces",
+    "category": "refactoring",
+    "priority": "medium",
+    "labels": [
+      "refactoring",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 349,
+    "title": "[Refactor] Split large file provider_tests.rs",
+    "body": "## File\n`crates/browser-core/tests/provider_tests.rs`\n\n## Issue\nFile has 506 lines and should be split into smaller modules.\n\n## Suggested\n- Identify logical groupings\n- Extract into separate files\n- Maintain clean interfaces",
+    "category": "refactoring",
+    "priority": "medium",
+    "labels": [
+      "refactoring",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 350,
+    "title": "[Refactor] Split large file browser_controls_tests.rs",
+    "body": "## File\n`crates/browser-core/tests/browser_controls_tests.rs`\n\n## Issue\nFile has 719 lines and should be split into smaller modules.\n\n## Suggested\n- Identify logical groupings\n- Extract into separate files\n- Maintain clean interfaces",
+    "category": "refactoring",
+    "priority": "medium",
+    "labels": [
+      "refactoring",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 351,
+    "title": "[Refactor] Split large file validation_tests.rs",
+    "body": "## File\n`crates/browser-core/tests/validation_tests.rs`\n\n## Issue\nFile has 567 lines and should be split into smaller modules.\n\n## Suggested\n- Identify logical groupings\n- Extract into separate files\n- Maintain clean interfaces",
+    "category": "refactoring",
+    "priority": "medium",
+    "labels": [
+      "refactoring",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 352,
+    "title": "[Refactor] Split large file browser_controls.rs",
+    "body": "## File\n`crates/browser-core/src/browser_controls.rs`\n\n## Issue\nFile has 724 lines and should be split into smaller modules.\n\n## Suggested\n- Identify logical groupings\n- Extract into separate files\n- Maintain clean interfaces",
+    "category": "refactoring",
+    "priority": "medium",
+    "labels": [
+      "refactoring",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 353,
+    "title": "[Refactor] Split large file automation.rs",
+    "body": "## File\n`crates/browser-core/src/automation.rs`\n\n## Issue\nFile has 898 lines and should be split into smaller modules.\n\n## Suggested\n- Identify logical groupings\n- Extract into separate files\n- Maintain clean interfaces",
+    "category": "refactoring",
+    "priority": "medium",
+    "labels": [
+      "refactoring",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 354,
+    "title": "[Refactor] Split large file error_recovery.rs",
+    "body": "## File\n`crates/browser-core/src/error_recovery.rs`\n\n## Issue\nFile has 599 lines and should be split into smaller modules.\n\n## Suggested\n- Identify logical groupings\n- Extract into separate files\n- Maintain clean interfaces",
+    "category": "refactoring",
+    "priority": "medium",
+    "labels": [
+      "refactoring",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 355,
+    "title": "[Refactor] Split large file proxy_rotation.rs",
+    "body": "## File\n`crates/browser-core/src/proxy_rotation.rs`\n\n## Issue\nFile has 850 lines and should be split into smaller modules.\n\n## Suggested\n- Identify logical groupings\n- Extract into separate files\n- Maintain clean interfaces",
+    "category": "refactoring",
+    "priority": "medium",
+    "labels": [
+      "refactoring",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 356,
+    "title": "[Refactor] Split large file chromium_engine.rs",
+    "body": "## File\n`crates/browser-core/src/chromium_engine.rs`\n\n## Issue\nFile has 1300 lines and should be split into smaller modules.\n\n## Suggested\n- Identify logical groupings\n- Extract into separate files\n- Maintain clean interfaces",
+    "category": "refactoring",
+    "priority": "medium",
+    "labels": [
+      "refactoring",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 357,
+    "title": "[Refactor] Split large file content_enhancement.rs",
+    "body": "## File\n`crates/browser-core/src/content_enhancement.rs`\n\n## Issue\nFile has 1488 lines and should be split into smaller modules.\n\n## Suggested\n- Identify logical groupings\n- Extract into separate files\n- Maintain clean interfaces",
+    "category": "refactoring",
+    "priority": "medium",
+    "labels": [
+      "refactoring",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 358,
+    "title": "[Refactor] Split large file webview_manager.rs",
+    "body": "## File\n`crates/browser-core/src/webview_manager.rs`\n\n## Issue\nFile has 747 lines and should be split into smaller modules.\n\n## Suggested\n- Identify logical groupings\n- Extract into separate files\n- Maintain clean interfaces",
+    "category": "refactoring",
+    "priority": "medium",
+    "labels": [
+      "refactoring",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 359,
+    "title": "[Refactor] Split large file performance_optimizer.rs",
+    "body": "## File\n`crates/browser-core/src/performance_optimizer.rs`\n\n## Issue\nFile has 617 lines and should be split into smaller modules.\n\n## Suggested\n- Identify logical groupings\n- Extract into separate files\n- Maintain clean interfaces",
+    "category": "refactoring",
+    "priority": "medium",
+    "labels": [
+      "refactoring",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 360,
+    "title": "[Refactor] Split large file experimental.rs",
+    "body": "## File\n`crates/browser-core/src/experimental.rs`\n\n## Issue\nFile has 1295 lines and should be split into smaller modules.\n\n## Suggested\n- Identify logical groupings\n- Extract into separate files\n- Maintain clean interfaces",
+    "category": "refactoring",
+    "priority": "medium",
+    "labels": [
+      "refactoring",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 361,
+    "title": "[Refactor] Split large file network_intelligence.rs",
+    "body": "## File\n`crates/browser-core/src/network_intelligence.rs`\n\n## Issue\nFile has 826 lines and should be split into smaller modules.\n\n## Suggested\n- Identify logical groupings\n- Extract into separate files\n- Maintain clean interfaces",
+    "category": "refactoring",
+    "priority": "medium",
+    "labels": [
+      "refactoring",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 362,
+    "title": "[Refactor] Split large file local_proxy.rs",
+    "body": "## File\n`crates/browser-core/src/local_proxy.rs`\n\n## Issue\nFile has 864 lines and should be split into smaller modules.\n\n## Suggested\n- Identify logical groupings\n- Extract into separate files\n- Maintain clean interfaces",
+    "category": "refactoring",
+    "priority": "medium",
+    "labels": [
+      "refactoring",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 363,
+    "title": "[Refactor] Split large file privacy_fortress.rs",
+    "body": "## File\n`crates/browser-core/src/privacy_fortress.rs`\n\n## Issue\nFile has 874 lines and should be split into smaller modules.\n\n## Suggested\n- Identify logical groupings\n- Extract into separate files\n- Maintain clean interfaces",
+    "category": "refactoring",
+    "priority": "medium",
+    "labels": [
+      "refactoring",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 364,
+    "title": "[Refactor] Split large file ad_verification.rs",
+    "body": "## File\n`crates/browser-core/src/ad_verification.rs`\n\n## Issue\nFile has 534 lines and should be split into smaller modules.\n\n## Suggested\n- Identify logical groupings\n- Extract into separate files\n- Maintain clean interfaces",
+    "category": "refactoring",
+    "priority": "medium",
+    "labels": [
+      "refactoring",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 365,
+    "title": "[Refactor] Split large file prelude.rs",
+    "body": "## File\n`crates/browser-core/src/prelude.rs`\n\n## Issue\nFile has 680 lines and should be split into smaller modules.\n\n## Suggested\n- Identify logical groupings\n- Extract into separate files\n- Maintain clean interfaces",
+    "category": "refactoring",
+    "priority": "medium",
+    "labels": [
+      "refactoring",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 366,
+    "title": "[Refactor] Split large file browser_tab_manager.rs",
+    "body": "## File\n`crates/browser-core/src/browser_tab_manager.rs`\n\n## Issue\nFile has 686 lines and should be split into smaller modules.\n\n## Suggested\n- Identify logical groupings\n- Extract into separate files\n- Maintain clean interfaces",
+    "category": "refactoring",
+    "priority": "medium",
+    "labels": [
+      "refactoring",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 367,
+    "title": "[Refactor] Split large file storage.rs",
+    "body": "## File\n`crates/browser-core/src/storage.rs`\n\n## Issue\nFile has 1446 lines and should be split into smaller modules.\n\n## Suggested\n- Identify logical groupings\n- Extract into separate files\n- Maintain clean interfaces",
+    "category": "refactoring",
+    "priority": "medium",
+    "labels": [
+      "refactoring",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 368,
+    "title": "[Refactor] Split large file proxy_validator.rs",
+    "body": "## File\n`crates/browser-core/src/proxy_validator.rs`\n\n## Issue\nFile has 865 lines and should be split into smaller modules.\n\n## Suggested\n- Identify logical groupings\n- Extract into separate files\n- Maintain clean interfaces",
+    "category": "refactoring",
+    "priority": "medium",
+    "labels": [
+      "refactoring",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 369,
+    "title": "[Refactor] Split large file config_manager.rs",
+    "body": "## File\n`crates/browser-core/src/config_manager.rs`\n\n## Issue\nFile has 737 lines and should be split into smaller modules.\n\n## Suggested\n- Identify logical groupings\n- Extract into separate files\n- Maintain clean interfaces",
+    "category": "refactoring",
+    "priority": "medium",
+    "labels": [
+      "refactoring",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 370,
+    "title": "[Refactor] Split large file main.rs",
+    "body": "## File\n`ui-tauri/src-tauri/src/main.rs`\n\n## Issue\nFile has 1037 lines and should be split into smaller modules.\n\n## Suggested\n- Identify logical groupings\n- Extract into separate files\n- Maintain clean interfaces",
+    "category": "refactoring",
+    "priority": "medium",
+    "labels": [
+      "refactoring",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 371,
+    "title": "[Bug] Handle network timeout errors gracefully",
+    "body": "## Description\nEnsure network timeouts don't crash the application\n\n## Expected Behavior\nApplication handles the error gracefully without crashing.\n\n## Acceptance Criteria\n- Error is caught and handled\n- User is informed appropriately\n- Application remains stable",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 372,
+    "title": "[Bug] Fix memory leak on tab close",
+    "body": "## Description\nEnsure all resources are freed when tabs are closed\n\n## Expected Behavior\nApplication handles the error gracefully without crashing.\n\n## Acceptance Criteria\n- Error is caught and handled\n- User is informed appropriately\n- Application remains stable",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 373,
+    "title": "[Bug] Handle proxy authentication failures",
+    "body": "## Description\nGraceful handling when proxy auth fails\n\n## Expected Behavior\nApplication handles the error gracefully without crashing.\n\n## Acceptance Criteria\n- Error is caught and handled\n- User is informed appropriately\n- Application remains stable",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 374,
+    "title": "[Bug] Fix race condition in tab manager",
+    "body": "## Description\nSynchronize concurrent tab operations\n\n## Expected Behavior\nApplication handles the error gracefully without crashing.\n\n## Acceptance Criteria\n- Error is caught and handled\n- User is informed appropriately\n- Application remains stable",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 375,
+    "title": "[Bug] Handle WebView crash recovery",
+    "body": "## Description\nRecover gracefully from WebView crashes\n\n## Expected Behavior\nApplication handles the error gracefully without crashing.\n\n## Acceptance Criteria\n- Error is caught and handled\n- User is informed appropriately\n- Application remains stable",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 376,
+    "title": "[Bug] Fix clipboard permission handling",
+    "body": "## Description\nHandle clipboard permission denials\n\n## Expected Behavior\nApplication handles the error gracefully without crashing.\n\n## Acceptance Criteria\n- Error is caught and handled\n- User is informed appropriately\n- Application remains stable",
+    "category": "bug",
+    "priority": "medium",
+    "labels": [
+      "bug",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 377,
+    "title": "[Bug] Handle disk full errors",
+    "body": "## Description\nGraceful handling when disk is full\n\n## Expected Behavior\nApplication handles the error gracefully without crashing.\n\n## Acceptance Criteria\n- Error is caught and handled\n- User is informed appropriately\n- Application remains stable",
+    "category": "bug",
+    "priority": "medium",
+    "labels": [
+      "bug",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 378,
+    "title": "[Bug] Fix settings save race condition",
+    "body": "## Description\nPrevent settings corruption on concurrent saves\n\n## Expected Behavior\nApplication handles the error gracefully without crashing.\n\n## Acceptance Criteria\n- Error is caught and handled\n- User is informed appropriately\n- Application remains stable",
+    "category": "bug",
+    "priority": "medium",
+    "labels": [
+      "bug",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 379,
+    "title": "[Bug] Handle certificate errors properly",
+    "body": "## Description\nUser-friendly certificate error handling\n\n## Expected Behavior\nApplication handles the error gracefully without crashing.\n\n## Acceptance Criteria\n- Error is caught and handled\n- User is informed appropriately\n- Application remains stable",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 380,
+    "title": "[Bug] Fix navigation history corruption",
+    "body": "## Description\nPrevent history corruption on crashes\n\n## Expected Behavior\nApplication handles the error gracefully without crashing.\n\n## Acceptance Criteria\n- Error is caught and handled\n- User is informed appropriately\n- Application remains stable",
+    "category": "bug",
+    "priority": "medium",
+    "labels": [
+      "bug",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 381,
+    "title": "[Bug] Handle out-of-memory scenarios",
+    "body": "## Description\nGraceful degradation when memory is low\n\n## Expected Behavior\nApplication handles the error gracefully without crashing.\n\n## Acceptance Criteria\n- Error is caught and handled\n- User is informed appropriately\n- Application remains stable",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 382,
+    "title": "[Bug] Fix proxy rotation during active request",
+    "body": "## Description\nHandle proxy changes mid-request\n\n## Expected Behavior\nApplication handles the error gracefully without crashing.\n\n## Acceptance Criteria\n- Error is caught and handled\n- User is informed appropriately\n- Application remains stable",
+    "category": "bug",
+    "priority": "medium",
+    "labels": [
+      "bug",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 383,
+    "title": "[Bug] Handle DNS resolution failures",
+    "body": "## Description\nGraceful DNS failure handling\n\n## Expected Behavior\nApplication handles the error gracefully without crashing.\n\n## Acceptance Criteria\n- Error is caught and handled\n- User is informed appropriately\n- Application remains stable",
+    "category": "bug",
+    "priority": "medium",
+    "labels": [
+      "bug",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 384,
+    "title": "[Bug] Fix session restore after crash",
+    "body": "## Description\nReliable session restoration\n\n## Expected Behavior\nApplication handles the error gracefully without crashing.\n\n## Acceptance Criteria\n- Error is caught and handled\n- User is informed appropriately\n- Application remains stable",
+    "category": "bug",
+    "priority": "high",
+    "labels": [
+      "bug",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 385,
+    "title": "[Bug] Handle file download interruptions",
+    "body": "## Description\nResume or cleanup interrupted downloads\n\n## Expected Behavior\nApplication handles the error gracefully without crashing.\n\n## Acceptance Criteria\n- Error is caught and handled\n- User is informed appropriately\n- Application remains stable",
+    "category": "bug",
+    "priority": "medium",
+    "labels": [
+      "bug",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 386,
+    "title": "[Security] Implement input sanitization",
+    "body": "## Description\nSanitize all user inputs to prevent injection\n\n## Risk\nSecurity vulnerability if not addressed.\n\n## Requirements\n- Follow security best practices\n- Add appropriate tests\n- Document security considerations",
+    "category": "security",
+    "priority": "high",
+    "labels": [
+      "security",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 387,
+    "title": "[Security] Add rate limiting",
+    "body": "## Description\nPrevent brute force and DoS attacks\n\n## Risk\nSecurity vulnerability if not addressed.\n\n## Requirements\n- Follow security best practices\n- Add appropriate tests\n- Document security considerations",
+    "category": "security",
+    "priority": "high",
+    "labels": [
+      "security",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 388,
+    "title": "[Security] Implement secure session management",
+    "body": "## Description\nSecure session tokens and expiration\n\n## Risk\nSecurity vulnerability if not addressed.\n\n## Requirements\n- Follow security best practices\n- Add appropriate tests\n- Document security considerations",
+    "category": "security",
+    "priority": "high",
+    "labels": [
+      "security",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 389,
+    "title": "[Security] Add CORS policy enforcement",
+    "body": "## Description\nProper CORS configuration\n\n## Risk\nSecurity vulnerability if not addressed.\n\n## Requirements\n- Follow security best practices\n- Add appropriate tests\n- Document security considerations",
+    "category": "security",
+    "priority": "medium",
+    "labels": [
+      "security",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 390,
+    "title": "[Security] Implement CSP headers",
+    "body": "## Description\nContent Security Policy headers\n\n## Risk\nSecurity vulnerability if not addressed.\n\n## Requirements\n- Follow security best practices\n- Add appropriate tests\n- Document security considerations",
+    "category": "security",
+    "priority": "medium",
+    "labels": [
+      "security",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 391,
+    "title": "[Security] Add XSS protection",
+    "body": "## Description\nPrevent cross-site scripting attacks\n\n## Risk\nSecurity vulnerability if not addressed.\n\n## Requirements\n- Follow security best practices\n- Add appropriate tests\n- Document security considerations",
+    "category": "security",
+    "priority": "high",
+    "labels": [
+      "security",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 392,
+    "title": "[Security] Implement CSRF protection",
+    "body": "## Description\nCross-site request forgery prevention\n\n## Risk\nSecurity vulnerability if not addressed.\n\n## Requirements\n- Follow security best practices\n- Add appropriate tests\n- Document security considerations",
+    "category": "security",
+    "priority": "high",
+    "labels": [
+      "security",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 393,
+    "title": "[Security] Add SQL injection prevention",
+    "body": "## Description\nParameterized queries everywhere\n\n## Risk\nSecurity vulnerability if not addressed.\n\n## Requirements\n- Follow security best practices\n- Add appropriate tests\n- Document security considerations",
+    "category": "security",
+    "priority": "high",
+    "labels": [
+      "security",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 394,
+    "title": "[Security] Implement secure password hashing",
+    "body": "## Description\nUse bcrypt/argon2 for passwords\n\n## Risk\nSecurity vulnerability if not addressed.\n\n## Requirements\n- Follow security best practices\n- Add appropriate tests\n- Document security considerations",
+    "category": "security",
+    "priority": "high",
+    "labels": [
+      "security",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 395,
+    "title": "[Security] Add security headers",
+    "body": "## Description\nX-Frame-Options, X-Content-Type-Options, etc.\n\n## Risk\nSecurity vulnerability if not addressed.\n\n## Requirements\n- Follow security best practices\n- Add appropriate tests\n- Document security considerations",
+    "category": "security",
+    "priority": "medium",
+    "labels": [
+      "security",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 396,
+    "title": "[Security] Implement secure communication",
+    "body": "## Description\nEnforce HTTPS everywhere\n\n## Risk\nSecurity vulnerability if not addressed.\n\n## Requirements\n- Follow security best practices\n- Add appropriate tests\n- Document security considerations",
+    "category": "security",
+    "priority": "high",
+    "labels": [
+      "security",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 397,
+    "title": "[Security] Add certificate validation",
+    "body": "## Description\nProper SSL certificate validation\n\n## Risk\nSecurity vulnerability if not addressed.\n\n## Requirements\n- Follow security best practices\n- Add appropriate tests\n- Document security considerations",
+    "category": "security",
+    "priority": "high",
+    "labels": [
+      "security",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 398,
+    "title": "[Security] Implement API key security",
+    "body": "## Description\nSecure storage and transmission of API keys\n\n## Risk\nSecurity vulnerability if not addressed.\n\n## Requirements\n- Follow security best practices\n- Add appropriate tests\n- Document security considerations",
+    "category": "security",
+    "priority": "high",
+    "labels": [
+      "security",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 399,
+    "title": "[Security] Add audit logging",
+    "body": "## Description\nLog security-relevant events\n\n## Risk\nSecurity vulnerability if not addressed.\n\n## Requirements\n- Follow security best practices\n- Add appropriate tests\n- Document security considerations",
+    "category": "security",
+    "priority": "medium",
+    "labels": [
+      "security",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 400,
+    "title": "[Security] Implement privilege separation",
+    "body": "## Description\nMinimize privileges for each component\n\n## Risk\nSecurity vulnerability if not addressed.\n\n## Requirements\n- Follow security best practices\n- Add appropriate tests\n- Document security considerations",
+    "category": "security",
+    "priority": "medium",
+    "labels": [
+      "security",
+      "priority-medium"
+    ]
+  },
+  {
+    "id": 401,
+    "title": "[Security] Add dependency vulnerability scanning",
+    "body": "## Description\nRegular scanning for vulnerable deps\n\n## Risk\nSecurity vulnerability if not addressed.\n\n## Requirements\n- Follow security best practices\n- Add appropriate tests\n- Document security considerations",
+    "category": "security",
+    "priority": "high",
+    "labels": [
+      "security",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 402,
+    "title": "[Security] Implement secure defaults",
+    "body": "## Description\nSecure configuration by default\n\n## Risk\nSecurity vulnerability if not addressed.\n\n## Requirements\n- Follow security best practices\n- Add appropriate tests\n- Document security considerations",
+    "category": "security",
+    "priority": "high",
+    "labels": [
+      "security",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 403,
+    "title": "[Security] Add data encryption at rest",
+    "body": "## Description\nEncrypt sensitive stored data\n\n## Risk\nSecurity vulnerability if not addressed.\n\n## Requirements\n- Follow security best practices\n- Add appropriate tests\n- Document security considerations",
+    "category": "security",
+    "priority": "high",
+    "labels": [
+      "security",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 404,
+    "title": "[Security] Implement secure update mechanism",
+    "body": "## Description\nSigned updates to prevent tampering\n\n## Risk\nSecurity vulnerability if not addressed.\n\n## Requirements\n- Follow security best practices\n- Add appropriate tests\n- Document security considerations",
+    "category": "security",
+    "priority": "high",
+    "labels": [
+      "security",
+      "priority-high"
+    ]
+  },
+  {
+    "id": 405,
+    "title": "[Security] Add memory protection",
+    "body": "## Description\nPrevent memory corruption attacks\n\n## Risk\nSecurity vulnerability if not addressed.\n\n## Requirements\n- Follow security best practices\n- Add appropriate tests\n- Document security considerations",
+    "category": "security",
+    "priority": "medium",
+    "labels": [
+      "security",
+      "priority-medium"
+    ]
+  }
+]

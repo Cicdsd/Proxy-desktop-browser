@@ -545,11 +545,11 @@ pub mod string_utils {
         let mut result = s.to_string();
         
         // Hide anything that looks like a password
-        let password_pattern = regex::Regex::new(r"(?i)(password|passwd|pwd|secret|token|api_key|apikey)[\s:=]+\S+").unwrap();
+        let password_pattern = regex::Regex::new(r"(?i)(password|passwd|pwd|secret|token|api_key|apikey)[\s:=]+\S+").expect("Valid regex pattern");
         result = password_pattern.replace_all(&result, "$1=***HIDDEN***").to_string();
         
         // Hide bearer tokens
-        let bearer_pattern = regex::Regex::new(r"(?i)bearer\s+\S+").unwrap();
+        let bearer_pattern = regex::Regex::new(r"(?i)bearer\s+\S+").expect("Valid bearer regex pattern");
         result = bearer_pattern.replace_all(&result, "Bearer ***HIDDEN***").to_string();
         
         result
@@ -563,7 +563,7 @@ pub mod string_utils {
                 if i > 0 {
                     result.push('_');
                 }
-                result.push(c.to_lowercase().next().unwrap());
+                result.push(c.to_lowercase().next().expect("Character has lowercase representation"));
             } else {
                 result.push(c);
             }
@@ -579,7 +579,7 @@ pub mod string_utils {
             if c == '_' {
                 capitalize_next = true;
             } else if capitalize_next {
-                result.push(c.to_uppercase().next().unwrap());
+                result.push(c.to_uppercase().next().expect("Character has uppercase representation"));
                 capitalize_next = false;
             } else {
                 result.push(c);
@@ -664,7 +664,7 @@ mod prelude_tests {
         
         metrics.record_histogram("latency", 100.0).await;
         metrics.record_histogram("latency", 200.0).await;
-        let stats = metrics.get_histogram_stats("latency").await.unwrap();
+        let stats = metrics.get_histogram_stats("latency").await.expect("Get operation should succeed");
         assert_eq!(stats.count, 2);
         assert_eq!(stats.mean, 150.0);
     }

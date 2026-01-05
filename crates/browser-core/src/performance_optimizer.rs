@@ -577,7 +577,7 @@ mod tests {
         
         let next = optimizer.get_next_resource().await;
         assert!(next.is_some());
-        assert_eq!(next.unwrap().priority, CachePriority::Critical);
+        assert_eq!(next.expect("Operation should succeed in test").priority, CachePriority::Critical);
     }
 
     #[test]

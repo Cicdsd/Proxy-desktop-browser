@@ -658,7 +658,7 @@ mod tests {
             config.proxy.enabled = true;
             config.proxy.default_host = Some("127.0.0.1".to_string());
             config.proxy.default_port = Some(8080);
-        }).await.unwrap();
+        }).await.expect("Async operation should succeed");
 
         let config = manager.get().await;
         assert!(config.proxy.enabled);
@@ -668,7 +668,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_config_save_load() {
-        let temp_dir = TempDir::new().unwrap();
+        let temp_dir = TempDir::new().expect("Operation should succeed in test");
         let config_path = temp_dir.path().join("config.json");
         
         // Save config
@@ -676,14 +676,14 @@ mod tests {
             let manager = ConfigManager::with_path(&config_path);
             manager.update(|config| {
                 config.general.theme = "dark".to_string();
-            }).await.unwrap();
-            manager.save().await.unwrap();
+            }).await.expect("Async operation should succeed");
+            manager.save().await.expect("Save operation should succeed");
         }
 
         // Load config
         {
             let manager = ConfigManager::with_path(&config_path);
-            manager.load().await.unwrap();
+            manager.load().await.expect("Load operation should succeed");
             let config = manager.get().await;
             assert_eq!(config.general.theme, "dark");
         }
@@ -698,7 +698,7 @@ mod tests {
         
         manager.update(|config| {
             config.features.experimental = true;
-        }).await.unwrap();
+        }).await.expect("Async operation should succeed");
         
         assert!(manager.is_feature_enabled("experimental").await);
     }
@@ -710,9 +710,9 @@ mod tests {
         manager.update(|config| {
             config.proxy.enabled = true;
             // No host/port configured - should generate warnings
-        }).await.unwrap();
+        }).await.expect("Async operation should succeed");
 
-        let warnings = manager.validate().await.unwrap();
+        let warnings = manager.validate().await.expect("Validate operation should succeed");
         assert!(!warnings.is_empty());
     }
 
@@ -722,14 +722,14 @@ mod tests {
         
         manager.update(|config| {
             config.general.theme = "custom_theme".to_string();
-        }).await.unwrap();
+        }).await.expect("Async operation should succeed");
 
-        let json = manager.export_json().await.unwrap();
+        let json = manager.export_json().await.expect("Export operation should succeed");
         assert!(json.contains("custom_theme"));
 
         // Reset and import
-        manager.reset().await.unwrap();
-        manager.import_json(&json).await.unwrap();
+        manager.reset().await.expect("Reset operation should succeed");
+        manager.import_json(&json).await.expect("Import operation should succeed");
         
         let config = manager.get().await;
         assert_eq!(config.general.theme, "custom_theme");

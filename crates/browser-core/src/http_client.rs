@@ -33,8 +33,8 @@ impl HttpClient {
             .build();
         
         let rate_limiter = Arc::new(RateLimiter::direct(
-            Quota::per_second(NonZeroU32::new(10).unwrap())
-                .allow_burst(NonZeroU32::new(20).unwrap())
+            Quota::per_second(NonZeroU32::new(10).expect("10 is non-zero"))
+                .allow_burst(NonZeroU32::new(20).expect("20 is non-zero"))
         ));
         
         Ok(Self { 
@@ -65,8 +65,8 @@ impl HttpClient {
             .build();
         
         let rate_limiter = Arc::new(RateLimiter::direct(
-            Quota::per_second(NonZeroU32::new(10).unwrap())
-                .allow_burst(NonZeroU32::new(20).unwrap())
+            Quota::per_second(NonZeroU32::new(10).expect("10 is non-zero"))
+                .allow_burst(NonZeroU32::new(20).expect("20 is non-zero"))
         ));
         
         Ok(Self { 

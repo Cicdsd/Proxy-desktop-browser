@@ -756,7 +756,7 @@ mod tests {
     use tempfile::TempDir;
 
     async fn create_test_storage() -> (StorageEngine, TempDir) {
-        let temp_dir = TempDir::new().unwrap();
+        let temp_dir = TempDir::new().expect("Operation should succeed in test");
         let storage = StorageEngine::new(temp_dir.path()).unwrap();
         (storage, temp_dir)
     }
@@ -775,22 +775,22 @@ mod tests {
             http_only: true,
             secure: true,
             same_site: "Lax".to_string(),
-        }).await.unwrap();
+        }).await.expect("Async operation should succeed");
 
         storage.add_history("https://example.com", Some("Example")).await.unwrap();
         storage.add_bookmark("https://example.com", "Example Site", None).await.unwrap();
         storage.set_local_storage("https://example.com", "key1", "value1").await.unwrap();
 
         // Export
-        let export = storage.export_all().await.unwrap();
+        let export = storage.export_all().await.expect("Export operation should succeed");
         assert_eq!(export.cookies.len(), 1);
         assert_eq!(export.history.len(), 1);
         assert_eq!(export.bookmarks.len(), 1);
         assert_eq!(export.local_storage.len(), 1);
 
         // Clear and import
-        storage.clear_all().await.unwrap();
-        let stats = storage.import_all(export).await.unwrap();
+        storage.clear_all().await.expect("Clear operation should succeed");
+        let stats = storage.import_all(export).await.expect("Export operation should succeed");
         
         assert_eq!(stats.cookies_count, 1);
         assert_eq!(stats.history_count, 1);
@@ -804,12 +804,12 @@ mod tests {
 
         storage.add_bookmark("https://test.com", "Test", None).await.unwrap();
         
-        let json = storage.export_to_json().await.unwrap();
+        let json = storage.export_to_json().await.expect("Export operation should succeed");
         assert!(json.contains("test.com"));
 
-        storage.clear_all().await.unwrap();
+        storage.clear_all().await.expect("Clear operation should succeed");
         
-        let stats = storage.import_from_json(&json).await.unwrap();
+        let stats = storage.import_from_json(&json).await.expect("Import operation should succeed");
         assert_eq!(stats.bookmarks_count, 1);
     }
 
@@ -826,11 +826,11 @@ mod tests {
             http_only: false,
             secure: false,
             same_site: "None".to_string(),
-        }).await.unwrap();
+        }).await.expect("Async operation should succeed");
         storage.add_bookmark("https://test.com", "Test", None).await.unwrap();
 
-        let export = storage.export_all().await.unwrap();
-        storage.clear_all().await.unwrap();
+        let export = storage.export_all().await.expect("Export operation should succeed");
+        storage.clear_all().await.expect("Clear operation should succeed");
 
         // Import only bookmarks
         let options = ImportOptions {
@@ -841,10 +841,10 @@ mod tests {
             import_local_storage: false,
         };
         
-        storage.import_with_options(export, &options).await.unwrap();
+        storage.import_with_options(export, &options).await.expect("Export operation should succeed");
         
-        assert_eq!(storage.get_all_cookies().await.unwrap().len(), 0);
-        assert_eq!(storage.get_bookmarks().await.unwrap().len(), 1);
+        assert_eq!(storage.get_all_cookies().await.expect("Get operation should succeed").len(), 0);
+        assert_eq!(storage.get_bookmarks().await.expect("Get operation should succeed").len(), 1);
     }
 
     #[tokio::test]
@@ -852,16 +852,16 @@ mod tests {
         let (storage, _temp) = create_test_storage().await;
 
         storage.add_bookmark("https://first.com", "First", None).await.unwrap();
-        let export = storage.export_all().await.unwrap();
+        let export = storage.export_all().await.expect("Export operation should succeed");
 
         storage.add_bookmark("https://second.com", "Second", None).await.unwrap();
 
         // Merge import
         let options = ImportOptions::all();
-        storage.import_with_options(export, &options).await.unwrap();
+        storage.import_with_options(export, &options).await.expect("Export operation should succeed");
 
         // Should have both bookmarks
-        let bookmarks = storage.get_bookmarks().await.unwrap();
+        let bookmarks = storage.get_bookmarks().await.expect("Get operation should succeed");
         assert_eq!(bookmarks.len(), 2);
     }
 }
@@ -1365,7 +1365,7 @@ mod session_tests {
     use tempfile::TempDir;
 
     async fn create_test_session_manager() -> (SessionManager, TempDir) {
-        let temp_dir = TempDir::new().unwrap();
+        let temp_dir = TempDir::new().expect("Operation should succeed in test");
         let manager = SessionManager::new(temp_dir.path().to_path_buf());
         (manager, temp_dir)
     }
@@ -1374,7 +1374,7 @@ mod session_tests {
     async fn test_create_session() {
         let (manager, _temp) = create_test_session_manager().await;
         
-        let session = manager.create_session("Test Session", false).await.unwrap();
+        let session = manager.create_session("Test Session", false).await.expect("Create operation should succeed");
         assert_eq!(session.name, "Test Session");
         assert!(!session.is_default);
     }
@@ -1383,7 +1383,7 @@ mod session_tests {
     async fn test_default_session() {
         let (manager, _temp) = create_test_session_manager().await;
         
-        let session = manager.get_or_create_default_session().await.unwrap();
+        let session = manager.get_or_create_default_session().await.expect("Create operation should succeed");
         assert!(session.is_default);
     }
 
@@ -1391,7 +1391,7 @@ mod session_tests {
     async fn test_add_tab() {
         let (manager, _temp) = create_test_session_manager().await;
         
-        let session = manager.create_session("Test", false).await.unwrap();
+        let session = manager.create_session("Test", false).await.expect("Create operation should succeed");
         
         let tab = SessionTab {
             tab_id: "tab1".to_string(),
@@ -1406,26 +1406,26 @@ mod session_tests {
             history_index: 0,
         };
         
-        manager.add_tab_to_session(&session.session_id, tab).await.unwrap();
+        manager.add_tab_to_session(&session.session_id, tab).await.expect("Add operation should succeed");
         
-        let updated = manager.get_session(&session.session_id).await.unwrap();
+        let updated = manager.get_session(&session.session_id).await.expect("Get operation should succeed");
         assert_eq!(updated.tabs.len(), 1);
     }
 
     #[tokio::test]
     async fn test_session_persistence() {
-        let temp_dir = TempDir::new().unwrap();
+        let temp_dir = TempDir::new().expect("Operation should succeed in test");
         
         // Create and save
         {
             let manager = SessionManager::new(temp_dir.path().to_path_buf());
-            manager.create_session("Persistent Session", true).await.unwrap();
+            manager.create_session("Persistent Session", true).await.expect("Create operation should succeed");
         }
         
         // Load in new manager
         {
             let manager = SessionManager::new(temp_dir.path().to_path_buf());
-            let count = manager.load_sessions().await.unwrap();
+            let count = manager.load_sessions().await.expect("Load operation should succeed");
             assert_eq!(count, 1);
             
             let sessions = manager.list_sessions().await;
@@ -1437,8 +1437,8 @@ mod session_tests {
     async fn test_duplicate_session() {
         let (manager, _temp) = create_test_session_manager().await;
         
-        let original = manager.create_session("Original", false).await.unwrap();
-        let duplicate = manager.duplicate_session(&original.session_id, "Copy").await.unwrap();
+        let original = manager.create_session("Original", false).await.expect("Create operation should succeed");
+        let duplicate = manager.duplicate_session(&original.session_id, "Copy").await.expect("Duplicate operation should succeed");
         
         assert_ne!(original.session_id, duplicate.session_id);
         assert_eq!(duplicate.name, "Copy");

@@ -825,13 +825,13 @@ mod enhanced_tests {
         let monitor = ProxyHealthMonitor::new();
         
         monitor.record_success("proxy1", 100.0, 1000, 2000).await;
-        let health = monitor.get_health("proxy1").await.unwrap();
+        let health = monitor.get_health("proxy1").await.expect("Get operation should succeed");
         assert!(health.is_healthy);
         
         for _ in 0..3 {
             monitor.record_failure("proxy2", "connection timeout").await;
         }
-        let health2 = monitor.get_health("proxy2").await.unwrap();
+        let health2 = monitor.get_health("proxy2").await.expect("Get operation should succeed");
         assert!(!health2.is_healthy);
     }
 
@@ -842,7 +842,7 @@ mod enhanced_tests {
         monitor.record_success("proxy1", 100.0, 1000, 2000).await;
         monitor.record_success("proxy1", 150.0, 500, 1500).await;
         
-        let stats = monitor.get_bandwidth_stats("proxy1").await.unwrap();
+        let stats = monitor.get_bandwidth_stats("proxy1").await.expect("Get operation should succeed");
         assert_eq!(stats.bytes_sent, 1500);
         assert_eq!(stats.bytes_received, 3500);
         assert_eq!(stats.requests_count, 2);

@@ -1,0 +1,2957 @@
+[
+  {
+    "id": 1,
+    "title": "[Code Quality] Replace unwrap() calls in crates/api-server/tests/api_routes.rs",
+    "body": "## Description\nThe file `crates/api-server/tests/api_routes.rs` contains 16 uses of `.unwrap()` which can cause panics.\n\n## Suggested Fix\nReplace with proper error handling using `?` operator or `.expect()`.\n\n## File Location\n`crates/api-server/tests/api_routes.rs`",
+    "labels": [
+      "code-quality",
+      "rust",
+      "error-handling"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 2,
+    "title": "[Code Quality] Replace unwrap() calls in crates/browser-core/tests/chromium_engine_tests.rs",
+    "body": "## Description\nThe file `crates/browser-core/tests/chromium_engine_tests.rs` contains 5 uses of `.unwrap()` which can cause panics.\n\n## Suggested Fix\nReplace with proper error handling using `?` operator or `.expect()`.\n\n## File Location\n`crates/browser-core/tests/chromium_engine_tests.rs`",
+    "labels": [
+      "code-quality",
+      "rust",
+      "error-handling"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 3,
+    "title": "[Refactoring] Split large file crates/browser-core/tests/chromium_engine_tests.rs",
+    "body": "## Description\nThe file has 561 lines. Consider splitting into modules.\n\n## File Location\n`crates/browser-core/tests/chromium_engine_tests.rs`",
+    "labels": [
+      "refactoring",
+      "rust"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 4,
+    "title": "[Code Quality] Replace unwrap() calls in crates/browser-core/tests/engine_manager_tests.rs",
+    "body": "## Description\nThe file `crates/browser-core/tests/engine_manager_tests.rs` contains 12 uses of `.unwrap()` which can cause panics.\n\n## Suggested Fix\nReplace with proper error handling using `?` operator or `.expect()`.\n\n## File Location\n`crates/browser-core/tests/engine_manager_tests.rs`",
+    "labels": [
+      "code-quality",
+      "rust",
+      "error-handling"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 5,
+    "title": "[Code Quality] Replace unwrap() calls in crates/browser-core/tests/chromium_integration_tests.rs",
+    "body": "## Description\nThe file `crates/browser-core/tests/chromium_integration_tests.rs` contains 19 uses of `.unwrap()` which can cause panics.\n\n## Suggested Fix\nReplace with proper error handling using `?` operator or `.expect()`.\n\n## File Location\n`crates/browser-core/tests/chromium_integration_tests.rs`",
+    "labels": [
+      "code-quality",
+      "rust",
+      "error-handling"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 6,
+    "title": "[Code Quality] Replace unwrap() calls in crates/browser-core/tests/provider_tests.rs",
+    "body": "## Description\nThe file `crates/browser-core/tests/provider_tests.rs` contains 7 uses of `.unwrap()` which can cause panics.\n\n## Suggested Fix\nReplace with proper error handling using `?` operator or `.expect()`.\n\n## File Location\n`crates/browser-core/tests/provider_tests.rs`",
+    "labels": [
+      "code-quality",
+      "rust",
+      "error-handling"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 7,
+    "title": "[Refactoring] Split large file crates/browser-core/tests/provider_tests.rs",
+    "body": "## Description\nThe file has 507 lines. Consider splitting into modules.\n\n## File Location\n`crates/browser-core/tests/provider_tests.rs`",
+    "labels": [
+      "refactoring",
+      "rust"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 8,
+    "title": "[Code Quality] Replace unwrap() calls in crates/browser-core/tests/chromium_features_tests.rs",
+    "body": "## Description\nThe file `crates/browser-core/tests/chromium_features_tests.rs` contains 7 uses of `.unwrap()` which can cause panics.\n\n## Suggested Fix\nReplace with proper error handling using `?` operator or `.expect()`.\n\n## File Location\n`crates/browser-core/tests/chromium_features_tests.rs`",
+    "labels": [
+      "code-quality",
+      "rust",
+      "error-handling"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 9,
+    "title": "[Code Quality] Replace unwrap() calls in crates/browser-core/tests/browser_controls_tests.rs",
+    "body": "## Description\nThe file `crates/browser-core/tests/browser_controls_tests.rs` contains 50 uses of `.unwrap()` which can cause panics.\n\n## Suggested Fix\nReplace with proper error handling using `?` operator or `.expect()`.\n\n## File Location\n`crates/browser-core/tests/browser_controls_tests.rs`",
+    "labels": [
+      "code-quality",
+      "rust",
+      "error-handling"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 10,
+    "title": "[Refactoring] Split large file crates/browser-core/tests/browser_controls_tests.rs",
+    "body": "## Description\nThe file has 720 lines. Consider splitting into modules.\n\n## File Location\n`crates/browser-core/tests/browser_controls_tests.rs`",
+    "labels": [
+      "refactoring",
+      "rust"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 11,
+    "title": "[Code Quality] Replace unwrap() calls in crates/browser-core/tests/tab_lifecycle.rs",
+    "body": "## Description\nThe file `crates/browser-core/tests/tab_lifecycle.rs` contains 6 uses of `.unwrap()` which can cause panics.\n\n## Suggested Fix\nReplace with proper error handling using `?` operator or `.expect()`.\n\n## File Location\n`crates/browser-core/tests/tab_lifecycle.rs`",
+    "labels": [
+      "code-quality",
+      "rust",
+      "error-handling"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 12,
+    "title": "[Code Quality] Replace unwrap() calls in crates/browser-core/tests/chromium_tab_tests.rs",
+    "body": "## Description\nThe file `crates/browser-core/tests/chromium_tab_tests.rs` contains 4 uses of `.unwrap()` which can cause panics.\n\n## Suggested Fix\nReplace with proper error handling using `?` operator or `.expect()`.\n\n## File Location\n`crates/browser-core/tests/chromium_tab_tests.rs`",
+    "labels": [
+      "code-quality",
+      "rust",
+      "error-handling"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 13,
+    "title": "[Code Quality] Replace unwrap() calls in crates/browser-core/tests/network_interception_tests.rs",
+    "body": "## Description\nThe file `crates/browser-core/tests/network_interception_tests.rs` contains 7 uses of `.unwrap()` which can cause panics.\n\n## Suggested Fix\nReplace with proper error handling using `?` operator or `.expect()`.\n\n## File Location\n`crates/browser-core/tests/network_interception_tests.rs`",
+    "labels": [
+      "code-quality",
+      "rust",
+      "error-handling"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 14,
+    "title": "[Code Quality] Replace unwrap() calls in crates/browser-core/tests/webview_manager_tests.rs",
+    "body": "## Description\nThe file `crates/browser-core/tests/webview_manager_tests.rs` contains 7 uses of `.unwrap()` which can cause panics.\n\n## Suggested Fix\nReplace with proper error handling using `?` operator or `.expect()`.\n\n## File Location\n`crates/browser-core/tests/webview_manager_tests.rs`",
+    "labels": [
+      "code-quality",
+      "rust",
+      "error-handling"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 15,
+    "title": "[Code Quality] Replace unwrap() calls in crates/browser-core/tests/security_tests.rs",
+    "body": "## Description\nThe file `crates/browser-core/tests/security_tests.rs` contains 4 uses of `.unwrap()` which can cause panics.\n\n## Suggested Fix\nReplace with proper error handling using `?` operator or `.expect()`.\n\n## File Location\n`crates/browser-core/tests/security_tests.rs`",
+    "labels": [
+      "code-quality",
+      "rust",
+      "error-handling"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 16,
+    "title": "[Code Quality] Replace unwrap() calls in crates/browser-core/tests/proxy_rotation_tests.rs",
+    "body": "## Description\nThe file `crates/browser-core/tests/proxy_rotation_tests.rs` contains 5 uses of `.unwrap()` which can cause panics.\n\n## Suggested Fix\nReplace with proper error handling using `?` operator or `.expect()`.\n\n## File Location\n`crates/browser-core/tests/proxy_rotation_tests.rs`",
+    "labels": [
+      "code-quality",
+      "rust",
+      "error-handling"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 17,
+    "title": "[Error Handling] Replace panic! in crates/browser-core/tests/proxy_rotation_tests.rs",
+    "body": "## Description\nThe file has 5 panic! calls. Use Result instead.\n\n## File Location\n`crates/browser-core/tests/proxy_rotation_tests.rs`",
+    "labels": [
+      "error-handling",
+      "rust"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 18,
+    "title": "[Code Quality] Replace unwrap() calls in crates/browser-core/tests/validation_tests.rs",
+    "body": "## Description\nThe file `crates/browser-core/tests/validation_tests.rs` contains 5 uses of `.unwrap()` which can cause panics.\n\n## Suggested Fix\nReplace with proper error handling using `?` operator or `.expect()`.\n\n## File Location\n`crates/browser-core/tests/validation_tests.rs`",
+    "labels": [
+      "code-quality",
+      "rust",
+      "error-handling"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 19,
+    "title": "[Refactoring] Split large file crates/browser-core/tests/validation_tests.rs",
+    "body": "## Description\nThe file has 568 lines. Consider splitting into modules.\n\n## File Location\n`crates/browser-core/tests/validation_tests.rs`",
+    "labels": [
+      "refactoring",
+      "rust"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 20,
+    "title": "[Code Quality] Replace unwrap() calls in crates/browser-core/tests/tab_manager_tests.rs",
+    "body": "## Description\nThe file `crates/browser-core/tests/tab_manager_tests.rs` contains 13 uses of `.unwrap()` which can cause panics.\n\n## Suggested Fix\nReplace with proper error handling using `?` operator or `.expect()`.\n\n## File Location\n`crates/browser-core/tests/tab_manager_tests.rs`",
+    "labels": [
+      "code-quality",
+      "rust",
+      "error-handling"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 21,
+    "title": "[Documentation] Add docs to functions in crates/browser-core/src/free_ip_providers.rs",
+    "body": "## Description\nThe file has 15 undocumented public functions.\n\n## File Location\n`crates/browser-core/src/free_ip_providers.rs`",
+    "labels": [
+      "documentation",
+      "rust"
+    ],
+    "priority": "low"
+  },
+  {
+    "id": 22,
+    "title": "[Documentation] Add docs to functions in crates/browser-core/src/browser_controls.rs",
+    "body": "## Description\nThe file has 24 undocumented public functions.\n\n## File Location\n`crates/browser-core/src/browser_controls.rs`",
+    "labels": [
+      "documentation",
+      "rust"
+    ],
+    "priority": "low"
+  },
+  {
+    "id": 23,
+    "title": "[Performance] Review clone() usage in crates/browser-core/src/browser_controls.rs",
+    "body": "## Description\nThe file has 11 clone() calls. Consider using references.\n\n## File Location\n`crates/browser-core/src/browser_controls.rs`",
+    "labels": [
+      "performance",
+      "rust"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 24,
+    "title": "[Refactoring] Split large file crates/browser-core/src/browser_controls.rs",
+    "body": "## Description\nThe file has 725 lines. Consider splitting into modules.\n\n## File Location\n`crates/browser-core/src/browser_controls.rs`",
+    "labels": [
+      "refactoring",
+      "rust"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 25,
+    "title": "[Code Quality] Replace unwrap() calls in crates/browser-core/src/automation.rs",
+    "body": "## Description\nThe file `crates/browser-core/src/automation.rs` contains 5 uses of `.unwrap()` which can cause panics.\n\n## Suggested Fix\nReplace with proper error handling using `?` operator or `.expect()`.\n\n## File Location\n`crates/browser-core/src/automation.rs`",
+    "labels": [
+      "code-quality",
+      "rust",
+      "error-handling"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 26,
+    "title": "[Documentation] Add docs to functions in crates/browser-core/src/automation.rs",
+    "body": "## Description\nThe file has 6 undocumented public functions.\n\n## File Location\n`crates/browser-core/src/automation.rs`",
+    "labels": [
+      "documentation",
+      "rust"
+    ],
+    "priority": "low"
+  },
+  {
+    "id": 27,
+    "title": "[Performance] Review clone() usage in crates/browser-core/src/automation.rs",
+    "body": "## Description\nThe file has 12 clone() calls. Consider using references.\n\n## File Location\n`crates/browser-core/src/automation.rs`",
+    "labels": [
+      "performance",
+      "rust"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 28,
+    "title": "[Refactoring] Split large file crates/browser-core/src/automation.rs",
+    "body": "## Description\nThe file has 899 lines. Consider splitting into modules.\n\n## File Location\n`crates/browser-core/src/automation.rs`",
+    "labels": [
+      "refactoring",
+      "rust"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 29,
+    "title": "[Refactoring] Split large file crates/browser-core/src/error_recovery.rs",
+    "body": "## Description\nThe file has 600 lines. Consider splitting into modules.\n\n## File Location\n`crates/browser-core/src/error_recovery.rs`",
+    "labels": [
+      "refactoring",
+      "rust"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 30,
+    "title": "[Code Quality] Replace unwrap() calls in crates/browser-core/src/http_client.rs",
+    "body": "## Description\nThe file `crates/browser-core/src/http_client.rs` contains 4 uses of `.unwrap()` which can cause panics.\n\n## Suggested Fix\nReplace with proper error handling using `?` operator or `.expect()`.\n\n## File Location\n`crates/browser-core/src/http_client.rs`",
+    "labels": [
+      "code-quality",
+      "rust",
+      "error-handling"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 31,
+    "title": "[Documentation] Add docs to functions in crates/browser-core/src/http_client.rs",
+    "body": "## Description\nThe file has 8 undocumented public functions.\n\n## File Location\n`crates/browser-core/src/http_client.rs`",
+    "labels": [
+      "documentation",
+      "rust"
+    ],
+    "priority": "low"
+  },
+  {
+    "id": 32,
+    "title": "[Documentation] Add docs to functions in crates/browser-core/src/backup.rs",
+    "body": "## Description\nThe file has 6 undocumented public functions.\n\n## File Location\n`crates/browser-core/src/backup.rs`",
+    "labels": [
+      "documentation",
+      "rust"
+    ],
+    "priority": "low"
+  },
+  {
+    "id": 33,
+    "title": "[Performance] Review clone() usage in crates/browser-core/src/proxy_rotation.rs",
+    "body": "## Description\nThe file has 17 clone() calls. Consider using references.\n\n## File Location\n`crates/browser-core/src/proxy_rotation.rs`",
+    "labels": [
+      "performance",
+      "rust"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 34,
+    "title": "[Refactoring] Split large file crates/browser-core/src/proxy_rotation.rs",
+    "body": "## Description\nThe file has 851 lines. Consider splitting into modules.\n\n## File Location\n`crates/browser-core/src/proxy_rotation.rs`",
+    "labels": [
+      "refactoring",
+      "rust"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 35,
+    "title": "[TODO]  Implement proper page-to-tab mapping when chromiumoxide sup",
+    "body": "## Description\nFound TODO in `crates/browser-core/src/chromium_engine.rs`:\n```\n Implement proper page-to-tab mapping when chromiumoxide supports target IDs\n```\n\n## File Location\n`crates/browser-core/src/chromium_engine.rs`",
+    "labels": [
+      "todo",
+      "enhancement"
+    ],
+    "priority": "low"
+  },
+  {
+    "id": 36,
+    "title": "[Performance] Review clone() usage in crates/browser-core/src/chromium_engine.rs",
+    "body": "## Description\nThe file has 12 clone() calls. Consider using references.\n\n## File Location\n`crates/browser-core/src/chromium_engine.rs`",
+    "labels": [
+      "performance",
+      "rust"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 37,
+    "title": "[Refactoring] Split large file crates/browser-core/src/chromium_engine.rs",
+    "body": "## Description\nThe file has 1301 lines. Consider splitting into modules.\n\n## File Location\n`crates/browser-core/src/chromium_engine.rs`",
+    "labels": [
+      "refactoring",
+      "rust"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 38,
+    "title": "[Documentation] Add docs to functions in crates/browser-core/src/content_enhancement.rs",
+    "body": "## Description\nThe file has 7 undocumented public functions.\n\n## File Location\n`crates/browser-core/src/content_enhancement.rs`",
+    "labels": [
+      "documentation",
+      "rust"
+    ],
+    "priority": "low"
+  },
+  {
+    "id": 39,
+    "title": "[Refactoring] Split large file crates/browser-core/src/content_enhancement.rs",
+    "body": "## Description\nThe file has 1489 lines. Consider splitting into modules.\n\n## File Location\n`crates/browser-core/src/content_enhancement.rs`",
+    "labels": [
+      "refactoring",
+      "rust"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 40,
+    "title": "[Documentation] Add docs to functions in crates/browser-core/src/webview_manager.rs",
+    "body": "## Description\nThe file has 24 undocumented public functions.\n\n## File Location\n`crates/browser-core/src/webview_manager.rs`",
+    "labels": [
+      "documentation",
+      "rust"
+    ],
+    "priority": "low"
+  },
+  {
+    "id": 41,
+    "title": "[Refactoring] Split large file crates/browser-core/src/webview_manager.rs",
+    "body": "## Description\nThe file has 748 lines. Consider splitting into modules.\n\n## File Location\n`crates/browser-core/src/webview_manager.rs`",
+    "labels": [
+      "refactoring",
+      "rust"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 42,
+    "title": "[Refactoring] Split large file crates/browser-core/src/performance_optimizer.rs",
+    "body": "## Description\nThe file has 618 lines. Consider splitting into modules.\n\n## File Location\n`crates/browser-core/src/performance_optimizer.rs`",
+    "labels": [
+      "refactoring",
+      "rust"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 43,
+    "title": "[Documentation] Add docs to functions in crates/browser-core/src/proxy.rs",
+    "body": "## Description\nThe file has 14 undocumented public functions.\n\n## File Location\n`crates/browser-core/src/proxy.rs`",
+    "labels": [
+      "documentation",
+      "rust"
+    ],
+    "priority": "low"
+  },
+  {
+    "id": 44,
+    "title": "[Documentation] Add docs to functions in crates/browser-core/src/experimental.rs",
+    "body": "## Description\nThe file has 74 undocumented public functions.\n\n## File Location\n`crates/browser-core/src/experimental.rs`",
+    "labels": [
+      "documentation",
+      "rust"
+    ],
+    "priority": "low"
+  },
+  {
+    "id": 45,
+    "title": "[Refactoring] Split large file crates/browser-core/src/experimental.rs",
+    "body": "## Description\nThe file has 1296 lines. Consider splitting into modules.\n\n## File Location\n`crates/browser-core/src/experimental.rs`",
+    "labels": [
+      "refactoring",
+      "rust"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 46,
+    "title": "[Code Quality] Replace unwrap() calls in crates/browser-core/src/security.rs",
+    "body": "## Description\nThe file `crates/browser-core/src/security.rs` contains 4 uses of `.unwrap()` which can cause panics.\n\n## Suggested Fix\nReplace with proper error handling using `?` operator or `.expect()`.\n\n## File Location\n`crates/browser-core/src/security.rs`",
+    "labels": [
+      "code-quality",
+      "rust",
+      "error-handling"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 47,
+    "title": "[Refactoring] Split large file crates/browser-core/src/network_intelligence.rs",
+    "body": "## Description\nThe file has 827 lines. Consider splitting into modules.\n\n## File Location\n`crates/browser-core/src/network_intelligence.rs`",
+    "labels": [
+      "refactoring",
+      "rust"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 48,
+    "title": "[Performance] Review clone() usage in crates/browser-core/src/local_proxy.rs",
+    "body": "## Description\nThe file has 17 clone() calls. Consider using references.\n\n## File Location\n`crates/browser-core/src/local_proxy.rs`",
+    "labels": [
+      "performance",
+      "rust"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 49,
+    "title": "[Refactoring] Split large file crates/browser-core/src/local_proxy.rs",
+    "body": "## Description\nThe file has 865 lines. Consider splitting into modules.\n\n## File Location\n`crates/browser-core/src/local_proxy.rs`",
+    "labels": [
+      "refactoring",
+      "rust"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 50,
+    "title": "[Refactoring] Split large file crates/browser-core/src/privacy_fortress.rs",
+    "body": "## Description\nThe file has 875 lines. Consider splitting into modules.\n\n## File Location\n`crates/browser-core/src/privacy_fortress.rs`",
+    "labels": [
+      "refactoring",
+      "rust"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 51,
+    "title": "[Performance] Review clone() usage in crates/browser-core/src/ad_verification.rs",
+    "body": "## Description\nThe file has 12 clone() calls. Consider using references.\n\n## File Location\n`crates/browser-core/src/ad_verification.rs`",
+    "labels": [
+      "performance",
+      "rust"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 52,
+    "title": "[Refactoring] Split large file crates/browser-core/src/ad_verification.rs",
+    "body": "## Description\nThe file has 535 lines. Consider splitting into modules.\n\n## File Location\n`crates/browser-core/src/ad_verification.rs`",
+    "labels": [
+      "refactoring",
+      "rust"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 53,
+    "title": "[Code Quality] Replace unwrap() calls in crates/browser-core/src/prelude.rs",
+    "body": "## Description\nThe file `crates/browser-core/src/prelude.rs` contains 5 uses of `.unwrap()` which can cause panics.\n\n## Suggested Fix\nReplace with proper error handling using `?` operator or `.expect()`.\n\n## File Location\n`crates/browser-core/src/prelude.rs`",
+    "labels": [
+      "code-quality",
+      "rust",
+      "error-handling"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 54,
+    "title": "[Refactoring] Split large file crates/browser-core/src/prelude.rs",
+    "body": "## Description\nThe file has 681 lines. Consider splitting into modules.\n\n## File Location\n`crates/browser-core/src/prelude.rs`",
+    "labels": [
+      "refactoring",
+      "rust"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 55,
+    "title": "[Documentation] Add docs to functions in crates/browser-core/src/browser_tab_manager.rs",
+    "body": "## Description\nThe file has 17 undocumented public functions.\n\n## File Location\n`crates/browser-core/src/browser_tab_manager.rs`",
+    "labels": [
+      "documentation",
+      "rust"
+    ],
+    "priority": "low"
+  },
+  {
+    "id": 56,
+    "title": "[Performance] Review clone() usage in crates/browser-core/src/browser_tab_manager.rs",
+    "body": "## Description\nThe file has 12 clone() calls. Consider using references.\n\n## File Location\n`crates/browser-core/src/browser_tab_manager.rs`",
+    "labels": [
+      "performance",
+      "rust"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 57,
+    "title": "[Refactoring] Split large file crates/browser-core/src/browser_tab_manager.rs",
+    "body": "## Description\nThe file has 687 lines. Consider splitting into modules.\n\n## File Location\n`crates/browser-core/src/browser_tab_manager.rs`",
+    "labels": [
+      "refactoring",
+      "rust"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 58,
+    "title": "[Code Quality] Replace unwrap() calls in crates/browser-core/src/storage.rs",
+    "body": "## Description\nThe file `crates/browser-core/src/storage.rs` contains 36 uses of `.unwrap()` which can cause panics.\n\n## Suggested Fix\nReplace with proper error handling using `?` operator or `.expect()`.\n\n## File Location\n`crates/browser-core/src/storage.rs`",
+    "labels": [
+      "code-quality",
+      "rust",
+      "error-handling"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 59,
+    "title": "[Documentation] Add docs to functions in crates/browser-core/src/storage.rs",
+    "body": "## Description\nThe file has 19 undocumented public functions.\n\n## File Location\n`crates/browser-core/src/storage.rs`",
+    "labels": [
+      "documentation",
+      "rust"
+    ],
+    "priority": "low"
+  },
+  {
+    "id": 60,
+    "title": "[Performance] Review clone() usage in crates/browser-core/src/storage.rs",
+    "body": "## Description\nThe file has 22 clone() calls. Consider using references.\n\n## File Location\n`crates/browser-core/src/storage.rs`",
+    "labels": [
+      "performance",
+      "rust"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 61,
+    "title": "[Refactoring] Split large file crates/browser-core/src/storage.rs",
+    "body": "## Description\nThe file has 1447 lines. Consider splitting into modules.\n\n## File Location\n`crates/browser-core/src/storage.rs`",
+    "labels": [
+      "refactoring",
+      "rust"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 62,
+    "title": "[Documentation] Add docs to functions in crates/browser-core/src/proxy_validator.rs",
+    "body": "## Description\nThe file has 8 undocumented public functions.\n\n## File Location\n`crates/browser-core/src/proxy_validator.rs`",
+    "labels": [
+      "documentation",
+      "rust"
+    ],
+    "priority": "low"
+  },
+  {
+    "id": 63,
+    "title": "[Performance] Review clone() usage in crates/browser-core/src/proxy_validator.rs",
+    "body": "## Description\nThe file has 14 clone() calls. Consider using references.\n\n## File Location\n`crates/browser-core/src/proxy_validator.rs`",
+    "labels": [
+      "performance",
+      "rust"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 64,
+    "title": "[Refactoring] Split large file crates/browser-core/src/proxy_validator.rs",
+    "body": "## Description\nThe file has 866 lines. Consider splitting into modules.\n\n## File Location\n`crates/browser-core/src/proxy_validator.rs`",
+    "labels": [
+      "refactoring",
+      "rust"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 65,
+    "title": "[Code Quality] Replace unwrap() calls in crates/browser-core/src/config_manager.rs",
+    "body": "## Description\nThe file `crates/browser-core/src/config_manager.rs` contains 12 uses of `.unwrap()` which can cause panics.\n\n## Suggested Fix\nReplace with proper error handling using `?` operator or `.expect()`.\n\n## File Location\n`crates/browser-core/src/config_manager.rs`",
+    "labels": [
+      "code-quality",
+      "rust",
+      "error-handling"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 66,
+    "title": "[Documentation] Add docs to functions in crates/browser-core/src/config_manager.rs",
+    "body": "## Description\nThe file has 7 undocumented public functions.\n\n## File Location\n`crates/browser-core/src/config_manager.rs`",
+    "labels": [
+      "documentation",
+      "rust"
+    ],
+    "priority": "low"
+  },
+  {
+    "id": 67,
+    "title": "[Refactoring] Split large file crates/browser-core/src/config_manager.rs",
+    "body": "## Description\nThe file has 738 lines. Consider splitting into modules.\n\n## File Location\n`crates/browser-core/src/config_manager.rs`",
+    "labels": [
+      "refactoring",
+      "rust"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 68,
+    "title": "[Code Quality] Replace unwrap() calls in crates/browser-core/src/scraper_util.rs",
+    "body": "## Description\nThe file `crates/browser-core/src/scraper_util.rs` contains 8 uses of `.unwrap()` which can cause panics.\n\n## Suggested Fix\nReplace with proper error handling using `?` operator or `.expect()`.\n\n## File Location\n`crates/browser-core/src/scraper_util.rs`",
+    "labels": [
+      "code-quality",
+      "rust",
+      "error-handling"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 69,
+    "title": "[Documentation] Add docs to functions in ui-tauri/src-tauri/src/auth.rs",
+    "body": "## Description\nThe file has 9 undocumented public functions.\n\n## File Location\n`ui-tauri/src-tauri/src/auth.rs`",
+    "labels": [
+      "documentation",
+      "rust"
+    ],
+    "priority": "low"
+  },
+  {
+    "id": 70,
+    "title": "[Performance] Review clone() usage in ui-tauri/src-tauri/src/auth.rs",
+    "body": "## Description\nThe file has 16 clone() calls. Consider using references.\n\n## File Location\n`ui-tauri/src-tauri/src/auth.rs`",
+    "labels": [
+      "performance",
+      "rust"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 71,
+    "title": "[Documentation] Add docs to functions in ui-tauri/src-tauri/src/webview_manager.rs",
+    "body": "## Description\nThe file has 10 undocumented public functions.\n\n## File Location\n`ui-tauri/src-tauri/src/webview_manager.rs`",
+    "labels": [
+      "documentation",
+      "rust"
+    ],
+    "priority": "low"
+  },
+  {
+    "id": 72,
+    "title": "[Refactoring] Split large file ui-tauri/src-tauri/src/main.rs",
+    "body": "## Description\nThe file has 1038 lines. Consider splitting into modules.\n\n## File Location\n`ui-tauri/src-tauri/src/main.rs`",
+    "labels": [
+      "refactoring",
+      "rust"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 73,
+    "title": "[Refactoring] Split large component ui-tauri/src/components/MainApp.svelte",
+    "body": "## Description\nComponent has 480 lines.\n\n## File Location\n`ui-tauri/src/components/MainApp.svelte`",
+    "labels": [
+      "refactoring",
+      "svelte"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 74,
+    "title": "[Refactoring] Split large component ui-tauri/src/components/browser/WebviewBrowser.svelte",
+    "body": "## Description\nComponent has 350 lines.\n\n## File Location\n`ui-tauri/src/components/browser/WebviewBrowser.svelte`",
+    "labels": [
+      "refactoring",
+      "svelte"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 75,
+    "title": "[Refactoring] Split large component ui-tauri/src/components/browser/BrowserShell.svelte",
+    "body": "## Description\nComponent has 2247 lines.\n\n## File Location\n`ui-tauri/src/components/browser/BrowserShell.svelte`",
+    "labels": [
+      "refactoring",
+      "svelte"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 76,
+    "title": "[Refactoring] Split large component ui-tauri/src/components/browser/NavigationBar.svelte",
+    "body": "## Description\nComponent has 307 lines.\n\n## File Location\n`ui-tauri/src/components/browser/NavigationBar.svelte`",
+    "labels": [
+      "refactoring",
+      "svelte"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 77,
+    "title": "[Refactoring] Split large component ui-tauri/src/components/browser/BrowserView.svelte",
+    "body": "## Description\nComponent has 283 lines.\n\n## File Location\n`ui-tauri/src/components/browser/BrowserView.svelte`",
+    "labels": [
+      "refactoring",
+      "svelte"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 78,
+    "title": "[Refactoring] Split large component ui-tauri/src/components/browser/EnhancedTabList.svelte",
+    "body": "## Description\nComponent has 316 lines.\n\n## File Location\n`ui-tauri/src/components/browser/EnhancedTabList.svelte`",
+    "labels": [
+      "refactoring",
+      "svelte"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 79,
+    "title": "[Refactoring] Split large component ui-tauri/src/components/auth/LoginForm.svelte",
+    "body": "## Description\nComponent has 228 lines.\n\n## File Location\n`ui-tauri/src/components/auth/LoginForm.svelte`",
+    "labels": [
+      "refactoring",
+      "svelte"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 80,
+    "title": "[Refactoring] Split large component ui-tauri/src/components/auth/RegisterForm.svelte",
+    "body": "## Description\nComponent has 280 lines.\n\n## File Location\n`ui-tauri/src/components/auth/RegisterForm.svelte`",
+    "labels": [
+      "refactoring",
+      "svelte"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 81,
+    "title": "[Refactoring] Split large component ui-tauri/src/components/auth/UserManagement.svelte",
+    "body": "## Description\nComponent has 454 lines.\n\n## File Location\n`ui-tauri/src/components/auth/UserManagement.svelte`",
+    "labels": [
+      "refactoring",
+      "svelte"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 82,
+    "title": "[Refactoring] Split large component ui-tauri/src/components/ui/VirtualList.svelte",
+    "body": "## Description\nComponent has 273 lines.\n\n## File Location\n`ui-tauri/src/components/ui/VirtualList.svelte`",
+    "labels": [
+      "refactoring",
+      "svelte"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 83,
+    "title": "[Refactoring] Split large component ui-tauri/src/components/config/BrowserSettingsPanel.svelte",
+    "body": "## Description\nComponent has 416 lines.\n\n## File Location\n`ui-tauri/src/components/config/BrowserSettingsPanel.svelte`",
+    "labels": [
+      "refactoring",
+      "svelte"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 84,
+    "title": "[Refactoring] Split large component ui-tauri/src/components/config/ProxyConfiguration.svelte",
+    "body": "## Description\nComponent has 210 lines.\n\n## File Location\n`ui-tauri/src/components/config/ProxyConfiguration.svelte`",
+    "labels": [
+      "refactoring",
+      "svelte"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 85,
+    "title": "[Refactoring] Split large component ui-tauri/src/components/config/FreeProxiesPanel.svelte",
+    "body": "## Description\nComponent has 302 lines.\n\n## File Location\n`ui-tauri/src/components/config/FreeProxiesPanel.svelte`",
+    "labels": [
+      "refactoring",
+      "svelte"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 86,
+    "title": "[Refactoring] Split large component ui-tauri/src/components/config/BackupRestorePanel.svelte",
+    "body": "## Description\nComponent has 343 lines.\n\n## File Location\n`ui-tauri/src/components/config/BackupRestorePanel.svelte`",
+    "labels": [
+      "refactoring",
+      "svelte"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 87,
+    "title": "[Refactoring] Split large component ui-tauri/src/components/config/FreeIpProvidersPanel.svelte",
+    "body": "## Description\nComponent has 336 lines.\n\n## File Location\n`ui-tauri/src/components/config/FreeIpProvidersPanel.svelte`",
+    "labels": [
+      "refactoring",
+      "svelte"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 88,
+    "title": "[Refactoring] Split large component ui-tauri/src/components/config/ApiSettingsPanel.svelte",
+    "body": "## Description\nComponent has 1131 lines.\n\n## File Location\n`ui-tauri/src/components/config/ApiSettingsPanel.svelte`",
+    "labels": [
+      "refactoring",
+      "svelte"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 89,
+    "title": "[Refactoring] Split large component ui-tauri/src/components/layout/LeftPanel.svelte",
+    "body": "## Description\nComponent has 221 lines.\n\n## File Location\n`ui-tauri/src/components/layout/LeftPanel.svelte`",
+    "labels": [
+      "refactoring",
+      "svelte"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 90,
+    "title": "[Feature] Multi-language support (i18n)",
+    "body": "## Description\nAdd internationalization support for the UI\n\n## Acceptance Criteria\n- Feature is fully implemented\n- UI is intuitive and accessible\n- Tests are added\n- Documentation is updated",
+    "labels": [
+      "enhancement",
+      "i18n"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 91,
+    "title": "[Feature] Dark/Light theme toggle",
+    "body": "## Description\nAdd theme switching capability with user preference persistence\n\n## Acceptance Criteria\n- Feature is fully implemented\n- UI is intuitive and accessible\n- Tests are added\n- Documentation is updated",
+    "labels": [
+      "enhancement",
+      "ui"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 92,
+    "title": "[Feature] Proxy health monitoring dashboard",
+    "body": "## Description\nReal-time dashboard showing proxy status, latency, and uptime\n\n## Acceptance Criteria\n- Feature is fully implemented\n- UI is intuitive and accessible\n- Tests are added\n- Documentation is updated",
+    "labels": [
+      "enhancement",
+      "feature"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 93,
+    "title": "[Feature] Export proxy configurations",
+    "body": "## Description\nAllow exporting proxy settings to JSON/YAML formats\n\n## Acceptance Criteria\n- Feature is fully implemented\n- UI is intuitive and accessible\n- Tests are added\n- Documentation is updated",
+    "labels": [
+      "enhancement",
+      "feature"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 94,
+    "title": "[Feature] Import proxy configurations",
+    "body": "## Description\nAllow importing proxy settings from configuration files\n\n## Acceptance Criteria\n- Feature is fully implemented\n- UI is intuitive and accessible\n- Tests are added\n- Documentation is updated",
+    "labels": [
+      "enhancement",
+      "feature"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 95,
+    "title": "[Feature] Customizable keyboard shortcuts",
+    "body": "## Description\nUser-defined hotkeys for common operations\n\n## Acceptance Criteria\n- Feature is fully implemented\n- UI is intuitive and accessible\n- Tests are added\n- Documentation is updated",
+    "labels": [
+      "enhancement",
+      "ux"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 96,
+    "title": "[Feature] Session save and restore",
+    "body": "## Description\nPersist and restore browser sessions across restarts\n\n## Acceptance Criteria\n- Feature is fully implemented\n- UI is intuitive and accessible\n- Tests are added\n- Documentation is updated",
+    "labels": [
+      "enhancement",
+      "feature"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 97,
+    "title": "[Feature] Scheduled proxy rotation",
+    "body": "## Description\nTime-based automatic proxy switching with schedules\n\n## Acceptance Criteria\n- Feature is fully implemented\n- UI is intuitive and accessible\n- Tests are added\n- Documentation is updated",
+    "labels": [
+      "enhancement",
+      "feature"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 98,
+    "title": "[Feature] Bandwidth usage monitoring",
+    "body": "## Description\nTrack and display data usage per proxy and tab\n\n## Acceptance Criteria\n- Feature is fully implemented\n- UI is intuitive and accessible\n- Tests are added\n- Documentation is updated",
+    "labels": [
+      "enhancement",
+      "feature"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 99,
+    "title": "[Feature] Connection pool optimization",
+    "body": "## Description\nOptimize connection reuse for better performance\n\n## Acceptance Criteria\n- Feature is fully implemented\n- UI is intuitive and accessible\n- Tests are added\n- Documentation is updated",
+    "labels": [
+      "enhancement",
+      "performance"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 100,
+    "title": "[Feature] Browser extension support",
+    "body": "## Description\nEnable installation and management of browser extensions\n\n## Acceptance Criteria\n- Feature is fully implemented\n- UI is intuitive and accessible\n- Tests are added\n- Documentation is updated",
+    "labels": [
+      "enhancement",
+      "feature"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 101,
+    "title": "[Feature] Custom user-agent manager",
+    "body": "## Description\nUI for creating and managing custom user agents\n\n## Acceptance Criteria\n- Feature is fully implemented\n- UI is intuitive and accessible\n- Tests are added\n- Documentation is updated",
+    "labels": [
+      "enhancement",
+      "feature"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 102,
+    "title": "[Feature] Proxy chaining support",
+    "body": "## Description\nSupport for multi-hop proxy connections\n\n## Acceptance Criteria\n- Feature is fully implemented\n- UI is intuitive and accessible\n- Tests are added\n- Documentation is updated",
+    "labels": [
+      "enhancement",
+      "feature"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 103,
+    "title": "[Feature] Geolocation spoofing",
+    "body": "## Description\nAbility to fake browser geolocation data\n\n## Acceptance Criteria\n- Feature is fully implemented\n- UI is intuitive and accessible\n- Tests are added\n- Documentation is updated",
+    "labels": [
+      "enhancement",
+      "privacy"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 104,
+    "title": "[Feature] WebRTC leak prevention",
+    "body": "## Description\nBlock WebRTC from leaking real IP addresses\n\n## Acceptance Criteria\n- Feature is fully implemented\n- UI is intuitive and accessible\n- Tests are added\n- Documentation is updated",
+    "labels": [
+      "enhancement",
+      "security"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 105,
+    "title": "[Feature] DNS over HTTPS (DoH)",
+    "body": "## Description\nImplement encrypted DNS queries for privacy\n\n## Acceptance Criteria\n- Feature is fully implemented\n- UI is intuitive and accessible\n- Tests are added\n- Documentation is updated",
+    "labels": [
+      "enhancement",
+      "security"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 106,
+    "title": "[Feature] Automatic proxy failover",
+    "body": "## Description\nAutomatically switch to backup proxy on failure\n\n## Acceptance Criteria\n- Feature is fully implemented\n- UI is intuitive and accessible\n- Tests are added\n- Documentation is updated",
+    "labels": [
+      "enhancement",
+      "reliability"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 107,
+    "title": "[Feature] Built-in proxy speed test",
+    "body": "## Description\nTest and compare proxy latency and throughput\n\n## Acceptance Criteria\n- Feature is fully implemented\n- UI is intuitive and accessible\n- Tests are added\n- Documentation is updated",
+    "labels": [
+      "enhancement",
+      "feature"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 108,
+    "title": "[Feature] Usage analytics dashboard",
+    "body": "## Description\nDetailed statistics on browsing and proxy usage\n\n## Acceptance Criteria\n- Feature is fully implemented\n- UI is intuitive and accessible\n- Tests are added\n- Documentation is updated",
+    "labels": [
+      "enhancement",
+      "feature"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 109,
+    "title": "[Feature] API rate limiting",
+    "body": "## Description\nImplement rate limiting for API endpoints\n\n## Acceptance Criteria\n- Feature is fully implemented\n- UI is intuitive and accessible\n- Tests are added\n- Documentation is updated",
+    "labels": [
+      "enhancement",
+      "security"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 110,
+    "title": "[Feature] Proxy auth credential caching",
+    "body": "## Description\nSecurely cache proxy authentication credentials\n\n## Acceptance Criteria\n- Feature is fully implemented\n- UI is intuitive and accessible\n- Tests are added\n- Documentation is updated",
+    "labels": [
+      "enhancement",
+      "security"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 111,
+    "title": "[Feature] Tab grouping by proxy",
+    "body": "## Description\nOrganize and group tabs by their proxy settings\n\n## Acceptance Criteria\n- Feature is fully implemented\n- UI is intuitive and accessible\n- Tests are added\n- Documentation is updated",
+    "labels": [
+      "enhancement",
+      "ui"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 112,
+    "title": "[Feature] Bookmark manager",
+    "body": "## Description\nSave and organize favorite pages with sync support\n\n## Acceptance Criteria\n- Feature is fully implemented\n- UI is intuitive and accessible\n- Tests are added\n- Documentation is updated",
+    "labels": [
+      "enhancement",
+      "feature"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 113,
+    "title": "[Feature] Download manager",
+    "body": "## Description\nBuilt-in download manager with proxy support\n\n## Acceptance Criteria\n- Feature is fully implemented\n- UI is intuitive and accessible\n- Tests are added\n- Documentation is updated",
+    "labels": [
+      "enhancement",
+      "feature"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 114,
+    "title": "[Feature] Screenshot capture",
+    "body": "## Description\nCapture and save tab screenshots\n\n## Acceptance Criteria\n- Feature is fully implemented\n- UI is intuitive and accessible\n- Tests are added\n- Documentation is updated",
+    "labels": [
+      "enhancement",
+      "feature"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 115,
+    "title": "[Feature] Page archiver",
+    "body": "## Description\nSave complete pages for offline viewing\n\n## Acceptance Criteria\n- Feature is fully implemented\n- UI is intuitive and accessible\n- Tests are added\n- Documentation is updated",
+    "labels": [
+      "enhancement",
+      "feature"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 116,
+    "title": "[Feature] Cookie manager per tab",
+    "body": "## Description\nIsolated cookie management for each tab\n\n## Acceptance Criteria\n- Feature is fully implemented\n- UI is intuitive and accessible\n- Tests are added\n- Documentation is updated",
+    "labels": [
+      "enhancement",
+      "privacy"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 117,
+    "title": "[Feature] Local storage manager",
+    "body": "## Description\nManage local storage data per tab\n\n## Acceptance Criteria\n- Feature is fully implemented\n- UI is intuitive and accessible\n- Tests are added\n- Documentation is updated",
+    "labels": [
+      "enhancement",
+      "privacy"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 118,
+    "title": "[Feature] Network request inspector",
+    "body": "## Description\nDebug and inspect network requests\n\n## Acceptance Criteria\n- Feature is fully implemented\n- UI is intuitive and accessible\n- Tests are added\n- Documentation is updated",
+    "labels": [
+      "enhancement",
+      "debugging"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 119,
+    "title": "[Feature] Console output viewer",
+    "body": "## Description\nView JavaScript console output from pages\n\n## Acceptance Criteria\n- Feature is fully implemented\n- UI is intuitive and accessible\n- Tests are added\n- Documentation is updated",
+    "labels": [
+      "enhancement",
+      "debugging"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 120,
+    "title": "[Feature] SOCKS4 proxy support",
+    "body": "## Description\nAdd support for SOCKS4 protocol\n\n## Acceptance Criteria\n- Feature is fully implemented\n- UI is intuitive and accessible\n- Tests are added\n- Documentation is updated",
+    "labels": [
+      "enhancement",
+      "feature"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 121,
+    "title": "[Feature] Enhanced SOCKS5 support",
+    "body": "## Description\nImproved SOCKS5 handling with UDP\n\n## Acceptance Criteria\n- Feature is fully implemented\n- UI is intuitive and accessible\n- Tests are added\n- Documentation is updated",
+    "labels": [
+      "enhancement",
+      "feature"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 122,
+    "title": "[Feature] HTTP/2 proxy support",
+    "body": "## Description\nSupport for HTTP/2 protocol through proxies\n\n## Acceptance Criteria\n- Feature is fully implemented\n- UI is intuitive and accessible\n- Tests are added\n- Documentation is updated",
+    "labels": [
+      "enhancement",
+      "feature"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 123,
+    "title": "[Feature] Tor network integration",
+    "body": "## Description\nBuilt-in Tor network connectivity\n\n## Acceptance Criteria\n- Feature is fully implemented\n- UI is intuitive and accessible\n- Tests are added\n- Documentation is updated",
+    "labels": [
+      "enhancement",
+      "privacy"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 124,
+    "title": "[Feature] VPN integration",
+    "body": "## Description\nSupport for VPN connections\n\n## Acceptance Criteria\n- Feature is fully implemented\n- UI is intuitive and accessible\n- Tests are added\n- Documentation is updated",
+    "labels": [
+      "enhancement",
+      "feature"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 125,
+    "title": "[Feature] Ad blocker integration",
+    "body": "## Description\nBuilt-in advertisement blocking\n\n## Acceptance Criteria\n- Feature is fully implemented\n- UI is intuitive and accessible\n- Tests are added\n- Documentation is updated",
+    "labels": [
+      "enhancement",
+      "feature"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 126,
+    "title": "[Feature] Tracker blocker",
+    "body": "## Description\nBlock third-party tracking scripts\n\n## Acceptance Criteria\n- Feature is fully implemented\n- UI is intuitive and accessible\n- Tests are added\n- Documentation is updated",
+    "labels": [
+      "enhancement",
+      "privacy"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 127,
+    "title": "[Feature] Password manager integration",
+    "body": "## Description\nSecure password storage and autofill\n\n## Acceptance Criteria\n- Feature is fully implemented\n- UI is intuitive and accessible\n- Tests are added\n- Documentation is updated",
+    "labels": [
+      "enhancement",
+      "security"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 128,
+    "title": "[Feature] Form autofill",
+    "body": "## Description\nAutomatic form completion\n\n## Acceptance Criteria\n- Feature is fully implemented\n- UI is intuitive and accessible\n- Tests are added\n- Documentation is updated",
+    "labels": [
+      "enhancement",
+      "feature"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 129,
+    "title": "[Feature] Reading mode",
+    "body": "## Description\nDistraction-free reading experience\n\n## Acceptance Criteria\n- Feature is fully implemented\n- UI is intuitive and accessible\n- Tests are added\n- Documentation is updated",
+    "labels": [
+      "enhancement",
+      "feature"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 130,
+    "title": "[Feature] Print to PDF",
+    "body": "## Description\nSave pages as PDF documents\n\n## Acceptance Criteria\n- Feature is fully implemented\n- UI is intuitive and accessible\n- Tests are added\n- Documentation is updated",
+    "labels": [
+      "enhancement",
+      "feature"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 131,
+    "title": "[Feature] Tab hibernation",
+    "body": "## Description\nSuspend inactive tabs to reduce memory\n\n## Acceptance Criteria\n- Feature is fully implemented\n- UI is intuitive and accessible\n- Tests are added\n- Documentation is updated",
+    "labels": [
+      "enhancement",
+      "performance"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 132,
+    "title": "[Feature] Memory usage monitor",
+    "body": "## Description\nTrack memory consumption per tab\n\n## Acceptance Criteria\n- Feature is fully implemented\n- UI is intuitive and accessible\n- Tests are added\n- Documentation is updated",
+    "labels": [
+      "enhancement",
+      "feature"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 133,
+    "title": "[Feature] CPU usage monitor",
+    "body": "## Description\nMonitor CPU usage by the application\n\n## Acceptance Criteria\n- Feature is fully implemented\n- UI is intuitive and accessible\n- Tests are added\n- Documentation is updated",
+    "labels": [
+      "enhancement",
+      "feature"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 134,
+    "title": "[Feature] Proxy rotation rules engine",
+    "body": "## Description\nCondition-based proxy rotation logic\n\n## Acceptance Criteria\n- Feature is fully implemented\n- UI is intuitive and accessible\n- Tests are added\n- Documentation is updated",
+    "labels": [
+      "enhancement",
+      "feature"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 135,
+    "title": "[Feature] Site-specific proxy rules",
+    "body": "## Description\nConfigure different proxies per website\n\n## Acceptance Criteria\n- Feature is fully implemented\n- UI is intuitive and accessible\n- Tests are added\n- Documentation is updated",
+    "labels": [
+      "enhancement",
+      "feature"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 136,
+    "title": "[Feature] URL pattern matching",
+    "body": "## Description\nRegex-based URL matching for rules\n\n## Acceptance Criteria\n- Feature is fully implemented\n- UI is intuitive and accessible\n- Tests are added\n- Documentation is updated",
+    "labels": [
+      "enhancement",
+      "feature"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 137,
+    "title": "[Feature] Whitelist/Blacklist manager",
+    "body": "## Description\nManage allowed and blocked sites\n\n## Acceptance Criteria\n- Feature is fully implemented\n- UI is intuitive and accessible\n- Tests are added\n- Documentation is updated",
+    "labels": [
+      "enhancement",
+      "feature"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 138,
+    "title": "[Feature] Auto-update mechanism",
+    "body": "## Description\nAutomatic application updates\n\n## Acceptance Criteria\n- Feature is fully implemented\n- UI is intuitive and accessible\n- Tests are added\n- Documentation is updated",
+    "labels": [
+      "enhancement",
+      "feature"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 139,
+    "title": "[Feature] Crash recovery",
+    "body": "## Description\nAutomatic session recovery after crashes\n\n## Acceptance Criteria\n- Feature is fully implemented\n- UI is intuitive and accessible\n- Tests are added\n- Documentation is updated",
+    "labels": [
+      "enhancement",
+      "reliability"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 140,
+    "title": "[Testing] Unit tests for proxy module",
+    "body": "## Description\nComprehensive unit tests for proxy functionality\n\n## Requirements\n- Tests are comprehensive\n- Edge cases are covered\n- Tests are maintainable and documented",
+    "labels": [
+      "testing",
+      "rust"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 141,
+    "title": "[Testing] Unit tests for tab manager",
+    "body": "## Description\nTest tab creation, switching, and destruction\n\n## Requirements\n- Tests are comprehensive\n- Edge cases are covered\n- Tests are maintainable and documented",
+    "labels": [
+      "testing",
+      "rust"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 142,
+    "title": "[Testing] Unit tests for config manager",
+    "body": "## Description\nTest configuration loading and saving\n\n## Requirements\n- Tests are comprehensive\n- Edge cases are covered\n- Tests are maintainable and documented",
+    "labels": [
+      "testing",
+      "rust"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 143,
+    "title": "[Testing] Unit tests for security module",
+    "body": "## Description\nTest security features and validation\n\n## Requirements\n- Tests are comprehensive\n- Edge cases are covered\n- Tests are maintainable and documented",
+    "labels": [
+      "testing",
+      "rust"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 144,
+    "title": "[Testing] Unit tests for network module",
+    "body": "## Description\nTest network operations and error handling\n\n## Requirements\n- Tests are comprehensive\n- Edge cases are covered\n- Tests are maintainable and documented",
+    "labels": [
+      "testing",
+      "rust"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 145,
+    "title": "[Testing] Unit tests for fingerprint module",
+    "body": "## Description\nTest browser fingerprinting features\n\n## Requirements\n- Tests are comprehensive\n- Edge cases are covered\n- Tests are maintainable and documented",
+    "labels": [
+      "testing",
+      "rust"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 146,
+    "title": "[Testing] Unit tests for storage module",
+    "body": "## Description\nTest data persistence and retrieval\n\n## Requirements\n- Tests are comprehensive\n- Edge cases are covered\n- Tests are maintainable and documented",
+    "labels": [
+      "testing",
+      "rust"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 147,
+    "title": "[Testing] Unit tests for automation module",
+    "body": "## Description\nTest browser automation features\n\n## Requirements\n- Tests are comprehensive\n- Edge cases are covered\n- Tests are maintainable and documented",
+    "labels": [
+      "testing",
+      "rust"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 148,
+    "title": "[Testing] Integration tests for API",
+    "body": "## Description\nTest all API endpoints end-to-end\n\n## Requirements\n- Tests are comprehensive\n- Edge cases are covered\n- Tests are maintainable and documented",
+    "labels": [
+      "testing",
+      "integration"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 149,
+    "title": "[Testing] Integration tests for proxy rotation",
+    "body": "## Description\nTest proxy rotation logic\n\n## Requirements\n- Tests are comprehensive\n- Edge cases are covered\n- Tests are maintainable and documented",
+    "labels": [
+      "testing",
+      "integration"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 150,
+    "title": "[Testing] Integration tests for authentication",
+    "body": "## Description\nTest authentication flows\n\n## Requirements\n- Tests are comprehensive\n- Edge cases are covered\n- Tests are maintainable and documented",
+    "labels": [
+      "testing",
+      "integration"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 151,
+    "title": "[Testing] Integration tests for tab isolation",
+    "body": "## Description\nTest tab isolation features\n\n## Requirements\n- Tests are comprehensive\n- Edge cases are covered\n- Tests are maintainable and documented",
+    "labels": [
+      "testing",
+      "integration"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 152,
+    "title": "[Testing] E2E tests for tab creation",
+    "body": "## Description\nTest tab creation UI flow\n\n## Requirements\n- Tests are comprehensive\n- Edge cases are covered\n- Tests are maintainable and documented",
+    "labels": [
+      "testing",
+      "e2e"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 153,
+    "title": "[Testing] E2E tests for proxy configuration",
+    "body": "## Description\nTest proxy settings UI\n\n## Requirements\n- Tests are comprehensive\n- Edge cases are covered\n- Tests are maintainable and documented",
+    "labels": [
+      "testing",
+      "e2e"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 154,
+    "title": "[Testing] E2E tests for navigation",
+    "body": "## Description\nTest browser navigation\n\n## Requirements\n- Tests are comprehensive\n- Edge cases are covered\n- Tests are maintainable and documented",
+    "labels": [
+      "testing",
+      "e2e"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 155,
+    "title": "[Testing] E2E tests for settings panel",
+    "body": "## Description\nTest settings UI\n\n## Requirements\n- Tests are comprehensive\n- Edge cases are covered\n- Tests are maintainable and documented",
+    "labels": [
+      "testing",
+      "e2e"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 156,
+    "title": "[Testing] Performance benchmarks for proxy",
+    "body": "## Description\nMeasure proxy connection performance\n\n## Requirements\n- Tests are comprehensive\n- Edge cases are covered\n- Tests are maintainable and documented",
+    "labels": [
+      "testing",
+      "performance"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 157,
+    "title": "[Testing] Performance benchmarks for tabs",
+    "body": "## Description\nMeasure tab operation speed\n\n## Requirements\n- Tests are comprehensive\n- Edge cases are covered\n- Tests are maintainable and documented",
+    "labels": [
+      "testing",
+      "performance"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 158,
+    "title": "[Testing] Load testing for connections",
+    "body": "## Description\nStress test concurrent connections\n\n## Requirements\n- Tests are comprehensive\n- Edge cases are covered\n- Tests are maintainable and documented",
+    "labels": [
+      "testing",
+      "performance"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 159,
+    "title": "[Testing] Memory leak testing",
+    "body": "## Description\nDetect and prevent memory leaks\n\n## Requirements\n- Tests are comprehensive\n- Edge cases are covered\n- Tests are maintainable and documented",
+    "labels": [
+      "testing",
+      "performance"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 160,
+    "title": "[Testing] Security penetration testing",
+    "body": "## Description\nFind security vulnerabilities\n\n## Requirements\n- Tests are comprehensive\n- Edge cases are covered\n- Tests are maintainable and documented",
+    "labels": [
+      "testing",
+      "security"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 161,
+    "title": "[Testing] Fuzz testing for inputs",
+    "body": "## Description\nTest input handling robustness\n\n## Requirements\n- Tests are comprehensive\n- Edge cases are covered\n- Tests are maintainable and documented",
+    "labels": [
+      "testing",
+      "security"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 162,
+    "title": "[Testing] Regression test suite",
+    "body": "## Description\nPrevent feature regressions\n\n## Requirements\n- Tests are comprehensive\n- Edge cases are covered\n- Tests are maintainable and documented",
+    "labels": [
+      "testing",
+      "automation"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 163,
+    "title": "[Testing] Visual regression testing",
+    "body": "## Description\nTest UI visual consistency\n\n## Requirements\n- Tests are comprehensive\n- Edge cases are covered\n- Tests are maintainable and documented",
+    "labels": [
+      "testing",
+      "ui"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 164,
+    "title": "[Testing] Accessibility testing",
+    "body": "## Description\nTest accessibility compliance\n\n## Requirements\n- Tests are comprehensive\n- Edge cases are covered\n- Tests are maintainable and documented",
+    "labels": [
+      "testing",
+      "accessibility"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 165,
+    "title": "[Security] Input validation audit",
+    "body": "## Description\nAudit and validate all user inputs\n\n## Security Impact\nCritical for protecting user data and system integrity.\n\n## Acceptance Criteria\n- Vulnerability is addressed\n- Security tests are added",
+    "labels": [
+      "security",
+      "audit"
+    ],
+    "priority": "high"
+  },
+  {
+    "id": 166,
+    "title": "[Security] SQL injection prevention",
+    "body": "## Description\nEnsure parameterized queries are used\n\n## Security Impact\nCritical for protecting user data and system integrity.\n\n## Acceptance Criteria\n- Vulnerability is addressed\n- Security tests are added",
+    "labels": [
+      "security",
+      "audit"
+    ],
+    "priority": "high"
+  },
+  {
+    "id": 167,
+    "title": "[Security] XSS prevention audit",
+    "body": "## Description\nSanitize all output to prevent XSS\n\n## Security Impact\nCritical for protecting user data and system integrity.\n\n## Acceptance Criteria\n- Vulnerability is addressed\n- Security tests are added",
+    "labels": [
+      "security",
+      "audit"
+    ],
+    "priority": "high"
+  },
+  {
+    "id": 168,
+    "title": "[Security] CSRF protection implementation",
+    "body": "## Description\nAdd CSRF tokens to state-changing operations\n\n## Security Impact\nCritical for protecting user data and system integrity.\n\n## Acceptance Criteria\n- Vulnerability is addressed\n- Security tests are added",
+    "labels": [
+      "security",
+      "audit"
+    ],
+    "priority": "high"
+  },
+  {
+    "id": 169,
+    "title": "[Security] Secrets management system",
+    "body": "## Description\nImplement secure secret storage\n\n## Security Impact\nCritical for protecting user data and system integrity.\n\n## Acceptance Criteria\n- Vulnerability is addressed\n- Security tests are added",
+    "labels": [
+      "security",
+      "infrastructure"
+    ],
+    "priority": "high"
+  },
+  {
+    "id": 170,
+    "title": "[Security] Certificate pinning",
+    "body": "## Description\nPin SSL certificates for security\n\n## Security Impact\nCritical for protecting user data and system integrity.\n\n## Acceptance Criteria\n- Vulnerability is addressed\n- Security tests are added",
+    "labels": [
+      "security",
+      "network"
+    ],
+    "priority": "high"
+  },
+  {
+    "id": 171,
+    "title": "[Security] Memory safety audit",
+    "body": "## Description\nReview all unsafe Rust code\n\n## Security Impact\nCritical for protecting user data and system integrity.\n\n## Acceptance Criteria\n- Vulnerability is addressed\n- Security tests are added",
+    "labels": [
+      "security",
+      "rust"
+    ],
+    "priority": "high"
+  },
+  {
+    "id": 172,
+    "title": "[Security] Dependency vulnerability scan",
+    "body": "## Description\nScan dependencies for vulnerabilities\n\n## Security Impact\nCritical for protecting user data and system integrity.\n\n## Acceptance Criteria\n- Vulnerability is addressed\n- Security tests are added",
+    "labels": [
+      "security",
+      "dependencies"
+    ],
+    "priority": "high"
+  },
+  {
+    "id": 173,
+    "title": "[Security] Authentication hardening",
+    "body": "## Description\nStrengthen authentication mechanisms\n\n## Security Impact\nCritical for protecting user data and system integrity.\n\n## Acceptance Criteria\n- Vulnerability is addressed\n- Security tests are added",
+    "labels": [
+      "security",
+      "auth"
+    ],
+    "priority": "high"
+  },
+  {
+    "id": 174,
+    "title": "[Security] Session security review",
+    "body": "## Description\nEnsure secure session management\n\n## Security Impact\nCritical for protecting user data and system integrity.\n\n## Acceptance Criteria\n- Vulnerability is addressed\n- Security tests are added",
+    "labels": [
+      "security",
+      "auth"
+    ],
+    "priority": "high"
+  },
+  {
+    "id": 175,
+    "title": "[Security] Encryption at rest",
+    "body": "## Description\nEncrypt all sensitive stored data\n\n## Security Impact\nCritical for protecting user data and system integrity.\n\n## Acceptance Criteria\n- Vulnerability is addressed\n- Security tests are added",
+    "labels": [
+      "security",
+      "data"
+    ],
+    "priority": "high"
+  },
+  {
+    "id": 176,
+    "title": "[Security] Encryption in transit",
+    "body": "## Description\nEnsure all communications are encrypted\n\n## Security Impact\nCritical for protecting user data and system integrity.\n\n## Acceptance Criteria\n- Vulnerability is addressed\n- Security tests are added",
+    "labels": [
+      "security",
+      "network"
+    ],
+    "priority": "high"
+  },
+  {
+    "id": 177,
+    "title": "[Security] Access control audit",
+    "body": "## Description\nReview and verify access permissions\n\n## Security Impact\nCritical for protecting user data and system integrity.\n\n## Acceptance Criteria\n- Vulnerability is addressed\n- Security tests are added",
+    "labels": [
+      "security",
+      "auth"
+    ],
+    "priority": "high"
+  },
+  {
+    "id": 178,
+    "title": "[Security] Log sanitization",
+    "body": "## Description\nRemove sensitive data from logs\n\n## Security Impact\nCritical for protecting user data and system integrity.\n\n## Acceptance Criteria\n- Vulnerability is addressed\n- Security tests are added",
+    "labels": [
+      "security",
+      "logging"
+    ],
+    "priority": "high"
+  },
+  {
+    "id": 179,
+    "title": "[Security] Error message review",
+    "body": "## Description\nEnsure errors don't leak sensitive info\n\n## Security Impact\nCritical for protecting user data and system integrity.\n\n## Acceptance Criteria\n- Vulnerability is addressed\n- Security tests are added",
+    "labels": [
+      "security",
+      "audit"
+    ],
+    "priority": "high"
+  },
+  {
+    "id": 180,
+    "title": "[Security] Rate limiting implementation",
+    "body": "## Description\nPrevent API abuse with rate limits\n\n## Security Impact\nCritical for protecting user data and system integrity.\n\n## Acceptance Criteria\n- Vulnerability is addressed\n- Security tests are added",
+    "labels": [
+      "security",
+      "api"
+    ],
+    "priority": "high"
+  },
+  {
+    "id": 181,
+    "title": "[Security] Brute force protection",
+    "body": "## Description\nBlock repeated authentication attempts\n\n## Security Impact\nCritical for protecting user data and system integrity.\n\n## Acceptance Criteria\n- Vulnerability is addressed\n- Security tests are added",
+    "labels": [
+      "security",
+      "auth"
+    ],
+    "priority": "high"
+  },
+  {
+    "id": 182,
+    "title": "[Security] Security headers implementation",
+    "body": "## Description\nAdd security HTTP headers\n\n## Security Impact\nCritical for protecting user data and system integrity.\n\n## Acceptance Criteria\n- Vulnerability is addressed\n- Security tests are added",
+    "labels": [
+      "security",
+      "web"
+    ],
+    "priority": "high"
+  },
+  {
+    "id": 183,
+    "title": "[Security] Content Security Policy",
+    "body": "## Description\nImplement strict CSP\n\n## Security Impact\nCritical for protecting user data and system integrity.\n\n## Acceptance Criteria\n- Vulnerability is addressed\n- Security tests are added",
+    "labels": [
+      "security",
+      "web"
+    ],
+    "priority": "high"
+  },
+  {
+    "id": 184,
+    "title": "[Security] Subresource integrity",
+    "body": "## Description\nVerify external resource integrity\n\n## Security Impact\nCritical for protecting user data and system integrity.\n\n## Acceptance Criteria\n- Vulnerability is addressed\n- Security tests are added",
+    "labels": [
+      "security",
+      "web"
+    ],
+    "priority": "high"
+  },
+  {
+    "id": 185,
+    "title": "[Documentation] API reference documentation",
+    "body": "## Description\nComplete API endpoint documentation\n\n## Requirements\n- Clear and comprehensive\n- Examples provided where helpful\n- Kept in sync with code",
+    "labels": [
+      "documentation"
+    ],
+    "priority": "low"
+  },
+  {
+    "id": 186,
+    "title": "[Documentation] Architecture diagrams",
+    "body": "## Description\nCreate system architecture diagrams\n\n## Requirements\n- Clear and comprehensive\n- Examples provided where helpful\n- Kept in sync with code",
+    "labels": [
+      "documentation"
+    ],
+    "priority": "low"
+  },
+  {
+    "id": 187,
+    "title": "[Documentation] Developer setup guide",
+    "body": "## Description\nStep-by-step development environment setup\n\n## Requirements\n- Clear and comprehensive\n- Examples provided where helpful\n- Kept in sync with code",
+    "labels": [
+      "documentation"
+    ],
+    "priority": "low"
+  },
+  {
+    "id": 188,
+    "title": "[Documentation] User manual",
+    "body": "## Description\nComprehensive end-user documentation\n\n## Requirements\n- Clear and comprehensive\n- Examples provided where helpful\n- Kept in sync with code",
+    "labels": [
+      "documentation"
+    ],
+    "priority": "low"
+  },
+  {
+    "id": 189,
+    "title": "[Documentation] Configuration reference",
+    "body": "## Description\nDocument all configuration options\n\n## Requirements\n- Clear and comprehensive\n- Examples provided where helpful\n- Kept in sync with code",
+    "labels": [
+      "documentation"
+    ],
+    "priority": "low"
+  },
+  {
+    "id": 190,
+    "title": "[Documentation] Troubleshooting guide",
+    "body": "## Description\nCommon issues and solutions\n\n## Requirements\n- Clear and comprehensive\n- Examples provided where helpful\n- Kept in sync with code",
+    "labels": [
+      "documentation"
+    ],
+    "priority": "low"
+  },
+  {
+    "id": 191,
+    "title": "[Documentation] Security best practices",
+    "body": "## Description\nSecurity guidelines for users\n\n## Requirements\n- Clear and comprehensive\n- Examples provided where helpful\n- Kept in sync with code",
+    "labels": [
+      "documentation"
+    ],
+    "priority": "low"
+  },
+  {
+    "id": 192,
+    "title": "[Documentation] Changelog maintenance",
+    "body": "## Description\nKeep changelog up to date\n\n## Requirements\n- Clear and comprehensive\n- Examples provided where helpful\n- Kept in sync with code",
+    "labels": [
+      "documentation"
+    ],
+    "priority": "low"
+  },
+  {
+    "id": 193,
+    "title": "[Documentation] Code comments improvement",
+    "body": "## Description\nImprove inline code documentation\n\n## Requirements\n- Clear and comprehensive\n- Examples provided where helpful\n- Kept in sync with code",
+    "labels": [
+      "documentation"
+    ],
+    "priority": "low"
+  },
+  {
+    "id": 194,
+    "title": "[Documentation] README enhancements",
+    "body": "## Description\nExpand and improve README\n\n## Requirements\n- Clear and comprehensive\n- Examples provided where helpful\n- Kept in sync with code",
+    "labels": [
+      "documentation"
+    ],
+    "priority": "low"
+  },
+  {
+    "id": 195,
+    "title": "[Documentation] Contributing guidelines",
+    "body": "## Description\nCreate CONTRIBUTING.md file\n\n## Requirements\n- Clear and comprehensive\n- Examples provided where helpful\n- Kept in sync with code",
+    "labels": [
+      "documentation"
+    ],
+    "priority": "low"
+  },
+  {
+    "id": 196,
+    "title": "[Documentation] Code of conduct",
+    "body": "## Description\nAdd CODE_OF_CONDUCT.md\n\n## Requirements\n- Clear and comprehensive\n- Examples provided where helpful\n- Kept in sync with code",
+    "labels": [
+      "documentation"
+    ],
+    "priority": "low"
+  },
+  {
+    "id": 197,
+    "title": "[Documentation] License documentation",
+    "body": "## Description\nClarify licensing terms\n\n## Requirements\n- Clear and comprehensive\n- Examples provided where helpful\n- Kept in sync with code",
+    "labels": [
+      "documentation"
+    ],
+    "priority": "low"
+  },
+  {
+    "id": 198,
+    "title": "[Documentation] Deployment guide",
+    "body": "## Description\nDocument deployment procedures\n\n## Requirements\n- Clear and comprehensive\n- Examples provided where helpful\n- Kept in sync with code",
+    "labels": [
+      "documentation"
+    ],
+    "priority": "low"
+  },
+  {
+    "id": 199,
+    "title": "[Documentation] Backup procedures",
+    "body": "## Description\nDocument backup and restore\n\n## Requirements\n- Clear and comprehensive\n- Examples provided where helpful\n- Kept in sync with code",
+    "labels": [
+      "documentation"
+    ],
+    "priority": "low"
+  },
+  {
+    "id": 200,
+    "title": "[Documentation] API versioning documentation",
+    "body": "## Description\nDocument API version policy\n\n## Requirements\n- Clear and comprehensive\n- Examples provided where helpful\n- Kept in sync with code",
+    "labels": [
+      "documentation"
+    ],
+    "priority": "low"
+  },
+  {
+    "id": 201,
+    "title": "[Documentation] Error code reference",
+    "body": "## Description\nDocument all error codes\n\n## Requirements\n- Clear and comprehensive\n- Examples provided where helpful\n- Kept in sync with code",
+    "labels": [
+      "documentation"
+    ],
+    "priority": "low"
+  },
+  {
+    "id": 202,
+    "title": "[Documentation] FAQ section",
+    "body": "## Description\nFrequently asked questions\n\n## Requirements\n- Clear and comprehensive\n- Examples provided where helpful\n- Kept in sync with code",
+    "labels": [
+      "documentation"
+    ],
+    "priority": "low"
+  },
+  {
+    "id": 203,
+    "title": "[Documentation] Video tutorials",
+    "body": "## Description\nCreate tutorial videos\n\n## Requirements\n- Clear and comprehensive\n- Examples provided where helpful\n- Kept in sync with code",
+    "labels": [
+      "documentation"
+    ],
+    "priority": "low"
+  },
+  {
+    "id": 204,
+    "title": "[Documentation] Quick start guide",
+    "body": "## Description\n5-minute getting started guide\n\n## Requirements\n- Clear and comprehensive\n- Examples provided where helpful\n- Kept in sync with code",
+    "labels": [
+      "documentation"
+    ],
+    "priority": "low"
+  },
+  {
+    "id": 205,
+    "title": "[Performance] Memory leak detection and fixes",
+    "body": "## Description\nIdentify and fix memory leaks\n\n## Measurement\n- Baseline performance measured\n- Improvements quantified",
+    "labels": [
+      "performance"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 206,
+    "title": "[Performance] Startup time optimization",
+    "body": "## Description\nReduce application startup time\n\n## Measurement\n- Baseline performance measured\n- Improvements quantified",
+    "labels": [
+      "performance"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 207,
+    "title": "[Performance] Tab switching performance",
+    "body": "## Description\nOptimize tab switching speed\n\n## Measurement\n- Baseline performance measured\n- Improvements quantified",
+    "labels": [
+      "performance"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 208,
+    "title": "[Performance] Proxy connection pooling",
+    "body": "## Description\nImplement efficient connection reuse\n\n## Measurement\n- Baseline performance measured\n- Improvements quantified",
+    "labels": [
+      "performance"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 209,
+    "title": "[Performance] Lazy loading implementation",
+    "body": "## Description\nLoad resources on demand\n\n## Measurement\n- Baseline performance measured\n- Improvements quantified",
+    "labels": [
+      "performance"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 210,
+    "title": "[Performance] Cache optimization",
+    "body": "## Description\nImprove caching strategies\n\n## Measurement\n- Baseline performance measured\n- Improvements quantified",
+    "labels": [
+      "performance"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 211,
+    "title": "[Performance] Request batching",
+    "body": "## Description\nBatch network requests efficiently\n\n## Measurement\n- Baseline performance measured\n- Improvements quantified",
+    "labels": [
+      "performance"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 212,
+    "title": "[Performance] UI rendering optimization",
+    "body": "## Description\nImprove rendering performance\n\n## Measurement\n- Baseline performance measured\n- Improvements quantified",
+    "labels": [
+      "performance"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 213,
+    "title": "[Performance] Database query optimization",
+    "body": "## Description\nOptimize database operations\n\n## Measurement\n- Baseline performance measured\n- Improvements quantified",
+    "labels": [
+      "performance"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 214,
+    "title": "[Performance] Resource cleanup automation",
+    "body": "## Description\nEnsure proper resource cleanup\n\n## Measurement\n- Baseline performance measured\n- Improvements quantified",
+    "labels": [
+      "performance"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 215,
+    "title": "[Performance] Async operation optimization",
+    "body": "## Description\nImprove async patterns\n\n## Measurement\n- Baseline performance measured\n- Improvements quantified",
+    "labels": [
+      "performance"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 216,
+    "title": "[Performance] Memory footprint reduction",
+    "body": "## Description\nReduce overall memory usage\n\n## Measurement\n- Baseline performance measured\n- Improvements quantified",
+    "labels": [
+      "performance"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 217,
+    "title": "[Performance] CPU usage optimization",
+    "body": "## Description\nReduce CPU consumption\n\n## Measurement\n- Baseline performance measured\n- Improvements quantified",
+    "labels": [
+      "performance"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 218,
+    "title": "[Performance] Network bandwidth optimization",
+    "body": "## Description\nMinimize bandwidth usage\n\n## Measurement\n- Baseline performance measured\n- Improvements quantified",
+    "labels": [
+      "performance"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 219,
+    "title": "[Performance] Bundle size reduction",
+    "body": "## Description\nReduce JavaScript bundle size\n\n## Measurement\n- Baseline performance measured\n- Improvements quantified",
+    "labels": [
+      "performance"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 220,
+    "title": "[UI/UX] Responsive design improvements",
+    "body": "## Description\nBetter support for different screen sizes\n\n## Requirements\n- Follow consistent design patterns\n- Ensure accessibility\n- Test on different devices",
+    "labels": [
+      "ui",
+      "ux"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 221,
+    "title": "[UI/UX] Loading state indicators",
+    "body": "## Description\nAdd loading spinners and progress bars\n\n## Requirements\n- Follow consistent design patterns\n- Ensure accessibility\n- Test on different devices",
+    "labels": [
+      "ui",
+      "ux"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 222,
+    "title": "[UI/UX] Error state UI improvements",
+    "body": "## Description\nBetter error message display\n\n## Requirements\n- Follow consistent design patterns\n- Ensure accessibility\n- Test on different devices",
+    "labels": [
+      "ui",
+      "ux"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 223,
+    "title": "[UI/UX] Empty state UI design",
+    "body": "## Description\nDesign for empty lists and views\n\n## Requirements\n- Follow consistent design patterns\n- Ensure accessibility\n- Test on different devices",
+    "labels": [
+      "ui",
+      "ux"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 224,
+    "title": "[UI/UX] Tooltip additions",
+    "body": "## Description\nAdd helpful tooltips throughout\n\n## Requirements\n- Follow consistent design patterns\n- Ensure accessibility\n- Test on different devices",
+    "labels": [
+      "ui",
+      "ux"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 225,
+    "title": "[UI/UX] Form validation feedback",
+    "body": "## Description\nImprove form validation UX\n\n## Requirements\n- Follow consistent design patterns\n- Ensure accessibility\n- Test on different devices",
+    "labels": [
+      "ui",
+      "ux"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 226,
+    "title": "[UI/UX] Toast notification system",
+    "body": "## Description\nImplement notification toasts\n\n## Requirements\n- Follow consistent design patterns\n- Ensure accessibility\n- Test on different devices",
+    "labels": [
+      "ui",
+      "ux"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 227,
+    "title": "[UI/UX] Modal dialog improvements",
+    "body": "## Description\nImprove modal design and behavior\n\n## Requirements\n- Follow consistent design patterns\n- Ensure accessibility\n- Test on different devices",
+    "labels": [
+      "ui",
+      "ux"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 228,
+    "title": "[UI/UX] Navigation flow improvements",
+    "body": "## Description\nBetter navigation patterns\n\n## Requirements\n- Follow consistent design patterns\n- Ensure accessibility\n- Test on different devices",
+    "labels": [
+      "ui",
+      "ux"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 229,
+    "title": "[UI/UX] Search functionality",
+    "body": "## Description\nAdd global search feature\n\n## Requirements\n- Follow consistent design patterns\n- Ensure accessibility\n- Test on different devices",
+    "labels": [
+      "ui",
+      "ux"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 230,
+    "title": "[UI/UX] Sorting options for lists",
+    "body": "## Description\nAdd sortable columns\n\n## Requirements\n- Follow consistent design patterns\n- Ensure accessibility\n- Test on different devices",
+    "labels": [
+      "ui",
+      "ux"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 231,
+    "title": "[UI/UX] Pagination for large lists",
+    "body": "## Description\nImplement efficient pagination\n\n## Requirements\n- Follow consistent design patterns\n- Ensure accessibility\n- Test on different devices",
+    "labels": [
+      "ui",
+      "ux"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 232,
+    "title": "[UI/UX] Drag and drop support",
+    "body": "## Description\nAdd drag and drop for reordering\n\n## Requirements\n- Follow consistent design patterns\n- Ensure accessibility\n- Test on different devices",
+    "labels": [
+      "ui",
+      "ux"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 233,
+    "title": "[UI/UX] Context menu additions",
+    "body": "## Description\nAdd right-click context menus\n\n## Requirements\n- Follow consistent design patterns\n- Ensure accessibility\n- Test on different devices",
+    "labels": [
+      "ui",
+      "ux"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 234,
+    "title": "[UI/UX] Undo/redo functionality",
+    "body": "## Description\nImplement action history\n\n## Requirements\n- Follow consistent design patterns\n- Ensure accessibility\n- Test on different devices",
+    "labels": [
+      "ui",
+      "ux"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 235,
+    "title": "[DevOps] CI/CD pipeline optimization",
+    "body": "## Description\nImprove pipeline efficiency\n\n## Requirements\n- Document all changes\n- Test before deploying",
+    "labels": [
+      "devops"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 236,
+    "title": "[DevOps] Automated testing in CI",
+    "body": "## Description\nRun all tests in CI pipeline\n\n## Requirements\n- Document all changes\n- Test before deploying",
+    "labels": [
+      "devops"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 237,
+    "title": "[DevOps] Code coverage reporting",
+    "body": "## Description\nAdd coverage reports to CI\n\n## Requirements\n- Document all changes\n- Test before deploying",
+    "labels": [
+      "devops"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 238,
+    "title": "[DevOps] Security scanning in CI",
+    "body": "## Description\nAutomated security scans\n\n## Requirements\n- Document all changes\n- Test before deploying",
+    "labels": [
+      "devops"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 239,
+    "title": "[DevOps] Release automation",
+    "body": "## Description\nAutomate the release process\n\n## Requirements\n- Document all changes\n- Test before deploying",
+    "labels": [
+      "devops"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 240,
+    "title": "[DevOps] Docker image optimization",
+    "body": "## Description\nReduce image size and build time\n\n## Requirements\n- Document all changes\n- Test before deploying",
+    "labels": [
+      "devops"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 241,
+    "title": "[DevOps] Dependency caching in CI",
+    "body": "## Description\nSpeed up builds with caching\n\n## Requirements\n- Document all changes\n- Test before deploying",
+    "labels": [
+      "devops"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 242,
+    "title": "[DevOps] Build time reduction",
+    "body": "## Description\nOptimize build performance\n\n## Requirements\n- Document all changes\n- Test before deploying",
+    "labels": [
+      "devops"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 243,
+    "title": "[DevOps] Artifact management",
+    "body": "## Description\nImprove artifact handling\n\n## Requirements\n- Document all changes\n- Test before deploying",
+    "labels": [
+      "devops"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 244,
+    "title": "[DevOps] Environment configuration",
+    "body": "## Description\nBetter environment management\n\n## Requirements\n- Document all changes\n- Test before deploying",
+    "labels": [
+      "devops"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 245,
+    "title": "[DevOps] Application monitoring setup",
+    "body": "## Description\nImplement monitoring solution\n\n## Requirements\n- Document all changes\n- Test before deploying",
+    "labels": [
+      "devops"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 246,
+    "title": "[DevOps] Centralized logging",
+    "body": "## Description\nSet up log aggregation\n\n## Requirements\n- Document all changes\n- Test before deploying",
+    "labels": [
+      "devops"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 247,
+    "title": "[DevOps] Alerting system",
+    "body": "## Description\nImplement critical alerts\n\n## Requirements\n- Document all changes\n- Test before deploying",
+    "labels": [
+      "devops"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 248,
+    "title": "[DevOps] Backup automation",
+    "body": "## Description\nAutomate backup procedures\n\n## Requirements\n- Document all changes\n- Test before deploying",
+    "labels": [
+      "devops"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 249,
+    "title": "[DevOps] Disaster recovery planning",
+    "body": "## Description\nDocument and test DR\n\n## Requirements\n- Document all changes\n- Test before deploying",
+    "labels": [
+      "devops"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 250,
+    "title": "[Refactoring] Extract common utility functions",
+    "body": "## Description\nCreate shared utilities module\n\n## Goals\n- Improve maintainability\n- Better readability\n- Reduce technical debt",
+    "labels": [
+      "refactoring"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 251,
+    "title": "[Refactoring] Reduce code duplication",
+    "body": "## Description\nApply DRY principle across codebase\n\n## Goals\n- Improve maintainability\n- Better readability\n- Reduce technical debt",
+    "labels": [
+      "refactoring"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 252,
+    "title": "[Refactoring] Improve error type hierarchy",
+    "body": "## Description\nCreate specific error types\n\n## Goals\n- Improve maintainability\n- Better readability\n- Reduce technical debt",
+    "labels": [
+      "refactoring"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 253,
+    "title": "[Refactoring] Simplify complex functions",
+    "body": "## Description\nBreak down large functions\n\n## Goals\n- Improve maintainability\n- Better readability\n- Reduce technical debt",
+    "labels": [
+      "refactoring"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 254,
+    "title": "[Refactoring] Improve naming conventions",
+    "body": "## Description\nConsistent naming throughout\n\n## Goals\n- Improve maintainability\n- Better readability\n- Reduce technical debt",
+    "labels": [
+      "refactoring"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 255,
+    "title": "[Refactoring] Module restructuring",
+    "body": "## Description\nBetter code organization\n\n## Goals\n- Improve maintainability\n- Better readability\n- Reduce technical debt",
+    "labels": [
+      "refactoring"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 256,
+    "title": "[Refactoring] Interface simplification",
+    "body": "## Description\nCleaner public APIs\n\n## Goals\n- Improve maintainability\n- Better readability\n- Reduce technical debt",
+    "labels": [
+      "refactoring"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 257,
+    "title": "[Refactoring] Remove dead code",
+    "body": "## Description\nClean up unused code\n\n## Goals\n- Improve maintainability\n- Better readability\n- Reduce technical debt",
+    "labels": [
+      "refactoring"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 258,
+    "title": "[Refactoring] Consolidate configurations",
+    "body": "## Description\nSingle source of truth for config\n\n## Goals\n- Improve maintainability\n- Better readability\n- Reduce technical debt",
+    "labels": [
+      "refactoring"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 259,
+    "title": "[Refactoring] Type system improvements",
+    "body": "## Description\nBetter type safety\n\n## Goals\n- Improve maintainability\n- Better readability\n- Reduce technical debt",
+    "labels": [
+      "refactoring"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 260,
+    "title": "[Compatibility] Windows compatibility testing",
+    "body": "## Description\nTest and fix Windows-specific issues\n\n## Testing Required\n- Test on target platform\n- Document any limitations",
+    "labels": [
+      "compatibility"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 261,
+    "title": "[Compatibility] macOS compatibility testing",
+    "body": "## Description\nTest and fix macOS-specific issues\n\n## Testing Required\n- Test on target platform\n- Document any limitations",
+    "labels": [
+      "compatibility"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 262,
+    "title": "[Compatibility] Linux compatibility testing",
+    "body": "## Description\nTest and fix Linux-specific issues\n\n## Testing Required\n- Test on target platform\n- Document any limitations",
+    "labels": [
+      "compatibility"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 263,
+    "title": "[Compatibility] High DPI display support",
+    "body": "## Description\nProper scaling on high-res displays\n\n## Testing Required\n- Test on target platform\n- Document any limitations",
+    "labels": [
+      "compatibility"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 264,
+    "title": "[Compatibility] Multi-monitor support",
+    "body": "## Description\nHandle multiple displays correctly\n\n## Testing Required\n- Test on target platform\n- Document any limitations",
+    "labels": [
+      "compatibility"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 265,
+    "title": "[Compatibility] Older OS version support",
+    "body": "## Description\nDefine minimum OS requirements\n\n## Testing Required\n- Test on target platform\n- Document any limitations",
+    "labels": [
+      "compatibility"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 266,
+    "title": "[Compatibility] ARM architecture support",
+    "body": "## Description\nSupport for ARM processors\n\n## Testing Required\n- Test on target platform\n- Document any limitations",
+    "labels": [
+      "compatibility"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 267,
+    "title": "[Compatibility] Screen reader compatibility",
+    "body": "## Description\nWork with assistive technologies\n\n## Testing Required\n- Test on target platform\n- Document any limitations",
+    "labels": [
+      "compatibility",
+      "accessibility"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 268,
+    "title": "[Bug] Fix race conditions in proxy rotation",
+    "body": "## Description\nThread safety improvements needed\n\n## Steps to Reproduce\n1. [Add steps]\n\n## Expected Behavior\n[Describe expected behavior]\n\n## Actual Behavior\n[Describe actual behavior]",
+    "labels": [
+      "bug",
+      "rust"
+    ],
+    "priority": "high"
+  },
+  {
+    "id": 269,
+    "title": "[Bug] Fix memory leak in tab manager",
+    "body": "## Description\nMemory not properly freed\n\n## Steps to Reproduce\n1. [Add steps]\n\n## Expected Behavior\n[Describe expected behavior]\n\n## Actual Behavior\n[Describe actual behavior]",
+    "labels": [
+      "bug",
+      "performance"
+    ],
+    "priority": "high"
+  },
+  {
+    "id": 270,
+    "title": "[Bug] Fix connection timeout handling",
+    "body": "## Description\nTimeouts not handled gracefully\n\n## Steps to Reproduce\n1. [Add steps]\n\n## Expected Behavior\n[Describe expected behavior]\n\n## Actual Behavior\n[Describe actual behavior]",
+    "labels": [
+      "bug",
+      "network"
+    ],
+    "priority": "high"
+  },
+  {
+    "id": 271,
+    "title": "[Bug] Fix proxy authentication retry",
+    "body": "## Description\nAuth failure not retried correctly\n\n## Steps to Reproduce\n1. [Add steps]\n\n## Expected Behavior\n[Describe expected behavior]\n\n## Actual Behavior\n[Describe actual behavior]",
+    "labels": [
+      "bug",
+      "network"
+    ],
+    "priority": "high"
+  },
+  {
+    "id": 272,
+    "title": "[Bug] Fix session persistence issues",
+    "body": "## Description\nSessions not saved properly\n\n## Steps to Reproduce\n1. [Add steps]\n\n## Expected Behavior\n[Describe expected behavior]\n\n## Actual Behavior\n[Describe actual behavior]",
+    "labels": [
+      "bug",
+      "feature"
+    ],
+    "priority": "high"
+  },
+  {
+    "id": 273,
+    "title": "[Bug] Fix keyboard shortcut conflicts",
+    "body": "## Description\nSome hotkeys conflict\n\n## Steps to Reproduce\n1. [Add steps]\n\n## Expected Behavior\n[Describe expected behavior]\n\n## Actual Behavior\n[Describe actual behavior]",
+    "labels": [
+      "bug",
+      "ui"
+    ],
+    "priority": "high"
+  },
+  {
+    "id": 274,
+    "title": "[Bug] Fix clipboard operations",
+    "body": "## Description\nCopy/paste not working correctly\n\n## Steps to Reproduce\n1. [Add steps]\n\n## Expected Behavior\n[Describe expected behavior]\n\n## Actual Behavior\n[Describe actual behavior]",
+    "labels": [
+      "bug",
+      "ui"
+    ],
+    "priority": "high"
+  },
+  {
+    "id": 275,
+    "title": "[Bug] Fix window state restoration",
+    "body": "## Description\nWindow position not restored\n\n## Steps to Reproduce\n1. [Add steps]\n\n## Expected Behavior\n[Describe expected behavior]\n\n## Actual Behavior\n[Describe actual behavior]",
+    "labels": [
+      "bug",
+      "ui"
+    ],
+    "priority": "high"
+  },
+  {
+    "id": 276,
+    "title": "[Bug] Fix file dialog handling",
+    "body": "## Description\nFile selection issues\n\n## Steps to Reproduce\n1. [Add steps]\n\n## Expected Behavior\n[Describe expected behavior]\n\n## Actual Behavior\n[Describe actual behavior]",
+    "labels": [
+      "bug",
+      "ui"
+    ],
+    "priority": "high"
+  },
+  {
+    "id": 277,
+    "title": "[Bug] Fix notification display",
+    "body": "## Description\nNotifications not showing\n\n## Steps to Reproduce\n1. [Add steps]\n\n## Expected Behavior\n[Describe expected behavior]\n\n## Actual Behavior\n[Describe actual behavior]",
+    "labels": [
+      "bug",
+      "ui"
+    ],
+    "priority": "high"
+  },
+  {
+    "id": 278,
+    "title": "[Bug] Fix URL validation",
+    "body": "## Description\nSome invalid URLs accepted\n\n## Steps to Reproduce\n1. [Add steps]\n\n## Expected Behavior\n[Describe expected behavior]\n\n## Actual Behavior\n[Describe actual behavior]",
+    "labels": [
+      "bug",
+      "validation"
+    ],
+    "priority": "high"
+  },
+  {
+    "id": 279,
+    "title": "[Bug] Fix proxy URL parsing",
+    "body": "## Description\nParsing errors with some URLs\n\n## Steps to Reproduce\n1. [Add steps]\n\n## Expected Behavior\n[Describe expected behavior]\n\n## Actual Behavior\n[Describe actual behavior]",
+    "labels": [
+      "bug",
+      "network"
+    ],
+    "priority": "high"
+  },
+  {
+    "id": 280,
+    "title": "[Bug] Fix certificate error handling",
+    "body": "## Description\nSSL errors not handled\n\n## Steps to Reproduce\n1. [Add steps]\n\n## Expected Behavior\n[Describe expected behavior]\n\n## Actual Behavior\n[Describe actual behavior]",
+    "labels": [
+      "bug",
+      "security"
+    ],
+    "priority": "high"
+  },
+  {
+    "id": 281,
+    "title": "[Bug] Fix websocket connections",
+    "body": "## Description\nWebSocket through proxy issues\n\n## Steps to Reproduce\n1. [Add steps]\n\n## Expected Behavior\n[Describe expected behavior]\n\n## Actual Behavior\n[Describe actual behavior]",
+    "labels": [
+      "bug",
+      "network"
+    ],
+    "priority": "high"
+  },
+  {
+    "id": 282,
+    "title": "[Bug] Fix redirect handling",
+    "body": "## Description\nRedirect loops possible\n\n## Steps to Reproduce\n1. [Add steps]\n\n## Expected Behavior\n[Describe expected behavior]\n\n## Actual Behavior\n[Describe actual behavior]",
+    "labels": [
+      "bug",
+      "network"
+    ],
+    "priority": "high"
+  },
+  {
+    "id": 283,
+    "title": "[Infrastructure] Set up error tracking service",
+    "body": "## Description\nImplement Sentry or similar\n\n## Requirements\n- Privacy-respecting implementation\n- Opt-out capability where applicable",
+    "labels": [
+      "infrastructure"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 284,
+    "title": "[Infrastructure] Implement telemetry collection",
+    "body": "## Description\nAnonymous usage statistics\n\n## Requirements\n- Privacy-respecting implementation\n- Opt-out capability where applicable",
+    "labels": [
+      "infrastructure"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 285,
+    "title": "[Infrastructure] Set up crash reporting",
+    "body": "## Description\nAutomatic crash reports\n\n## Requirements\n- Privacy-respecting implementation\n- Opt-out capability where applicable",
+    "labels": [
+      "infrastructure"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 286,
+    "title": "[Infrastructure] Implement feature flags",
+    "body": "## Description\nToggle features remotely\n\n## Requirements\n- Privacy-respecting implementation\n- Opt-out capability where applicable",
+    "labels": [
+      "infrastructure"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 287,
+    "title": "[Infrastructure] Set up A/B testing framework",
+    "body": "## Description\nTest feature variations\n\n## Requirements\n- Privacy-respecting implementation\n- Opt-out capability where applicable",
+    "labels": [
+      "infrastructure"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 288,
+    "title": "[Infrastructure] Implement analytics dashboard",
+    "body": "## Description\nUsage analytics\n\n## Requirements\n- Privacy-respecting implementation\n- Opt-out capability where applicable",
+    "labels": [
+      "infrastructure"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 289,
+    "title": "[Infrastructure] Set up status page",
+    "body": "## Description\nService status monitoring\n\n## Requirements\n- Privacy-respecting implementation\n- Opt-out capability where applicable",
+    "labels": [
+      "infrastructure"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 290,
+    "title": "[Infrastructure] Implement update server",
+    "body": "## Description\nServe application updates\n\n## Requirements\n- Privacy-respecting implementation\n- Opt-out capability where applicable",
+    "labels": [
+      "infrastructure"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 291,
+    "title": "[Infrastructure] Set up documentation hosting",
+    "body": "## Description\nHost docs website\n\n## Requirements\n- Privacy-respecting implementation\n- Opt-out capability where applicable",
+    "labels": [
+      "infrastructure"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 292,
+    "title": "[Infrastructure] Implement feedback collection",
+    "body": "## Description\nIn-app feedback system\n\n## Requirements\n- Privacy-respecting implementation\n- Opt-out capability where applicable",
+    "labels": [
+      "infrastructure"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 293,
+    "title": "[Accessibility] Keyboard navigation support",
+    "body": "## Description\nFull keyboard accessibility\n\n## WCAG Guidelines\n- Meet WCAG 2.1 AA requirements\n- Test with assistive technologies",
+    "labels": [
+      "accessibility"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 294,
+    "title": "[Accessibility] Screen reader optimization",
+    "body": "## Description\nImprove screen reader experience\n\n## WCAG Guidelines\n- Meet WCAG 2.1 AA requirements\n- Test with assistive technologies",
+    "labels": [
+      "accessibility"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 295,
+    "title": "[Accessibility] Color contrast improvements",
+    "body": "## Description\nMeet WCAG contrast requirements\n\n## WCAG Guidelines\n- Meet WCAG 2.1 AA requirements\n- Test with assistive technologies",
+    "labels": [
+      "accessibility"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 296,
+    "title": "[Accessibility] Focus indicator visibility",
+    "body": "## Description\nClear focus states\n\n## WCAG Guidelines\n- Meet WCAG 2.1 AA requirements\n- Test with assistive technologies",
+    "labels": [
+      "accessibility"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 297,
+    "title": "[Accessibility] ARIA labels implementation",
+    "body": "## Description\nProper ARIA attributes\n\n## WCAG Guidelines\n- Meet WCAG 2.1 AA requirements\n- Test with assistive technologies",
+    "labels": [
+      "accessibility"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 298,
+    "title": "[Accessibility] Skip navigation links",
+    "body": "## Description\nAllow skipping to content\n\n## WCAG Guidelines\n- Meet WCAG 2.1 AA requirements\n- Test with assistive technologies",
+    "labels": [
+      "accessibility"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 299,
+    "title": "[Accessibility] Form label associations",
+    "body": "## Description\nProper label-input associations\n\n## WCAG Guidelines\n- Meet WCAG 2.1 AA requirements\n- Test with assistive technologies",
+    "labels": [
+      "accessibility"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 300,
+    "title": "[Accessibility] Error announcement for screen readers",
+    "body": "## Description\nAnnounce errors properly\n\n## WCAG Guidelines\n- Meet WCAG 2.1 AA requirements\n- Test with assistive technologies",
+    "labels": [
+      "accessibility"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 301,
+    "title": "[Accessibility] Reduced motion support",
+    "body": "## Description\nRespect prefers-reduced-motion\n\n## WCAG Guidelines\n- Meet WCAG 2.1 AA requirements\n- Test with assistive technologies",
+    "labels": [
+      "accessibility"
+    ],
+    "priority": "medium"
+  },
+  {
+    "id": 302,
+    "title": "[Accessibility] Text sizing support",
+    "body": "## Description\nSupport user text size preferences\n\n## WCAG Guidelines\n- Meet WCAG 2.1 AA requirements\n- Test with assistive technologies",
+    "labels": [
+      "accessibility"
+    ],
+    "priority": "medium"
+  }
+]

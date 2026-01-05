@@ -114,7 +114,7 @@ impl VisualAutomationBuilder {
         let id = uuid::Uuid::new_v4().to_string();
         let now = std::time::SystemTime::now()
             .duration_since(std::time::UNIX_EPOCH)
-            .unwrap()
+            .unwrap_or_default()
             .as_secs();
         
         let workflow = Workflow {
@@ -464,7 +464,7 @@ impl ActionRecorder {
         
         let now = std::time::SystemTime::now()
             .duration_since(std::time::UNIX_EPOCH)
-            .unwrap()
+            .unwrap_or_default()
             .as_secs();
         
         Workflow {
@@ -654,7 +654,7 @@ impl DistributedAutomation {
         let task_id = uuid::Uuid::new_v4().to_string();
         let now = std::time::SystemTime::now()
             .duration_since(std::time::UNIX_EPOCH)
-            .unwrap()
+            .unwrap_or_default()
             .as_secs();
         
         let task = DistributedTask {
@@ -826,7 +826,7 @@ mod tests {
         };
         
         assert!(builder.add_step(&id, step).is_ok());
-        assert_eq!(builder.get_workflow(&id).unwrap().steps.len(), 1);
+        assert_eq!(builder.get_workflow(&id).expect("Operation should succeed in test").steps.len(), 1);
     }
 
     #[test]
@@ -893,6 +893,6 @@ mod tests {
         
         let workflow = manager.visual_builder.get_workflow(&workflow_id);
         assert!(workflow.is_some());
-        assert_eq!(workflow.unwrap().steps.len(), 3);
+        assert_eq!(workflow.expect("Operation should succeed in test").steps.len(), 3);
     }
 }
