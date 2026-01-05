@@ -76,6 +76,8 @@ governor = "0.6"
 aes-gcm = "0.10"
 argon2 = "0.5"
 base64 = "0.22"
+parking_lot = "0.12"
+rustc-hash = "2.0"
 
 # Configuration
 config = "0.14"

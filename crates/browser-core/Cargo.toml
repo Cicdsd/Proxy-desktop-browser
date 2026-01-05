@@ -48,6 +48,10 @@ async-trait = { workspace = true }
 # Internal dependencies
 virtual-ip = { path = "../virtual-ip" }
 
+# Efficiency optimizations
+parking_lot = { workspace = true }
+rustc-hash = { workspace = true }
+
 # Tauri dependencies (for commands)
 tauri = { workspace = true }
 

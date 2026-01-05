@@ -45,6 +45,7 @@ pub mod privacy_fortress;
 
 // V1000 Experimental Features (EXP-1001 to EXP-20005)
 pub mod experimental;
+pub mod efficiency;
 
 // V1000 Additional Feature Modules
 pub mod automation;
