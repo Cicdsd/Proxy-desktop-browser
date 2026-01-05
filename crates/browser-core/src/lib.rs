@@ -49,6 +49,7 @@ pub mod experimental;
 // V1000 Additional Feature Modules
 pub mod automation;
 pub mod content_enhancement;
+pub mod efficiency;
 pub mod browser_profile;
 pub mod screenshot;
 
@@ -213,4 +214,19 @@ pub use content_enhancement::{
     MediaPlayer, MediaPlayerConfig, MediaInfo, MediaType, VideoQuality,
     ContentTransformer, TransformationType,
     AccessibilityManager, AccessibilityConfig, ColorBlindnessMode,
+};
+
+// Efficiency optimization exports (addressing issues #488-#987)
+pub use efficiency::{
+    MemoryPool,
+    PoolStats,
+    BufferManager,
+    CpuOptimizer,
+    LazyInit,
+    PerformanceMonitor,
+    PerformanceMetrics,
+    LruCache,
+    ConnectionPool,
+    BatchProcessor,
+    ResourceManager,
 };
