@@ -29,8 +29,8 @@ impl ProxyScraper {
             })?;
         
         let document = Html::parse_document(&html);
-        let table_selector = Selector::parse("table.table tbody tr").unwrap();
-        let cell_selector = Selector::parse("td").unwrap();
+        let table_selector = Selector::parse("table.table tbody tr").expect("Failed to parse table selector");
+        let cell_selector = Selector::parse("td").expect("Failed to parse cell selector");
         
         let mut proxies = Vec::new();
         let mut count = 0;
@@ -97,9 +97,9 @@ impl ProxyScraper {
             })?;
         
         let document = Html::parse_document(&html);
-        let row_selector = Selector::parse("table#tbl_proxy_list tbody tr").unwrap();
-        let cell_selector = Selector::parse("td").unwrap();
-        let ip_selector = Selector::parse("abbr[data-proxy]").unwrap();
+        let row_selector = Selector::parse("table#tbl_proxy_list tbody tr").expect("Failed to parse proxy table selector");
+        let cell_selector = Selector::parse("td").expect("Failed to parse cell selector");
+        let ip_selector = Selector::parse("abbr[data-proxy]").expect("Failed to parse IP abbr selector");
         
         let mut proxies = Vec::new();
         let mut count = 0;
@@ -169,8 +169,8 @@ impl ProxyScraper {
             })?;
         
         let document = Html::parse_document(&html);
-        let row_selector = Selector::parse("table tr[onclick]").unwrap();
-        let cell_selector = Selector::parse("td").unwrap();
+        let row_selector = Selector::parse("table tr[onclick]").expect("Failed to parse onclick row selector");
+        let cell_selector = Selector::parse("td").expect("Failed to parse cell selector");
         
         let mut proxies = Vec::new();
         let mut count = 0;
@@ -291,7 +291,7 @@ mod tests {
     
     #[tokio::test]
     async fn test_proxy_scraper_creation() {
-        let client = HttpClient::new().unwrap();
+        let client = HttpClient::new().expect("Failed to create HTTP client for test");
         let scraper = ProxyScraper::new(client);
         assert!(scraper.scrape_all_providers().await.is_ok());
     }
