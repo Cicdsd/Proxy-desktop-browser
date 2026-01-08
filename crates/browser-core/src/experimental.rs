@@ -1407,7 +1407,7 @@ mod tests {
 
     #[test]
     fn test_differential_privacy() {
-        let mut dp = DifferentialPrivacy::new(0.1, 1e-5);
+        let dp = DifferentialPrivacy::new(0.1, 1e-5);
         let original = 100.0;
         let noised = dp.add_noise(original);
         assert!((noised - original).abs() < 1.0);

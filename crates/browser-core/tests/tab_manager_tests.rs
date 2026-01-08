@@ -309,7 +309,7 @@ fn test_network_config_serialization() {
 
 #[tokio::test]
 async fn test_tab_ip_manager_creation() {
-    let ip_generator = IPGenerator::new();
+    let ip_generator = IPGenerator::new(vec![], vec![]);
     let manager = TabIPManager::new(ip_generator);
     
     // Manager should be created successfully
@@ -318,7 +318,7 @@ async fn test_tab_ip_manager_creation() {
 
 #[tokio::test]
 async fn test_tab_ip_manager_create_tab() {
-    let ip_generator = IPGenerator::new();
+    let ip_generator = IPGenerator::new(vec![], vec![]);
     let manager = TabIPManager::new(ip_generator);
     
     let result = manager.create_tab("US").await;
@@ -337,7 +337,7 @@ async fn test_tab_ip_manager_create_tab() {
 
 #[tokio::test]
 async fn test_tab_ip_manager_create_random_tab() {
-    let ip_generator = IPGenerator::new();
+    let ip_generator = IPGenerator::new(vec![], vec![]);
     let manager = TabIPManager::new(ip_generator);
     
     let result = manager.create_tab_random().await;
@@ -355,7 +355,7 @@ async fn test_tab_ip_manager_create_random_tab() {
 
 #[tokio::test]
 async fn test_tab_ip_manager_rotate_ip() {
-    let ip_generator = IPGenerator::new();
+    let ip_generator = IPGenerator::new(vec![], vec![]);
     let manager = TabIPManager::new(ip_generator);
     
     // First create a tab
@@ -380,7 +380,7 @@ async fn test_tab_ip_manager_rotate_ip() {
 
 #[tokio::test]
 async fn test_tab_ip_manager_rotate_ip_different_country() {
-    let ip_generator = IPGenerator::new();
+    let ip_generator = IPGenerator::new(vec![], vec![]);
     let manager = TabIPManager::new(ip_generator);
     
     // First create a tab in US
@@ -403,7 +403,7 @@ async fn test_tab_ip_manager_rotate_ip_different_country() {
 
 #[tokio::test]
 async fn test_tab_ip_manager_rotate_nonexistent_tab() {
-    let ip_generator = IPGenerator::new();
+    let ip_generator = IPGenerator::new(vec![], vec![]);
     let manager = TabIPManager::new(ip_generator);
     
     // Try to rotate IP for non-existent tab
@@ -414,7 +414,7 @@ async fn test_tab_ip_manager_rotate_nonexistent_tab() {
 
 #[tokio::test]
 async fn test_tab_ip_manager_multiple_tabs() {
-    let ip_generator = IPGenerator::new();
+    let ip_generator = IPGenerator::new(vec![], vec![]);
     let manager = TabIPManager::new(ip_generator);
     
     let countries = vec!["US", "DE", "FR", "GB", "JP"];
@@ -442,7 +442,7 @@ async fn test_tab_ip_manager_multiple_tabs() {
 
 #[tokio::test]
 async fn test_full_tab_lifecycle() {
-    let ip_generator = IPGenerator::new();
+    let ip_generator = IPGenerator::new(vec![], vec![]);
     let manager = TabIPManager::new(ip_generator);
     
     // Create tab

@@ -58,6 +58,7 @@ impl Default for ContentEnhancementManager {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use super::super::{MediaInfo, MediaType, VideoQuality, TransformationType};
 
     #[test]
     fn test_reader_mode() {

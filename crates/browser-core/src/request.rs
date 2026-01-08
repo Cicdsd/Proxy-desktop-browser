@@ -24,6 +24,8 @@ use crate::proxy::ProxySettings;
 pub enum RequestErrorKind {
     /// Network connectivity error
     Network,
+    /// DNS resolution failure
+    DnsResolution,
     /// Request timeout
     Timeout,
     /// Invalid URL format
@@ -367,8 +369,17 @@ impl RequestBuilder {
         // Send the request
         let response = request_builder.send().await
             .map_err(|e| {
+                let error_msg = e.to_string().to_lowercase();
                 let kind = if e.is_timeout() {
                     RequestErrorKind::Timeout
+                } else if error_msg.contains("dns") 
+                    || error_msg.contains("resolve") 
+                    || error_msg.contains("no such host") 
+                    || error_msg.contains("name or service not known")
+                    || error_msg.contains("getaddrinfo") {
+                    // DNS resolution failure - provide helpful error message
+                    tracing::warn!("DNS resolution failed for URL: {}", &self.url);
+                    RequestErrorKind::DnsResolution
                 } else if e.is_connect() {
                     RequestErrorKind::Network
                 } else {

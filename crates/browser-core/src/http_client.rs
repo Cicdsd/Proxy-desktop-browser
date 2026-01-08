@@ -87,9 +87,25 @@ impl HttpClient {
         })
     }
 
-    /// Performs get operation.
+    /// Performs get operation with graceful DNS error handling.
     pub async fn get(&self, url: &str) -> Result<String> {
-        let response = self.client.get(url).send().await?;
+        let response = self.client.get(url).send().await
+            .map_err(|e| {
+                let error_str = e.to_string().to_lowercase();
+                if error_str.contains("dns") || 
+                   error_str.contains("resolve") ||
+                   error_str.contains("no such host") ||
+                   error_str.contains("name or service not known") ||
+                   error_str.contains("getaddrinfo") {
+                    anyhow!("DNS resolution failed for {}: Unable to resolve hostname. Please check your internet connection and DNS settings. Original error: {}", url, e)
+                } else if e.is_timeout() {
+                    anyhow!("Request timeout for {}: The server took too long to respond. Original error: {}", url, e)
+                } else if e.is_connect() {
+                    anyhow!("Connection failed for {}: Unable to connect to server. Please check your internet connection. Original error: {}", url, e)
+                } else {
+                    anyhow!("HTTP request failed for {}: {}", url, e)
+                }
+            })?;
         let text = response.text().await?;
         Ok(text)
     }
@@ -106,7 +122,17 @@ impl HttpClient {
                 .get(url)
                 .send()
                 .await
-                .map_err(|e| anyhow!("Enhanced GET request failed: {}", e))?;
+                .map_err(|e| {
+                    let error_str = e.to_string().to_lowercase();
+                    if error_str.contains("dns") || 
+                       error_str.contains("resolve") ||
+                       error_str.contains("no such host") ||
+                       error_str.contains("name or service not known") {
+                        anyhow!("DNS resolution failed for {}: Unable to resolve hostname. Please check your internet connection and DNS settings. Original error: {}", url, e)
+                    } else {
+                        anyhow!("Enhanced GET request failed for {}: {}", url, e)
+                    }
+                })?;
             
             response.text().await
                 .map_err(|e| anyhow!("Failed to read response text: {}", e))
@@ -118,7 +144,22 @@ impl HttpClient {
 
     /// Gets the json.
     pub async fn get_json<T: for<'de> Deserialize<'de>>(&self, url: &str) -> Result<T> {
-        let response = self.client.get(url).send().await?;
+        let response = self.client.get(url).send().await
+            .map_err(|e| {
+                let error_str = e.to_string().to_lowercase();
+                if error_str.contains("dns") || 
+                   error_str.contains("resolve") ||
+                   error_str.contains("no such host") ||
+                   error_str.contains("name or service not known") {
+                    anyhow!("DNS resolution failed for {}: Unable to resolve hostname. Please check your internet connection and DNS settings. Original error: {}", url, e)
+                } else if e.is_timeout() {
+                    anyhow!("Request timeout for {}: {}", url, e)
+                } else if e.is_connect() {
+                    anyhow!("Connection failed for {}: {}", url, e)
+                } else {
+                    anyhow!("HTTP request failed for {}: {}", url, e)
+                }
+            })?;
         let json = response.json::<T>().await?;
         Ok(json)
     }
@@ -135,7 +176,17 @@ impl HttpClient {
                 .get(url)
                 .send()
                 .await
-                .map_err(|e| anyhow!("Enhanced GET request failed: {}", e))?;
+                .map_err(|e| {
+                    let error_str = e.to_string().to_lowercase();
+                    if error_str.contains("dns") || 
+                       error_str.contains("resolve") ||
+                       error_str.contains("no such host") ||
+                       error_str.contains("name or service not known") {
+                        anyhow!("DNS resolution failed for {}: Unable to resolve hostname. Please check your internet connection and DNS settings. Original error: {}", url, e)
+                    } else {
+                        anyhow!("Enhanced GET request failed for {}: {}", url, e)
+                    }
+                })?;
             
             response.json::<T>().await
                 .map_err(|e| anyhow!("Failed to parse JSON: {}", e))
@@ -144,7 +195,6 @@ impl HttpClient {
             self.get_json(url).await
         }
     }
-
     /// Enhanced POST with retry and rate limiting
     pub async fn post_enhanced(&self, url: &str, body: String) -> Result<String> {
         if let (Some(enhanced_client), Some(rate_limiter)) = (&self.enhanced_client, &self.rate_limiter) {
@@ -156,10 +206,20 @@ impl HttpClient {
             let response = enhanced_client
                 .post(url)
                 .header("Content-Type", "application/json")
-                .body(body)
+                .body(body.clone())
                 .send()
                 .await
-                .map_err(|e| anyhow!("Enhanced POST request failed: {}", e))?;
+                .map_err(|e| {
+                    let error_str = e.to_string().to_lowercase();
+                    if error_str.contains("dns") || 
+                       error_str.contains("resolve") ||
+                       error_str.contains("no such host") ||
+                       error_str.contains("name or service not known") {
+                        anyhow!("DNS resolution failed for {}: Unable to resolve hostname. Please check your internet connection and DNS settings. Original error: {}", url, e)
+                    } else {
+                        anyhow!("Enhanced POST request failed for {}: {}", url, e)
+                    }
+                })?;
             
             response.text().await
                 .map_err(|e| anyhow!("Failed to read response text: {}", e))
@@ -169,7 +229,18 @@ impl HttpClient {
                 .header("Content-Type", "application/json")
                 .body(body)
                 .send()
-                .await?;
+                .await
+                .map_err(|e| {
+                    let error_str = e.to_string().to_lowercase();
+                    if error_str.contains("dns") || 
+                       error_str.contains("resolve") ||
+                       error_str.contains("no such host") ||
+                       error_str.contains("name or service not known") {
+                        anyhow!("DNS resolution failed for {}: Unable to resolve hostname. Please check your internet connection and DNS settings. Original error: {}", url, e)
+                    } else {
+                        anyhow!("POST request failed for {}: {}", url, e)
+                    }
+                })?;
             response.text().await
                 .map_err(|e| anyhow!("Failed to read response text: {}", e))
         }

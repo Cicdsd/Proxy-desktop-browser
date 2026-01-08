@@ -217,3 +217,30 @@ fn test_all_http_methods() {
     let options = RequestBuilder::options("https://example.com");
     assert_eq!(options.method, HttpMethod::Options);
 }
+
+#[test]
+fn test_dns_resolution_error_kind() {
+    // Test that DnsResolution error kind exists and works correctly
+    let error = RequestError::new(RequestErrorKind::DnsResolution, "Failed to resolve hostname")
+        .with_url("https://nonexistent-domain-12345.invalid");
+    
+    assert!(matches!(error.kind, RequestErrorKind::DnsResolution));
+    assert_eq!(error.message, "Failed to resolve hostname");
+    assert_eq!(error.url, Some("https://nonexistent-domain-12345.invalid".to_string()));
+    
+    // Test display format
+    let display = format!("{}", error);
+    assert!(display.contains("DnsResolution"));
+    assert!(display.contains("Failed to resolve hostname"));
+}
+
+#[test]
+fn test_dns_resolution_error_is_distinct_from_network() {
+    // Verify that DnsResolution is treated as a distinct error type from Network
+    let dns_error = RequestError::new(RequestErrorKind::DnsResolution, "DNS lookup failed");
+    let network_error = RequestError::new(RequestErrorKind::Network, "Connection refused");
+    
+    assert_ne!(dns_error.kind, network_error.kind);
+    assert!(matches!(dns_error.kind, RequestErrorKind::DnsResolution));
+    assert!(matches!(network_error.kind, RequestErrorKind::Network));
+}

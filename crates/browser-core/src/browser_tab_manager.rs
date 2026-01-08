@@ -752,7 +752,7 @@ mod tests {
     #[tokio::test]
     async fn test_browser_tab_manager_creation() {
         let app = mock_app();
-        let ip_generator = IPGenerator::new();
+        let ip_generator = IPGenerator::new(vec![], vec![]);
         
         let manager = BrowserTabManager::new(
             ip_generator,
