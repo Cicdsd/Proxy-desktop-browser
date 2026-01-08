@@ -19,6 +19,7 @@ pub mod tab_isolation;
 pub mod fingerprint;
 pub mod proxy;
 pub mod http_client;
+pub mod request;
 pub mod scraper_util;
 pub mod security;
 pub mod webview_manager;
@@ -67,6 +68,7 @@ pub use tab_isolation::{TabProfile, NetworkConfig, TabStatus, TLSProfile, HTTP2S
 pub use fingerprint::BrowserFingerprint;
 pub use proxy::{ProxyManager, ProxySettings, ProxyType, FreeProxy, ProxyTestResult};
 pub use http_client::{HttpClient, PublicIpDetector, PublicIpInfo};
+pub use request::{RequestBuilder, RequestManager, RequestConfig, RequestResponse, RequestError, RequestErrorKind, HttpMethod, RequestBody};
 pub use scraper_util::ProxyScraper;
 pub use security::{SecurityManager, BookmarkInput, ProxyInput};
 pub use webview_manager::{WebviewManager, WebviewTab};
