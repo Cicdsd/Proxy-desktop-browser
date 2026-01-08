@@ -3,13 +3,12 @@
 //! Part of the V1000 Upgrade Deep Plan - Phase 2 Feature Expansion
 //! Provides AI-based traffic optimization, bandwidth management, and QoS.
 
-use anyhow::Result;
 use serde::{Deserialize, Serialize};
 use std::collections::{HashMap, VecDeque};
 use std::sync::Arc;
-use std::time::{Duration, Instant};
+use std::time::Instant;
 use tokio::sync::RwLock;
-use tracing::{debug, info, warn};
+use tracing::{info, warn};
 
 /// Network intelligence manager
 pub struct NetworkIntelligence {
@@ -61,6 +60,8 @@ impl Default for NetworkIntelligenceConfig {
 /// Traffic analyzer for understanding network patterns
 #[derive(Debug)]
 /// Represents a TrafficAnalyzer.
+#[allow(dead_code)]
+#[allow(dead_code)]
 pub struct TrafficAnalyzer {
     request_history: VecDeque<RequestRecord>,
     domain_stats: HashMap<String, DomainStats>,
@@ -232,6 +233,8 @@ pub struct TrafficReport {
 /// Bandwidth manager for traffic shaping
 #[derive(Debug)]
 /// Represents a BandwidthManager.
+#[allow(dead_code)]
+#[allow(dead_code)]
 pub struct BandwidthManager {
     current_usage_bps: u64,
     max_bandwidth_bps: u64,

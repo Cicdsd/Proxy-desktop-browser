@@ -6,10 +6,8 @@
 use anyhow::Result;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
-use std::sync::Arc;
 use std::time::Instant;
-use tokio::sync::RwLock;
-use tracing::{debug, info, warn};
+use tracing::{info, warn};
 
 // =============================================================================
 // Category 1: Core Engine Experiments (EXP-1001 to EXP-1005)
@@ -27,6 +25,8 @@ pub enum EngineType {
 }
 
 /// Multi-engine system for optimal rendering
+#[allow(dead_code)]
+#[allow(dead_code)]
 pub struct MultiEngineSystem {
     active_engine: EngineType,
     engine_scores: HashMap<EngineType, f64>,
@@ -295,6 +295,7 @@ pub enum DnsStrategy {
 }
 
 /// Represents a DnsResolver.
+#[allow(dead_code)]
 pub struct DnsResolver {
     strategy: DnsStrategy,
     doh_servers: Vec<String>,
@@ -536,6 +537,8 @@ impl Default for BehavioralAuth {
 // =============================================================================
 
 /// EXP-4001: Differential Privacy Browsing
+#[allow(dead_code)]
+#[allow(dead_code)]
 pub struct DifferentialPrivacy {
     epsilon: f64,
     delta: f64,
@@ -626,6 +629,8 @@ impl Default for DecoyTrafficGenerator {
 }
 
 /// EXP-4005: Anti-Correlation System
+#[allow(dead_code)]
+#[allow(dead_code)]
 pub struct AntiCorrelationSystem {
     timing_jitter_ms: u64,
     behavior_normalized: bool,
@@ -673,6 +678,8 @@ impl Default for AntiCorrelationSystem {
 // =============================================================================
 
 /// EXP-5001: On-Device Large Language Model
+#[allow(dead_code)]
+#[allow(dead_code)]
 pub struct LocalLlm {
     model_loaded: bool,
     model_name: String,
@@ -729,6 +736,7 @@ impl Default for LocalLlm {
 }
 
 /// EXP-5002: Visual Understanding Engine
+#[allow(dead_code)]
 pub struct VisualEngine {
     ocr_enabled: bool,
     object_detection_enabled: bool,
@@ -916,6 +924,8 @@ pub enum PqcAlgorithm {
 }
 
 /// Represents a PostQuantumCrypto.
+#[allow(dead_code)]
+#[allow(dead_code)]
 pub struct PostQuantumCrypto {
     algorithm: PqcAlgorithm,
     enabled: bool,
@@ -997,6 +1007,8 @@ impl Default for IpfsBrowser {
 }
 
 /// EXP-16002: Blockchain DNS
+#[allow(dead_code)]
+#[allow(dead_code)]
 pub struct BlockchainDns {
     enabled: bool,
     supported_tlds: Vec<String>,
@@ -1083,6 +1095,8 @@ impl Default for DecentralizedIdentity {
 // =============================================================================
 
 /// EXP-15001: Quantum Random Numbers
+#[allow(dead_code)]
+#[allow(dead_code)]
 pub struct QuantumRng {
     entropy_source: String,
     generated_count: u64,

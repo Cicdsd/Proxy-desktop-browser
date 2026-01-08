@@ -10,10 +10,8 @@
 use anyhow::{anyhow, Result};
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
-use std::sync::Arc;
-use std::time::{Duration, Instant};
-use tokio::sync::RwLock;
-use tracing::{debug, info, warn};
+use std::time::Instant;
+use tracing::info;
 
 // =============================================================================
 // EXP-13001: Visual Automation Builder
@@ -184,6 +182,8 @@ impl Default for VisualAutomationBuilder {
 // =============================================================================
 
 /// Natural language automation interpreter
+#[allow(dead_code)]
+#[allow(dead_code)]
 pub struct NaturalLanguageAutomation {
     command_patterns: Vec<CommandPattern>,
     context: AutomationContext,

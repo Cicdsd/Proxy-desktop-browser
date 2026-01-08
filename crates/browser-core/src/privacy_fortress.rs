@@ -3,14 +3,13 @@
 //! Part of the V1000 Upgrade Deep Plan - Phase 2 Feature Expansion  
 //! Provides advanced anti-tracking, fingerprint randomization, and privacy scoring.
 
-use anyhow::Result;
 use rand::Rng;
 use serde::{Deserialize, Serialize};
 use std::collections::{HashMap, HashSet};
 use std::sync::Arc;
 use std::time::Instant;
 use tokio::sync::RwLock;
-use tracing::{debug, info, warn};
+use tracing::{debug, info};
 
 /// Privacy fortress manager
 pub struct PrivacyFortress {
@@ -235,6 +234,8 @@ pub struct TrackerStats {
 /// Fingerprint protector component
 #[derive(Debug)]
 /// Represents a FingerprintProtector.
+#[allow(dead_code)]
+#[allow(dead_code)]
 pub struct FingerprintProtector {
     randomized_values: FingerprintValues,
     protection_level: u8,
@@ -513,6 +514,7 @@ pub struct CookieStats {
 /// Privacy score calculator
 #[derive(Debug, Default)]
 /// Represents a PrivacyScore.
+#[allow(dead_code)]
 pub struct PrivacyScore {
     trackers_blocked: u64,
     fingerprint_protected: bool,
@@ -730,7 +732,7 @@ impl PrivacyFortress {
     }
 
     /// Get privacy recommendations
-    fn get_recommendations(&self, score: u32) -> Vec<String> {
+    fn get_recommendations(&self, _score: u32) -> Vec<String> {
         let mut recommendations = Vec::new();
         
         if !self.config.block_trackers {

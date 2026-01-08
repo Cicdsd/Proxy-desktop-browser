@@ -9,11 +9,10 @@
 use anyhow::{Context, Result};
 use toml;
 use serde::{Deserialize, Serialize};
-use std::collections::HashMap;
 use std::path::{Path, PathBuf};
 use std::sync::Arc;
 use tokio::sync::RwLock;
-use tracing::{debug, info, warn};
+use tracing::{debug, info};
 
 /// Main application configuration
 #[derive(Debug, Clone, Serialize, Deserialize)]

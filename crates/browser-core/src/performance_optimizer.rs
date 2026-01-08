@@ -3,13 +3,12 @@
 //! Part of the V1000 Upgrade Deep Plan - Phase 1 Foundation
 //! Provides lazy loading, predictive caching, and performance monitoring.
 
-use anyhow::Result;
 use serde::{Deserialize, Serialize};
 use std::collections::{HashMap, VecDeque};
 use std::sync::Arc;
-use std::time::{Duration, Instant};
+use std::time::Instant;
 use tokio::sync::RwLock;
-use tracing::{debug, info, warn};
+use tracing::{debug, info};
 
 /// Performance optimizer for browser operations
 pub struct PerformanceOptimizer {
@@ -501,7 +500,7 @@ impl PerformanceOptimizer {
     }
 
     /// Optimize resource loading priority
-    pub fn determine_priority(&self, url: &str, resource_type: &str) -> CachePriority {
+    pub fn determine_priority(&self, _url: &str, resource_type: &str) -> CachePriority {
         let lower_type = resource_type.to_lowercase();
         
         if lower_type.contains("html") || lower_type.contains("critical") {

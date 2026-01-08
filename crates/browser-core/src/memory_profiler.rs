@@ -7,7 +7,7 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::sync::atomic::{AtomicU64, Ordering};
 use std::sync::Arc;
-use std::time::{Duration, Instant};
+use std::time::Instant;
 use tokio::sync::RwLock;
 use tracing::{debug, info, warn};
 
@@ -326,7 +326,7 @@ impl MemoryProfiler {
         for (component, info) in allocations.iter() {
             // If allocations significantly exceed deallocations, flag as potential leak
             let allocation_rate = info.allocation_count as f64;
-            let memory_per_allocation = if allocation_rate > 0.0 {
+            let _memory_per_allocation = if allocation_rate > 0.0 {
                 info.allocated_mb / allocation_rate
             } else {
                 0.0
